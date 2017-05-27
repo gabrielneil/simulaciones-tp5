@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package simulaciones.tp5;
 
 /**
  *
- * @author gneil
+ * @author gabrielneil
  */
 public class Main {
 
@@ -15,6 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("hola");
     }
     
 }

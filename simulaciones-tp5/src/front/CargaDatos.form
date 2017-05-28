@@ -42,27 +42,27 @@
                       <EmptySpace pref="101" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jTextField7" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="seRetira_txt" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jTextField6" pref="80" max="32767" attributes="0"/>
-                                  <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="sientaEnMesa_txt" pref="80" max="32767" attributes="0"/>
+                                  <Component id="entranAMesa_txt" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField3" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="media_txt" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="entranAComprar_txt" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jTextField1" min="-2" pref="80" max="-2" attributes="0"/>
+                                          <Component id="desviacion_txt" min="-2" pref="80" max="-2" attributes="0"/>
                                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -110,7 +110,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="entranAComprar_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -122,8 +122,8 @@
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="desviacion_txt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="media_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -131,7 +131,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel5" min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="entranAMesa_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -140,13 +140,13 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="sientaEnMesa_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="seRetira_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="52" max="32767" attributes="0"/>
@@ -177,12 +177,12 @@
         <Property name="text" type="java.lang.String" value="Desviaci&#xf3;n"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="desviacion_txt">
       <Properties>
         <Property name="text" type="java.lang.String" value="2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="media_txt">
       <Properties>
         <Property name="text" type="java.lang.String" value="12"/>
       </Properties>
@@ -197,7 +197,7 @@
         <Property name="text" type="java.lang.String" value="Cantidad que entra a usar las mesas:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField3">
+    <Component class="javax.swing.JTextField" name="entranAComprar_txt">
       <Properties>
         <Property name="text" type="java.lang.String" value="60"/>
       </Properties>
@@ -207,7 +207,7 @@
         <Property name="text" type="java.lang.String" value="%"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
+    <Component class="javax.swing.JTextField" name="entranAMesa_txt">
       <Properties>
         <Property name="text" type="java.lang.String" value="40"/>
       </Properties>
@@ -232,7 +232,7 @@
         <Property name="text" type="java.lang.String" value="Cantidad que se sienta en una mesa:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField6">
+    <Component class="javax.swing.JTextField" name="sientaEnMesa_txt">
       <Properties>
         <Property name="text" type="java.lang.String" value="50"/>
       </Properties>
@@ -247,7 +247,7 @@
         <Property name="text" type="java.lang.String" value="Cantidad que se retira:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField7">
+    <Component class="javax.swing.JTextField" name="seRetira_txt">
       <Properties>
         <Property name="text" type="java.lang.String" value="50"/>
       </Properties>

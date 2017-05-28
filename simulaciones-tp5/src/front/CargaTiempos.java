@@ -5,17 +5,22 @@
  */
 package front;
 
+import simulaciones.tp5.Controller;
+
 /**
  *
  * @author gabrielneil
  */
 public class CargaTiempos extends javax.swing.JFrame {
 
+    Controller controller = Controller.getInstance();
+
     /**
      * Creates new form CargaTiempos
      */
     public CargaTiempos() {
         initComponents();
+        this.setVisible(true);
     }
 
     /**
@@ -82,8 +87,18 @@ public class CargaTiempos extends javax.swing.JFrame {
         jLabel9.setText("±");
 
         jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("minutos");
 
@@ -176,6 +191,20 @@ public class CargaTiempos extends javax.swing.JFrame {
     private void tiempoUtilizacionMesa2_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiempoUtilizacionMesa2_txtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tiempoUtilizacionMesa2_txtActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        if (Integer.parseInt(tiempoTicket_txt.getText()) > 0 && Integer.parseInt(tiempoEspera_txt.getText()) > 0 && Integer.parseInt(tiempoConsumicion1_txt.getText()) > 0 && Integer.parseInt(tiempoConsumicion2_txt.getText()) > 0 && Integer.parseInt(tiempoUtilizacionMesa1_txt.getText()) > 0 && Integer.parseInt(tiempoUtilizacionMesa2_txt.getText()) > 0) {
+            controller.valoresCargaTiempos(Integer.parseInt(tiempoTicket_txt.getText()), Integer.parseInt(tiempoEspera_txt.getText()), Integer.parseInt(tiempoConsumicion1_txt.getText()), Integer.parseInt(tiempoConsumicion2_txt.getText()), Integer.parseInt(tiempoUtilizacionMesa1_txt.getText()), Integer.parseInt(tiempoUtilizacionMesa2_txt.getText()));
+        } else {
+            System.out.println("Alguno de los valores es inválido");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

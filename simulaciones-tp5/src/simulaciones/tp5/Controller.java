@@ -17,16 +17,18 @@ public class Controller {
     private static Controller controller;
     CargaDatos cargaDatos;
     CargaTiempos cargaTiempos;
+    Calculator calculator;
 
     public Controller() {
+        calculator = new Calculator(this);
     }
 
     public static Controller getInstance() {
         if (controller == null) {
             controller = new Controller();
         } else {
-
         }
+
         return controller;
     }
 
@@ -36,5 +38,9 @@ public class Controller {
 
     public void cargaTiempos() {
         cargaTiempos = new CargaTiempos();
+    }
+
+    public void valoresCargaTiempos(int tiempoTicket, int tiempoEspera, int tiempoConsumicion1, int tiempoConsumicion2, int tiempoUtilizacionMesa1, int tiempoUtilizacionMesa2) {
+        calculator.cargaTiempos(tiempoTicket, tiempoEspera, tiempoConsumicion1, tiempoConsumicion2, tiempoUtilizacionMesa1, tiempoUtilizacionMesa2);
     }
 }

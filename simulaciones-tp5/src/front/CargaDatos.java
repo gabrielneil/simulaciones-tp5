@@ -231,6 +231,12 @@ public class CargaDatos extends javax.swing.JFrame {
 
     private void aceptar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptar_btnActionPerformed
         // TODO add your handling code here:
+        if (Integer.parseInt(media_txt.getText()) > 0 && Integer.parseInt(desviacion_txt.getText()) > 0 && Integer.parseInt(entranAComprar_txt.getText()) > 0 && Integer.parseInt(entranAMesa_txt.getText()) > 0 && Integer.parseInt(sientaEnMesa_txt.getText()) > 0 && Integer.parseInt(seRetira_txt.getText()) > 0) {
+            controller.valoresCargaDatos(Integer.parseInt(media_txt.getText()), Integer.parseInt(desviacion_txt.getText()) , Integer.parseInt(entranAComprar_txt.getText()) , Integer.parseInt(entranAMesa_txt.getText()) , Integer.parseInt(sientaEnMesa_txt.getText()),Integer.parseInt(seRetira_txt.getText()));
+        } else {
+            System.out.println("Alguno de los valores que ingresaste es inválido.");
+        }
+
     }//GEN-LAST:event_aceptar_btnActionPerformed
 
     private void salir_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir_btnActionPerformed

@@ -43,4 +43,9 @@ public class Controller {
     public void valoresCargaTiempos(int tiempoTicket, int tiempoEspera, int tiempoConsumicion1, int tiempoConsumicion2, int tiempoUtilizacionMesa1, int tiempoUtilizacionMesa2) {
         calculator.cargaTiempos(tiempoTicket, tiempoEspera, tiempoConsumicion1, tiempoConsumicion2, tiempoUtilizacionMesa1, tiempoUtilizacionMesa2);
     }
+
+    public void valoresCargaDatos(int media, int desviacion, int entranAComprar, int entranAMesa, int sientaEnMesa, int seRetira) {
+        calculator.cargaDatos(media, desviacion, entranAComprar, entranAMesa, sientaEnMesa, seRetira);
+    }
+
 }

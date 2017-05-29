@@ -202,7 +202,7 @@ public class CargaTiempos extends javax.swing.JFrame {
         if (Integer.parseInt(tiempoTicket_txt.getText()) > 0 && Integer.parseInt(tiempoEspera_txt.getText()) > 0 && Integer.parseInt(tiempoConsumicion1_txt.getText()) > 0 && Integer.parseInt(tiempoConsumicion2_txt.getText()) > 0 && Integer.parseInt(tiempoUtilizacionMesa1_txt.getText()) > 0 && Integer.parseInt(tiempoUtilizacionMesa2_txt.getText()) > 0) {
             controller.valoresCargaTiempos(Integer.parseInt(tiempoTicket_txt.getText()), Integer.parseInt(tiempoEspera_txt.getText()), Integer.parseInt(tiempoConsumicion1_txt.getText()), Integer.parseInt(tiempoConsumicion2_txt.getText()), Integer.parseInt(tiempoUtilizacionMesa1_txt.getText()), Integer.parseInt(tiempoUtilizacionMesa2_txt.getText()));
         } else {
-            System.out.println("Alguno de los valores es inválido");
+            System.out.println("Alguno de los valores es inválido.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

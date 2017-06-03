@@ -12,6 +12,7 @@ package simulaciones.tp5;
 public class Calculator {
 
     Controller controller;
+    Formulas formulas = new Formulas();
     int media = 12;
     int desviacion = 2;
     int entranAComprar = 60;

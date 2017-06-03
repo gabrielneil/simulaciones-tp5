@@ -11,9 +11,16 @@ package simulaciones.tp5;
  */
 public class Formulas {
 
-    
-    public double tiempoCompraTicket(float tiempoCompra, float random){
-        
-    return (-tiempoCompra)*Math.log(1-random);
+    public double tiempoCompraTicket(float tiempoCompra, float random) {
+
+        return (-tiempoCompra) * Math.log(1 - random);
     }
+
+    public double tiempoEntregaPedido(float tiempoCompra, float random) {
+
+        return (-tiempoCompra) * Math.log(1 - random);
+    }
+//    public double tiempoConsumición(){
+//    
+//    }
 }

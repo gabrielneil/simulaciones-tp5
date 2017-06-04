@@ -35,9 +35,9 @@ public class Controller {
     public void cargaDatos() {
         cargaDatos = new CargaDatos();
     }
-
-    public void cargaTiempos() {
-        cargaTiempos = new CargaTiempos();
+    
+    public CargaDatos getCargaDatos(){
+        return cargaDatos;
     }
 
     public void valoresCargaTiempos(int tiempoTicket, int tiempoEspera, int tiempoConsumicion1, int tiempoConsumicion2, int tiempoUtilizacionMesa1, int tiempoUtilizacionMesa2) {

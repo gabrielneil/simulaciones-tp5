@@ -5,6 +5,7 @@
  */
 package front;
 
+import javax.swing.JTextField;
 import simulaciones.tp5.Controller;
 
 /**
@@ -201,6 +202,7 @@ public class CargaTiempos extends javax.swing.JFrame {
         this.setVisible(false);
         if (Integer.parseInt(tiempoTicket_txt.getText()) > 0 && Integer.parseInt(tiempoEspera_txt.getText()) > 0 && Integer.parseInt(tiempoConsumicion1_txt.getText()) > 0 && Integer.parseInt(tiempoConsumicion2_txt.getText()) > 0 && Integer.parseInt(tiempoUtilizacionMesa1_txt.getText()) > 0 && Integer.parseInt(tiempoUtilizacionMesa2_txt.getText()) > 0) {
             controller.valoresCargaTiempos(Integer.parseInt(tiempoTicket_txt.getText()), Integer.parseInt(tiempoEspera_txt.getText()), Integer.parseInt(tiempoConsumicion1_txt.getText()), Integer.parseInt(tiempoConsumicion2_txt.getText()), Integer.parseInt(tiempoUtilizacionMesa1_txt.getText()), Integer.parseInt(tiempoUtilizacionMesa2_txt.getText()));
+            controller.getCargaDatos().setVisible(true);
         } else {
             System.out.println("Alguno de los valores es inválido.");
         }
@@ -241,6 +243,31 @@ public class CargaTiempos extends javax.swing.JFrame {
         });
     }
 
+    public Integer getTiempoConsumicion1_txt() {
+        return Integer.parseInt(tiempoConsumicion1_txt.getText());
+    }
+
+    public Integer getTiempoConsumicion2_txt() {
+        return Integer.parseInt(tiempoConsumicion2_txt.getText());
+    }
+
+    public Integer getTiempoEspera_txt() {
+        return Integer.parseInt(tiempoEspera_txt.getText());
+    }
+
+    public Integer getTiempoTicket_txt() {
+        return Integer.parseInt(tiempoTicket_txt.getText());
+    }
+
+    public Integer getTiempoUtilizacionMesa1_txt() {
+        return Integer.parseInt(tiempoUtilizacionMesa1_txt.getText());
+    }
+
+    public Integer getTiempoUtilizacionMesa2_txt() {
+        return Integer.parseInt(tiempoUtilizacionMesa2_txt.getText());
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

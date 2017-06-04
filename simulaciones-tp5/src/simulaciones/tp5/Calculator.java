@@ -55,7 +55,7 @@ public class Calculator {
     void initSimulacion() {
         do {
         //fix this    
-        } while (tabla._scpTabla);
+        } while (tabla._tblSimulacion.getRowCount()<3600);
         
     }
 

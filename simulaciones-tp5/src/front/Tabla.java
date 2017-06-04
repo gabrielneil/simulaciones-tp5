@@ -172,13 +172,4 @@ SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     private javax.swing.JTabbedPane simulationTable;
     // End of variables declaration//GEN-END:variables
 
-    public JScrollPane getScpTabla() {
-        //fix this
-        DefaultTableModel tm;
-        tm = (DefaultTableModel) _scpTabla.getModel();
-        
-        return _scpTabla;
-    }
-
-
 }

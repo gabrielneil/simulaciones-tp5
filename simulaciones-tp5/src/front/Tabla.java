@@ -6,6 +6,8 @@
 package front;
 
 import java.text.SimpleDateFormat;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 import simulaciones.tp5.*;
 
 
@@ -163,10 +165,20 @@ SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane _scpTabla;
+    public javax.swing.JScrollPane _scpTabla;
     public javax.swing.JTable _tblSimulacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane simulationTable;
     // End of variables declaration//GEN-END:variables
+
+    public JScrollPane getScpTabla() {
+        //fix this
+        DefaultTableModel tm;
+        tm = (DefaultTableModel) _scpTabla.getModel();
+        
+        return _scpTabla;
+    }
+
+
 }

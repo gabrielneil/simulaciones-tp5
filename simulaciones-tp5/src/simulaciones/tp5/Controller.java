@@ -48,4 +48,8 @@ public class Controller {
         calculator.cargaDatos(media, desviacion, entranAComprar, entranAMesa, sientaEnMesa, seRetira);
     }
 
+    public void simulacion() {
+        calculator.initSimulacion();
+    }
+
 }

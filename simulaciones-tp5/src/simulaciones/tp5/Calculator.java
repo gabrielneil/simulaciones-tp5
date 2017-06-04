@@ -5,6 +5,8 @@
  */
 package simulaciones.tp5;
 
+import front.Tabla;
+
 /**
  *
  * @author gabrielneil
@@ -13,6 +15,7 @@ public class Calculator {
 
     Controller controller;
     Formulas formulas = new Formulas();
+    Tabla tabla = new Tabla();
     int media = 12;
     int desviacion = 2;
     int entranAComprar = 60;
@@ -47,6 +50,13 @@ public class Calculator {
         this.entranAMesa = entranAMesa;
         this.sientaEnMesa = sientaEnMesa;
         this.seRetira = seRetira;
+    }
+
+    void initSimulacion() {
+        do {
+        //fix this    
+        } while (tabla._scpTabla);
+        
     }
 
 }

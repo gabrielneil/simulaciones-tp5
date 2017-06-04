@@ -232,8 +232,9 @@ public class CargaDatos extends javax.swing.JFrame {
     private void aceptar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptar_btnActionPerformed
             // TODO add your handling code here:
         if (Integer.parseInt(media_txt.getText()) > 0 && Integer.parseInt(desviacion_txt.getText()) > 0 && Integer.parseInt(entranAComprar_txt.getText()) > 0 && Integer.parseInt(entranAMesa_txt.getText()) > 0 && Integer.parseInt(sientaEnMesa_txt.getText()) > 0 && Integer.parseInt(seRetira_txt.getText()) > 0) {
-            controller.valoresCargaTiempos(cargaTiempos.getTiempoTicket_txt(), ERROR, ICONIFIED, ICONIFIED, DISPOSE_ON_CLOSE, DISPOSE_ON_CLOSE);
+            controller.valoresCargaTiempos(cargaTiempos.getTiempoTicket_txt(), cargaTiempos.getTiempoEspera_txt(), cargaTiempos.getTiempoConsumicion1_txt(), cargaTiempos.getTiempoConsumicion2_txt(), cargaTiempos.getTiempoUtilizacionMesa1_txt(), cargaTiempos.getTiempoUtilizacionMesa2_txt());
             controller.valoresCargaDatos(Integer.parseInt(media_txt.getText()), Integer.parseInt(desviacion_txt.getText()) , Integer.parseInt(entranAComprar_txt.getText()) , Integer.parseInt(entranAMesa_txt.getText()) , Integer.parseInt(sientaEnMesa_txt.getText()),Integer.parseInt(seRetira_txt.getText()));
+            controller.simulacion();
         } else {
             System.out.println("Alguno de los valores que ingresaste es inválido.");
         }

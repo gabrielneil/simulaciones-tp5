@@ -10,11 +10,11 @@ package Objects;
  * @author gabrielneil
  */
 public class Servidor {
-    String estado;
+
+    String estado = "LIBRE";
     int cola;
 
     public Servidor() {
-        estado = "LIBRE";
         cola = 0;
     }
 
@@ -27,10 +27,6 @@ public class Servidor {
         return estado;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
     public int getCola() {
         return cola;
     }
@@ -38,7 +34,13 @@ public class Servidor {
     public void setCola(int cola) {
         this.cola = cola;
     }
-    
-    
-    
+
+    public void setOcupado() {
+        this.estado = "OCUPADO";
+    }
+
+    public void setLibre() {
+        this.estado = "LIBRE";
+    }
+
 }

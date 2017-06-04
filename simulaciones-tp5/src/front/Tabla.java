@@ -5,6 +5,7 @@
  */
 package front;
 
+import java.text.SimpleDateFormat;
 import simulaciones.tp5.*;
 
 
@@ -13,6 +14,7 @@ import simulaciones.tp5.*;
  * @author gabrielneil
  */
 public class Tabla extends javax.swing.JFrame {
+SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,7 +36,7 @@ public class Tabla extends javax.swing.JFrame {
 
         _tblSimulacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {"Inicio",  new Float(0.0), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "Evento", "Reloj", "RND1", "RND2", "Llegada entre cliente", "Próxima llegada", "RND", "Acción", "Fin atención en caja", "RND", "Tiempo espera pedido", "Tiempo entrega pedido", "RND", "Acción - Mesa", "RND", "Tiempo de uso de mesa", "RND", "Tiempo de consumición", "Tiempo fin de consumición", "Estado", "Cola", "Estado", "Cola", "Estado", "Cola", "Tiempo permanencia", "Cantidad clientes en cafetería"
@@ -162,7 +164,7 @@ public class Tabla extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane _scpTabla;
-    private javax.swing.JTable _tblSimulacion;
+    public javax.swing.JTable _tblSimulacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane simulationTable;

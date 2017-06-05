@@ -12,7 +12,6 @@ import front.Tabla;
  * @author gabrielneil
  */
 public class Calculator {
-
     Controller controller;
     Formulas formulas = new Formulas();
     Tabla tabla = new Tabla();
@@ -53,9 +52,14 @@ public class Calculator {
     }
 
     void initSimulacion() {
-        do {
-        //fix this    
-        } while (tabla._tblSimulacion.getRowCount()<3600);
+        float proximoCliente;
+        
+        for (int i = 0; i < 10; i++) {
+            proximoCliente = (float) formulas.tiempoLlegadaCliente(i);
+        }
+//        do {
+//        //fix this    
+//        } while (tabla._tblSimulacion.getRowCount()<3600);
         
     }
 

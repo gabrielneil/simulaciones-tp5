@@ -15,6 +15,7 @@ public class CargaDatos extends javax.swing.JFrame {
 
     Controller controller = Controller.getInstance();
     CargaTiempos cargaTiempos = new CargaTiempos();
+
     /**
      * Creates new form CargaDatos
      */
@@ -230,10 +231,10 @@ public class CargaDatos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptar_btnActionPerformed
-            // TODO add your handling code here:
+        // TODO add your handling code here:
         if (Integer.parseInt(media_txt.getText()) > 0 && Integer.parseInt(desviacion_txt.getText()) > 0 && Integer.parseInt(entranAComprar_txt.getText()) > 0 && Integer.parseInt(entranAMesa_txt.getText()) > 0 && Integer.parseInt(sientaEnMesa_txt.getText()) > 0 && Integer.parseInt(seRetira_txt.getText()) > 0) {
             controller.valoresCargaTiempos(cargaTiempos.getTiempoTicket_txt(), cargaTiempos.getTiempoEspera_txt(), cargaTiempos.getTiempoConsumicion1_txt(), cargaTiempos.getTiempoConsumicion2_txt(), cargaTiempos.getTiempoUtilizacionMesa1_txt(), cargaTiempos.getTiempoUtilizacionMesa2_txt());
-            controller.valoresCargaDatos(Integer.parseInt(media_txt.getText()), Integer.parseInt(desviacion_txt.getText()) , Integer.parseInt(entranAComprar_txt.getText()) , Integer.parseInt(entranAMesa_txt.getText()) , Integer.parseInt(sientaEnMesa_txt.getText()),Integer.parseInt(seRetira_txt.getText()));
+            controller.valoresCargaDatos(Integer.parseInt(media_txt.getText()), Integer.parseInt(desviacion_txt.getText()), Integer.parseInt(entranAComprar_txt.getText()), Integer.parseInt(entranAMesa_txt.getText()), Integer.parseInt(sientaEnMesa_txt.getText()), Integer.parseInt(seRetira_txt.getText()));
             controller.simulacion();
         } else {
             System.out.println("Alguno de los valores que ingresaste es inválido.");
@@ -248,7 +249,7 @@ public class CargaDatos extends javax.swing.JFrame {
     private void editarTiempos_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarTiempos_btnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        controller.valoresCargaDatos(Integer.parseInt(media_txt.getText()), Integer.parseInt(desviacion_txt.getText()) , Integer.parseInt(entranAComprar_txt.getText()) , Integer.parseInt(entranAMesa_txt.getText()) , Integer.parseInt(sientaEnMesa_txt.getText()),Integer.parseInt(seRetira_txt.getText()));
+        controller.valoresCargaDatos(Integer.parseInt(media_txt.getText()), Integer.parseInt(desviacion_txt.getText()), Integer.parseInt(entranAComprar_txt.getText()), Integer.parseInt(entranAMesa_txt.getText()), Integer.parseInt(sientaEnMesa_txt.getText()), Integer.parseInt(seRetira_txt.getText()));
         cargaTiempos.setVisible(true);
     }//GEN-LAST:event_editarTiempos_btnActionPerformed
 

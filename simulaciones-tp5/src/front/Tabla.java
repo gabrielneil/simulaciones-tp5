@@ -10,13 +10,18 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import simulaciones.tp5.*;
 
-
 /**
  *
  * @author gabrielneil
  */
 public class Tabla extends javax.swing.JFrame {
-SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+    public Tabla() {
+        initComponents();
+        this.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,7 +43,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
         _tblSimulacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Inicio",  new Float(0.0), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Evento", "Reloj", "RND1", "RND2", "Llegada entre cliente", "Próxima llegada", "RND", "Acción", "Fin atención en caja", "RND", "Tiempo espera pedido", "Tiempo entrega pedido", "RND", "Acción - Mesa", "RND", "Tiempo de uso de mesa", "RND", "Tiempo de consumición", "Tiempo fin de consumición", "Estado", "Cola", "Estado", "Cola", "Estado", "Cola", "Tiempo permanencia", "Cantidad clientes en cafetería"

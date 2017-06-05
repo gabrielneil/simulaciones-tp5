@@ -5,26 +5,25 @@
  */
 package simulaciones.tp5;
 
-import java.util.Random;
-
 /**
  *
  * @author gabrielneil
  */
 public class Formulas {
 
-    Random rnd = new Random();
+    public static double tiempoCompraTicket(float tiempoCompra, float random) {
 
-    public double tiempoCompraTicket(float tiempoCompra, float random) {
         return (-tiempoCompra) * Math.log(1 - random);
     }
 
-    public double tiempoEntregaPedido(float tiempoCompra, float random) {
+    public static double tiempoEntregaPedido(float tiempoCompra, float random) {
+
         return (-tiempoCompra) * Math.log(1 - random);
     }
-
-    public double tiempoLlegadaCliente(float tiempoActual) {
-        return tiempoActual + (((-2 * Math.log(rnd.nextFloat()) * Math.cos(2 * Math.PI * rnd.nextFloat())) * 2) + 10);
+    
+    //box-muller
+    public static double llegadaCliente(float rnd1, float rnd2, float media, float desviacion){
+        return ((Math.sqrt(-2*Math.log(rnd1))*Math.cos(2*Math.PI*rnd2))*desviacion)+media;
     }
 //    public double tiempoConsumición(){
 //    

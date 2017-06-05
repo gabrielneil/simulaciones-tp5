@@ -33,7 +33,7 @@ public class Controller {
     }
 
     public void cargaDatos() {
-        cargaDatos = new CargaDatos();
+        cargaDatos = new CargaDatos(this);
     }
     
     public CargaDatos getCargaDatos(){

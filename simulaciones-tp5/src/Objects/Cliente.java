@@ -12,14 +12,8 @@ package Objects;
 public class Cliente {
 
     String estado;
-    float horaLlegada;
-    float horaPartida;
-
-    public Cliente(String estado, float horaLlegada, float horaPartida) {
-        this.estado = estado;
-        this.horaLlegada = horaLlegada;
-        this.horaPartida = horaPartida;
-    }
+    double horaLlegada;
+    double horaPartida;
 
     public String getEstado() {
         return estado;
@@ -29,20 +23,27 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public float getHoraLlegada() {
+    public double getHoraLlegada() {
         return horaLlegada;
     }
 
-    public void setHoraLlegada(float horaLlegada) {
+    public void setHoraLlegada(double horaLlegada) {
         this.horaLlegada = horaLlegada;
     }
 
-    public float getHoraPartida() {
+    public double getHoraPartida() {
         return horaPartida;
     }
 
-    public void setHoraPartida(float horaPartida) {
+    public void setHoraPartida(double horaPartida) {
         this.horaPartida = horaPartida;
     }
+
+    public Cliente(String estado, double horaLlegada, double horaPartida) {
+        this.estado = estado;
+        this.horaLlegada = horaLlegada;
+        this.horaPartida = horaPartida;
+    }
+
     
 }

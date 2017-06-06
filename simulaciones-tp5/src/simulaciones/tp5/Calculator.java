@@ -5,6 +5,7 @@
  */
 package simulaciones.tp5;
 
+import Objects.Cliente;
 import Objects.Servidor;
 import front.Tabla;
 import java.util.Random;
@@ -22,10 +23,13 @@ public class Calculator {
     Servidor empleado1 = new Servidor();
     Servidor empleado2 = new Servidor();
     Servidor cajero = new Servidor();
+    int cantidadClientesEnCafeteria = 0;
+
+    
     int media = 12;
     int desviacion = 2;
-    int entranAComprar = 60;
-    int entranAMesa = 40;
+    int entranAComprar = 70;
+    int entranAMesa = 30;
     int sientaEnMesa = 50;
     int seRetira = 50;
     double reloj = 0;
@@ -71,15 +75,16 @@ public class Calculator {
     public void setEvento(String evento) {
         this.evento = evento;
     }
-    public void setReloj(double tiempo){
-        this.reloj += tiempo;
+
+    public void setReloj(double tiempo) {
+        this.reloj = tiempo;
     }
     
     public void initSimulacion() {
         DefaultTableModel model = (DefaultTableModel) tabla._tblSimulacion.getModel();
-        
+
         while (reloj <= 60) {
-            
+
             if (reloj == 0) {
                 Random r = new Random();
                 float rnd1TiempoLlegada = r.nextFloat();
@@ -88,17 +93,62 @@ public class Calculator {
                 setEvento("Inicio");
                 model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj += tiempoLlegada});
                 setReloj(tiempoLlegada);
-            }
-            else{
-                double tiempoProxLlegadaCliente =(double) model.getValueAt(model.getRowCount()-1, 5);
-                
+            } 
+            else {
+                double tiempoProxLlegadaCliente = (double) model.getValueAt(model.getRowCount() - 1, 5);
+                double tiempoFinAtencionCaja = (double) model.getValueAt(model.getRowCount() - 1, 8);
+                double tiempoEntregaPedido = (double) model.getValueAt(model.getRowCount() - 1, 11);
+                double tiempoFinUsoMesa = (double) model.getValueAt(model.getRowCount() - 1, 15);
+                double tiempoFinConsumicion = (double) model.getValueAt(model.getRowCount() - 1, 18);
+
+                if ((tiempoProxLlegadaCliente < tiempoFinAtencionCaja) && (tiempoProxLlegadaCliente < tiempoEntregaPedido) && (tiempoProxLlegadaCliente < tiempoFinUsoMesa) && (tiempoProxLlegadaCliente < tiempoFinConsumicion)) {
+                    //tiempoProxLlegadaCliente es el proximo evento
+                    setEvento("Llegada Cliente");
+                    Random r = new Random();
+                    Cliente c1;
+                    float rnd1TiempoLlegada = r.nextFloat();
+                    float rnd2TiempoLlegada = r.nextFloat();
+                    double tiempoLlegada = llegadaEntreCliente(rnd1TiempoLlegada, rnd2TiempoLlegada);
+                    float rndAccion = r.nextFloat();
+                    //true y se calcula el tiempo que tarda en usar la mesa
+                    if(rndAccion<((entranAMesa-1)/100)){
+                        float rndTiempoUtilizacionMesa = r.nextFloat();
+                        double tiempoFinUtilizacionMesa = finUtilizacionDeMesa(rndTiempoUtilizacionMesa);
+                        c1 = new Cliente("Utilizando mesa",reloj,reloj+tiempoFinUtilizacionMesa);
+                        cantidadClientesEnCafeteria++;
+                        cajero.setLibre();
+                        empleado1.setLibre();
+                        empleado2.setLibre();
+                        //la idea seria que donde hay ceros copia las cosas de la fila de arriba
+                        model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj += tiempoLlegada,rndAccion,"Utiliza mesa",0,0,0,0,0,0,rndTiempoUtilizacionMesa,tiempoFinUtilizacionMesa,0,0,0,cajero.getEstado(),cajero.getCola(),empleado1.getEstado(),empleado1.getCola(),empleado2.getEstado(),empleado2.getCola(),0,c1.getEstado(),c1.getHoraLlegada(),c1.getHoraPartida()});
+                        setReloj(tiempoProxLlegadaCliente);
+                    }//false, entra a comprar
+                    else{
+                        tiempoFinAtencionCaja = reloj+=20;
+                        cajero.setOcupado();
+                        setReloj(tiempoProxLlegadaCliente);
+                    }
+                    
+                } else if ((tiempoFinAtencionCaja < tiempoEntregaPedido) && (tiempoFinAtencionCaja < tiempoFinUsoMesa) && (tiempoFinAtencionCaja < tiempoFinConsumicion)) {
+                    // tiempoFinAtencionCaja es el proximo evento
+
+                } else if ((tiempoEntregaPedido < tiempoFinUsoMesa) && (tiempoEntregaPedido < tiempoFinConsumicion)) {
+                    // tiempoEntregaPedido es el proximo evento
+
+                } else if (tiempoFinUsoMesa < tiempoFinConsumicion) {
+                    // tiempoUsoMesa es el proximo evento
+                    
+                } else {
+                    // tiempoFinConsumicion es el proximo evento
+
+                }
+
             }
         }
 
 //        do {
 //            //fix this    
 //        } while (tabla._tblSimulacion.getRowCount() < 3600);
-
     }
 
     //Tiempo de llegada entre clientes en minutos, 
@@ -110,5 +160,11 @@ public class Calculator {
         double tiempo = n1 * 60; //Estaba calculado en segundos, lo paso a minutos
         return tiempo;
     }
-
+    
+    public double finUtilizacionDeMesa(float rnd){
+        double n = Formulas.tiempoUtilizacionMesa(rnd);
+        double tiempo = n *60; //Estaba calculado en segundos, lo paso a minutos
+        return tiempo;
+    }
+    
 }

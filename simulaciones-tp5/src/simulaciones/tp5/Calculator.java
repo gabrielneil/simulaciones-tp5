@@ -40,7 +40,32 @@ public class Calculator {
     int tiempoConsumicion2 = 1;
     int tiempoUtilizacionMesa1 = 15;
     int tiempoUtilizacionMesa2 = 5;
-    String evento = "Inicio";
+    String evento = EVN_INICIO;
+
+    //Eventos: 
+    //Llegada cliente
+    //Atencion en caja 
+    //Entrega de pedido
+    //Utilizacion de mesa
+    //Consumicion de pedido
+    //Fin permanencia
+    public static final String EVN_INICIO = "Inicio";
+    public static final String EVN_LLEGADA = "Llegada Cliente";
+    public static final String EVN_ATENCION = "Atencion en caja";
+    public static final String EVN_ENTREGA = "Entrga de pedido";
+    public static final String EVN_UTILIZACION = "Utilizacion de mesa";
+    public static final String EVN_CONSUMICION = "Consumicion de pedido";
+    public static final String EVN_FIN = "Fin Permanencia";
+    
+    
+    /*
+     * Indices de las columnas
+     */
+    public static final int COL_TIEMPO_LLEGADA = 5;
+    public static final int COL_TIEMPO_ATENCION = 8;
+    public static final int COL_TIEMPO_ENTREGA = 11;
+    public static final int COL_FIN_USO = 15;
+    public static final int COL_FIN_CONSUMICION = 18;
 
     public Calculator(Controller controller) {
         this.controller = controller;
@@ -90,20 +115,24 @@ public class Calculator {
                 float rnd1TiempoLlegada = r.nextFloat();
                 float rnd2TiempoLlegada = r.nextFloat();
                 double tiempoLlegada = llegadaEntreCliente(rnd1TiempoLlegada, rnd2TiempoLlegada);
-                setEvento("Inicio");
+                setEvento(EVN_INICIO);
                 model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj += tiempoLlegada});
                 setReloj(tiempoLlegada);
             } 
             else {
-                double tiempoProxLlegadaCliente = (double) model.getValueAt(model.getRowCount() - 1, 5);
-                double tiempoFinAtencionCaja = (double) model.getValueAt(model.getRowCount() - 1, 8);
-                double tiempoEntregaPedido = (double) model.getValueAt(model.getRowCount() - 1, 11);
-                double tiempoFinUsoMesa = (double) model.getValueAt(model.getRowCount() - 1, 15);
-                double tiempoFinConsumicion = (double) model.getValueAt(model.getRowCount() - 1, 18);
+                double tiempoProxLlegadaCliente = (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_LLEGADA);
+                double tiempoFinAtencionCaja = (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION);
+                double tiempoEntregaPedido = (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA);
+                double tiempoFinUsoMesa = (double) model.getValueAt(model.getRowCount() - 1, COL_FIN_USO);
+                double tiempoFinConsumicion = (double) model.getValueAt(model.getRowCount() - 1, COL_FIN_CONSUMICION);
 
-                if ((tiempoProxLlegadaCliente < tiempoFinAtencionCaja) && (tiempoProxLlegadaCliente < tiempoEntregaPedido) && (tiempoProxLlegadaCliente < tiempoFinUsoMesa) && (tiempoProxLlegadaCliente < tiempoFinConsumicion)) {
+                if ((tiempoProxLlegadaCliente < tiempoFinAtencionCaja) 
+                        && (tiempoProxLlegadaCliente < tiempoEntregaPedido) 
+                        && (tiempoProxLlegadaCliente < tiempoFinUsoMesa) 
+                        && (tiempoProxLlegadaCliente < tiempoFinConsumicion)) 
+                {
                     //tiempoProxLlegadaCliente es el proximo evento
-                    setEvento("Llegada Cliente");
+                    setEvento(EVN_LLEGADA);
                     Random r = new Random();
                     Cliente c1;
                     float rnd1TiempoLlegada = r.nextFloat();
@@ -120,19 +149,28 @@ public class Calculator {
                         empleado1.setLibre();
                         empleado2.setLibre();
                         //la idea seria que donde hay ceros copia las cosas de la fila de arriba
-                        model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj += tiempoLlegada,rndAccion,"Utiliza mesa",0,0,0,0,0,0,rndTiempoUtilizacionMesa,tiempoFinUtilizacionMesa,0,0,0,cajero.getEstado(),cajero.getCola(),empleado1.getEstado(),empleado1.getCola(),empleado2.getEstado(),empleado2.getCola(),0,c1.getEstado(),c1.getHoraLlegada(),c1.getHoraPartida()});
+                        model.addRow(new Object[]{
+                            evento,reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, 
+                            reloj += tiempoLlegada, rndAccion, "Utiliza mesa", 0, 0, 0, 0, 0, 0,
+                            rndTiempoUtilizacionMesa, tiempoFinUtilizacionMesa, 0, 0, 0, cajero.getEstado(),
+                            cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(),
+                            empleado2.getCola(), 0, c1.getEstado(), c1.getHoraLlegada(), c1.getHoraPartida()  });
+                        
                         setReloj(tiempoProxLlegadaCliente);
                     }//false, entra a comprar
                     else{
-                        tiempoFinAtencionCaja = reloj+=20;
+                        tiempoFinAtencionCaja = reloj += 20;
                         cajero.setOcupado();
                         setReloj(tiempoProxLlegadaCliente);
                     }
                     
-                } else if ((tiempoFinAtencionCaja < tiempoEntregaPedido) && (tiempoFinAtencionCaja < tiempoFinUsoMesa) && (tiempoFinAtencionCaja < tiempoFinConsumicion)) {
+                } else if ((tiempoFinAtencionCaja < tiempoEntregaPedido) && 
+                        (tiempoFinAtencionCaja < tiempoFinUsoMesa) && 
+                        (tiempoFinAtencionCaja < tiempoFinConsumicion)) {
                     // tiempoFinAtencionCaja es el proximo evento
 
-                } else if ((tiempoEntregaPedido < tiempoFinUsoMesa) && (tiempoEntregaPedido < tiempoFinConsumicion)) {
+                } else if ((tiempoEntregaPedido < tiempoFinUsoMesa) 
+                        && (tiempoEntregaPedido < tiempoFinConsumicion)) {
                     // tiempoEntregaPedido es el proximo evento
 
                 } else if (tiempoFinUsoMesa < tiempoFinConsumicion) {

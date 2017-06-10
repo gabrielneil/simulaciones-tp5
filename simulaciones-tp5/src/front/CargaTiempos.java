@@ -21,7 +21,6 @@ public class CargaTiempos extends javax.swing.JFrame {
      */
     public CargaTiempos() {
         initComponents();
-        this.setVisible(true);
     }
 
     /**

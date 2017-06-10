@@ -104,22 +104,24 @@ public class Calculator {
     public void setReloj(double tiempo) {
         this.reloj = tiempo;
     }
-    
-    public void initSimulacion() {
-        DefaultTableModel model = (DefaultTableModel) tabla._tblSimulacion.getModel();
 
+    public void initSimulacion() {
+        tabla.setVisible(true);
+        DefaultTableModel model = (DefaultTableModel) tabla._tblSimulacion.getModel();
+        Random r = new Random();
         while (reloj <= 60) {
 
             if (reloj == 0) {
-                Random r = new Random();
+                //primera vuelta
                 float rnd1TiempoLlegada = r.nextFloat();
                 float rnd2TiempoLlegada = r.nextFloat();
                 double tiempoLlegada = llegadaEntreCliente(rnd1TiempoLlegada, rnd2TiempoLlegada);
                 setEvento(EVN_INICIO);
                 model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj += tiempoLlegada});
                 setReloj(tiempoLlegada);
-            } 
-            else {
+                
+            } else if (evento != EVN_INICIO) {
+                //tercera vuelta o más
                 double tiempoProxLlegadaCliente = (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_LLEGADA);
                 double tiempoFinAtencionCaja = (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION);
                 double tiempoEntregaPedido = (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA);
@@ -133,7 +135,6 @@ public class Calculator {
                 {
                     //tiempoProxLlegadaCliente es el proximo evento
                     setEvento(EVN_LLEGADA);
-                    Random r = new Random();
                     Cliente c1;
                     float rnd1TiempoLlegada = r.nextFloat();
                     float rnd2TiempoLlegada = r.nextFloat();
@@ -180,7 +181,8 @@ public class Calculator {
                     // tiempoFinConsumicion es el proximo evento
 
                 }
-
+            } else {
+                //segunda vuelta
             }
         }
 

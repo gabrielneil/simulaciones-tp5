@@ -20,7 +20,6 @@ public class Tabla extends javax.swing.JFrame {
 
     public Tabla() {
         initComponents();
-        this.setVisible(true);
     }
 
     /**

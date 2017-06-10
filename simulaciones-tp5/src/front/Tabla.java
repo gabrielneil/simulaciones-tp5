@@ -30,8 +30,7 @@ public class Tabla extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         simulationTable = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -43,103 +42,83 @@ public class Tabla extends javax.swing.JFrame {
         setTitle("Vector Estado");
 
         _tblSimulacion.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Evento", "Reloj", "RND1", "RND2", "Llegada entre cliente", "Próxima llegada", "RND", "Acción", "Fin atención en caja", "RND", "Tiempo espera pedido", "Tiempo entrega pedido", "RND", "Acción - Mesa", "RND", "Tiempo de uso de mesa", "RND", "Tiempo de consumición", "Tiempo fin de consumición", "Estado", "Cola", "Estado", "Cola", "Estado", "Cola", "Tiempo permanencia", "Cantidad clientes en cafetería"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Integer.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        _tblSimulacion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         _tblSimulacion.getTableHeader().setReorderingAllowed(false);
         _scpTabla.setViewportView(_tblSimulacion);
-        if (_tblSimulacion.getColumnModel().getColumnCount() > 0)
-        {
+        if (_tblSimulacion.getColumnModel().getColumnCount() > 0) {
             _tblSimulacion.getColumnModel().getColumn(0).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(0).setPreferredWidth(70);
-            _tblSimulacion.getColumnModel().getColumn(1).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(1).setPreferredWidth(50);
-            _tblSimulacion.getColumnModel().getColumn(2).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(2).setPreferredWidth(50);
-            _tblSimulacion.getColumnModel().getColumn(3).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(3).setPreferredWidth(50);
+            _tblSimulacion.getColumnModel().getColumn(0).setPreferredWidth(50);
+            _tblSimulacion.getColumnModel().getColumn(1).setMinWidth(20);
+            _tblSimulacion.getColumnModel().getColumn(1).setPreferredWidth(20);
+            _tblSimulacion.getColumnModel().getColumn(2).setMinWidth(5);
+            _tblSimulacion.getColumnModel().getColumn(2).setPreferredWidth(5);
+            _tblSimulacion.getColumnModel().getColumn(3).setMinWidth(5);
+            _tblSimulacion.getColumnModel().getColumn(3).setPreferredWidth(5);
             _tblSimulacion.getColumnModel().getColumn(4).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(4).setPreferredWidth(200);
+            _tblSimulacion.getColumnModel().getColumn(4).setPreferredWidth(50);
             _tblSimulacion.getColumnModel().getColumn(5).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(5).setPreferredWidth(200);
-            _tblSimulacion.getColumnModel().getColumn(6).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(6).setPreferredWidth(50);
+            _tblSimulacion.getColumnModel().getColumn(5).setPreferredWidth(50);
+            _tblSimulacion.getColumnModel().getColumn(6).setMinWidth(5);
+            _tblSimulacion.getColumnModel().getColumn(6).setPreferredWidth(5);
             _tblSimulacion.getColumnModel().getColumn(7).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(7).setPreferredWidth(200);
+            _tblSimulacion.getColumnModel().getColumn(7).setPreferredWidth(25);
             _tblSimulacion.getColumnModel().getColumn(8).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(8).setPreferredWidth(200);
-            _tblSimulacion.getColumnModel().getColumn(9).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(9).setPreferredWidth(50);
+            _tblSimulacion.getColumnModel().getColumn(9).setMinWidth(5);
+            _tblSimulacion.getColumnModel().getColumn(9).setPreferredWidth(5);
             _tblSimulacion.getColumnModel().getColumn(10).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(10).setPreferredWidth(180);
+            _tblSimulacion.getColumnModel().getColumn(10).setPreferredWidth(80);
             _tblSimulacion.getColumnModel().getColumn(11).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(11).setPreferredWidth(180);
-            _tblSimulacion.getColumnModel().getColumn(12).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(12).setPreferredWidth(50);
+            _tblSimulacion.getColumnModel().getColumn(12).setMinWidth(5);
+            _tblSimulacion.getColumnModel().getColumn(12).setPreferredWidth(5);
             _tblSimulacion.getColumnModel().getColumn(13).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(13).setPreferredWidth(200);
-            _tblSimulacion.getColumnModel().getColumn(14).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(14).setPreferredWidth(50);
+            _tblSimulacion.getColumnModel().getColumn(14).setMinWidth(5);
+            _tblSimulacion.getColumnModel().getColumn(14).setPreferredWidth(5);
             _tblSimulacion.getColumnModel().getColumn(15).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(15).setPreferredWidth(200);
-            _tblSimulacion.getColumnModel().getColumn(16).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(16).setPreferredWidth(50);
+            _tblSimulacion.getColumnModel().getColumn(16).setMinWidth(5);
+            _tblSimulacion.getColumnModel().getColumn(16).setPreferredWidth(5);
             _tblSimulacion.getColumnModel().getColumn(17).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(17).setPreferredWidth(200);
             _tblSimulacion.getColumnModel().getColumn(18).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(18).setPreferredWidth(200);
-            _tblSimulacion.getColumnModel().getColumn(19).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(19).setPreferredWidth(100);
-            _tblSimulacion.getColumnModel().getColumn(20).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(20).setPreferredWidth(100);
-            _tblSimulacion.getColumnModel().getColumn(21).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(21).setPreferredWidth(100);
-            _tblSimulacion.getColumnModel().getColumn(22).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(22).setPreferredWidth(100);
-            _tblSimulacion.getColumnModel().getColumn(23).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(23).setPreferredWidth(100);
-            _tblSimulacion.getColumnModel().getColumn(24).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(24).setPreferredWidth(100);
+            _tblSimulacion.getColumnModel().getColumn(19).setMinWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(19).setPreferredWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(20).setMinWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(20).setPreferredWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(21).setMinWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(21).setPreferredWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(22).setMinWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(22).setPreferredWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(23).setMinWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(23).setPreferredWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(24).setMinWidth(15);
+            _tblSimulacion.getColumnModel().getColumn(24).setPreferredWidth(15);
             _tblSimulacion.getColumnModel().getColumn(25).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(25).setPreferredWidth(200);
-            _tblSimulacion.getColumnModel().getColumn(26).setResizable(false);
-            _tblSimulacion.getColumnModel().getColumn(26).setPreferredWidth(200);
         }
         _tblSimulacion.getAccessibleContext().setAccessibleName("");
         _tblSimulacion.getAccessibleContext().setAccessibleDescription("");
 
         jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });

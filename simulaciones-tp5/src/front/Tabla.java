@@ -42,43 +42,33 @@ public class Tabla extends javax.swing.JFrame {
         setTitle("Vector Estado");
 
         _tblSimulacion.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Evento", "Reloj", "RND1", "RND2", "Llegada entre cliente", "Próxima llegada", "RND", "Acción", "Fin atención en caja", "RND", "Tiempo espera pedido", "Tiempo entrega pedido", "RND", "Acción - Mesa", "RND", "Tiempo de uso de mesa", "RND", "Tiempo de consumición", "Tiempo fin de consumición", "Estado", "Cola", "Estado", "Cola", "Estado", "Cola", "Tiempo permanencia", "Cantidad clientes en cafetería"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Integer.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         _tblSimulacion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         _tblSimulacion.getTableHeader().setReorderingAllowed(false);
         _scpTabla.setViewportView(_tblSimulacion);
-        if (_tblSimulacion.getColumnModel().getColumnCount() > 0)
-        {
-            _tblSimulacion.getColumnModel().getColumn(0).setResizable(false);
+        if (_tblSimulacion.getColumnModel().getColumnCount() > 0) {
             _tblSimulacion.getColumnModel().getColumn(0).setPreferredWidth(70);
-            _tblSimulacion.getColumnModel().getColumn(1).setResizable(false);
             _tblSimulacion.getColumnModel().getColumn(1).setPreferredWidth(50);
             _tblSimulacion.getColumnModel().getColumn(2).setResizable(false);
             _tblSimulacion.getColumnModel().getColumn(2).setPreferredWidth(50);

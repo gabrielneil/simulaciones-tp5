@@ -111,12 +111,12 @@ public class Calculator {
         tabla.setVisible(true);
         model = (DefaultTableModel) tabla._tblSimulacion.getModel();
         primeraVuelta();
-        //masVueltas();
+        masVueltas();
 
         //puse 3600 porque si no, no puedo probar nunca nada ya que tira numeros altos la siguiente llegada(despues cambiar)
-        while (reloj <= 3600) {
-            masVueltas();
-        }
+//        while (reloj <= 3600) {
+//            masVueltas();
+//        }
     }
 
     public void primeraVuelta() {
@@ -128,7 +128,9 @@ public class Calculator {
         rnd2TiempoLlegada = r.nextFloat();
         double tiempoLlegada = llegadaEntreCliente(rnd1TiempoLlegada, rnd2TiempoLlegada);
         setEvento(EVN_INICIO);
-        model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj + tiempoLlegada});
+        model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj + tiempoLlegada, 0.0, "",
+        0.0,0.0,0.0,0.0,0.0,"",0.0,0.0,0.0,0.0,0.0,cajero.getEstado(),cajero.getCola(),empleado1.getEstado(),empleado1.getCola(),empleado2.getEstado(),empleado2.getCola(),
+        0.0,0.0});
         setReloj(tiempoLlegada);
     }
 
@@ -137,30 +139,14 @@ public class Calculator {
         Random r = new Random();
         float rnd1TiempoLlegada;
         float rnd2TiempoLlegada;
-        double tiempoProxLlegadaCliente = 70000;
-        double tiempoFinAtencionCaja = 70000;
-        double tiempoEntregaPedido = 70000;
-        double tiempoFinUsoMesa = 70000;
-        double tiempoFinConsumicion = 70000;
-
-        if (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_LLEGADA) != null) {
-            tiempoProxLlegadaCliente = (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_LLEGADA);
-        }
-        if (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION) != null) {
-            tiempoFinAtencionCaja = (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION);
-        }
-
-        if (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA) != null) {
-            tiempoEntregaPedido = (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA);
-        }
-
-        if (model.getValueAt(model.getRowCount() - 1, COL_FIN_USO) != null) {
-            tiempoFinUsoMesa = (double) model.getValueAt(model.getRowCount() - 1, COL_FIN_USO);
-        }
-        if (model.getValueAt(model.getRowCount() - 1, COL_FIN_CONSUMICION) != null) {
-            tiempoFinConsumicion = (double) model.getValueAt(model.getRowCount() - 1, COL_FIN_CONSUMICION);
-        }
         
+        System.out.println((double) (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION)));
+        double tiempoProxLlegadaCliente = (double) (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_LLEGADA));
+        double tiempoFinAtencionCaja = (double) (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION));
+        double tiempoEntregaPedido = (double) (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA));
+        double tiempoFinUsoMesa = (double) (model.getValueAt(model.getRowCount() - 1, COL_FIN_USO));
+        double tiempoFinConsumicion = (double) (model.getValueAt(model.getRowCount() - 1, COL_FIN_CONSUMICION));
+
         if ((tiempoProxLlegadaCliente < tiempoFinAtencionCaja)
                 && (tiempoProxLlegadaCliente < tiempoEntregaPedido)
                 && (tiempoProxLlegadaCliente < tiempoFinUsoMesa)
@@ -176,7 +162,7 @@ public class Calculator {
             //true y se calcula el tiempo que tarda en usar la mesa
             if (rndAccion <= ((float) entranAMesa / 100)) {
 
-            System.out.println("no entra");
+            System.out.println("entra a la mesa");
             float rndTiempoUtilizacionMesa = r.nextFloat();
             double tiempoFinUtilizacionMesa = finUtilizacionDeMesa(rndTiempoUtilizacionMesa);
             c1 = new Cliente("Utilizando mesa", reloj, reloj + tiempoFinUtilizacionMesa);
@@ -195,10 +181,10 @@ public class Calculator {
         }
         //false, entra a comprar
             else {
+                System.out.println("entra a comprar");
                 tiempoFinAtencionCaja = reloj += 20;
                 cajero.setOcupado();
                 setReloj(tiempoProxLlegadaCliente);
-                  System.out.println("es porque entra acá");
             }
 
         } else if ((tiempoFinAtencionCaja < tiempoEntregaPedido)

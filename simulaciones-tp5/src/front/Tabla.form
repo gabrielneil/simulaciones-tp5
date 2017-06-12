@@ -91,33 +91,33 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="27" rowCount="0">
-                        <Column editable="false" title="Evento" type="java.lang.String"/>
-                        <Column editable="false" title="Reloj" type="java.lang.Float"/>
-                        <Column editable="false" title="RND1" type="java.lang.Float"/>
-                        <Column editable="false" title="RND2" type="java.lang.Float"/>
-                        <Column editable="false" title="Llegada entre cliente" type="java.lang.Float"/>
-                        <Column editable="false" title="Pr&#xf3;xima llegada" type="java.lang.Float"/>
-                        <Column editable="false" title="RND" type="java.lang.Float"/>
-                        <Column editable="false" title="Acci&#xf3;n" type="java.lang.String"/>
-                        <Column editable="false" title="Fin atenci&#xf3;n en caja" type="java.lang.Float"/>
-                        <Column editable="false" title="RND" type="java.lang.Float"/>
-                        <Column editable="false" title="Tiempo espera pedido" type="java.lang.Float"/>
-                        <Column editable="false" title="Tiempo entrega pedido" type="java.lang.Float"/>
-                        <Column editable="false" title="RND" type="java.lang.Float"/>
-                        <Column editable="false" title="Acci&#xf3;n - Mesa" type="java.lang.String"/>
-                        <Column editable="false" title="RND" type="java.lang.Float"/>
-                        <Column editable="false" title="Tiempo de uso de mesa" type="java.lang.Float"/>
-                        <Column editable="false" title="RND" type="java.lang.Float"/>
-                        <Column editable="false" title="Tiempo de consumici&#xf3;n" type="java.lang.Float"/>
-                        <Column editable="false" title="Tiempo fin de consumici&#xf3;n" type="java.lang.Float"/>
-                        <Column editable="false" title="Estado" type="java.lang.String"/>
-                        <Column editable="false" title="Cola" type="java.lang.Integer"/>
-                        <Column editable="false" title="Estado" type="java.lang.String"/>
-                        <Column editable="false" title="Cola" type="java.lang.Integer"/>
-                        <Column editable="false" title="Estado" type="java.lang.String"/>
-                        <Column editable="false" title="Cola" type="java.lang.Integer"/>
-                        <Column editable="false" title="Tiempo permanencia" type="java.lang.Float"/>
-                        <Column editable="true" title="Cantidad clientes en cafeter&#xed;a" type="java.lang.Integer"/>
+                        <Column editable="false" title="Evento(0)" type="java.lang.String"/>
+                        <Column editable="false" title="Reloj(1)" type="java.lang.Float"/>
+                        <Column editable="false" title="RND1(2)" type="java.lang.Float"/>
+                        <Column editable="false" title="RND2(3)" type="java.lang.Float"/>
+                        <Column editable="false" title="Llegada entre cliente(4)" type="java.lang.Float"/>
+                        <Column editable="false" title="Pr&#xf3;xima llegada(5)" type="java.lang.Float"/>
+                        <Column editable="false" title="RND(6)" type="java.lang.Float"/>
+                        <Column editable="false" title="Acci&#xf3;n(7)" type="java.lang.String"/>
+                        <Column editable="false" title="Fin atenci&#xf3;n en caja(8)" type="java.lang.Float"/>
+                        <Column editable="false" title="RND(9)" type="java.lang.Float"/>
+                        <Column editable="false" title="Tiempo espera pedido(10)" type="java.lang.Float"/>
+                        <Column editable="false" title="Tiempo entrega pedido(11)" type="java.lang.Float"/>
+                        <Column editable="false" title="RND(12)" type="java.lang.Float"/>
+                        <Column editable="false" title="Acci&#xf3;n - Mesa(13)" type="java.lang.String"/>
+                        <Column editable="false" title="RND(14)" type="java.lang.Float"/>
+                        <Column editable="false" title="Tiempo de uso de mesa(15)" type="java.lang.Float"/>
+                        <Column editable="false" title="RND(16)" type="java.lang.Float"/>
+                        <Column editable="false" title="Tiempo de consumici&#xf3;n(17)" type="java.lang.Float"/>
+                        <Column editable="false" title="Tiempo fin de consumici&#xf3;n(18)" type="java.lang.Float"/>
+                        <Column editable="false" title="Estado(19)" type="java.lang.String"/>
+                        <Column editable="false" title="Cola(20)" type="java.lang.Integer"/>
+                        <Column editable="false" title="Estado(21)" type="java.lang.String"/>
+                        <Column editable="false" title="Cola(22)" type="java.lang.Integer"/>
+                        <Column editable="false" title="Estado(23)" type="java.lang.String"/>
+                        <Column editable="false" title="Cola(24)" type="java.lang.Integer"/>
+                        <Column editable="false" title="Tiempo permanencia(25)" type="java.lang.Float"/>
+                        <Column editable="true" title="Cantidad clientes en cafeter&#xed;a(26)" type="java.lang.Integer"/>
                       </Table>
                     </Property>
                     <Property name="autoResizeMode" type="int" value="0"/>

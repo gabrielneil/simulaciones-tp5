@@ -8,6 +8,7 @@ package simulaciones.tp5;
 import Objects.Cliente;
 import Objects.Servidor;
 import front.Tabla;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author gabrielneil
  */
 public class Calculator {
-
+    ArrayList<Cliente> lista = new ArrayList<>();
     Controller controller;
     Formulas formulas = new Formulas();
     Tabla tabla;
@@ -113,7 +114,7 @@ public class Calculator {
         model = (DefaultTableModel) tabla._tblSimulacion.getModel();
         primeraVuelta();
         masVueltas();
-
+        masVueltas();
         //puse 3600 porque si no, no puedo probar nunca nada ya que tira numeros altos la siguiente llegada(despues cambiar)
 //        while (reloj <= 3600) {
 //            masVueltas();
@@ -131,7 +132,7 @@ public class Calculator {
         setEvento(EVN_INICIO);
         model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj + tiempoLlegada, 0.0, "",
             0.0, 0.0, 0.0, 0.0, 0.0, "", 0.0, 0.0, 0.0, 0.0, 0.0, cajero.getEstado(), cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(), empleado2.getCola(),
-            0.0, 0.0});
+            0.0, 0});
         setReloj(tiempoLlegada);
     }
 
@@ -156,6 +157,7 @@ public class Calculator {
                 (tiempoFinAtencionCaja == 0 && tiempoEntregaPedido == 0 && tiempoFinUsoMesa == 0 && tiempoFinConsumicion == 0)) {
 
             //tiempoProxLlegadaCliente es el proximo evento
+            System.out.println("el próximo");
             setEvento(EVN_LLEGADA);
             setReloj(tiempoProxLlegadaCliente);
             Cliente c1;
@@ -172,10 +174,11 @@ public class Calculator {
                 double tiempoFinUtilizacionMesa = finUtilizacionDeMesa(rndTiempoUtilizacionMesa);
                 c1 = new Cliente("Utilizando mesa", reloj, reloj + tiempoFinUtilizacionMesa);
                 //la idea seria que donde hay ceros copia las cosas de la fila de arriba
+                lista.add(c1);
                 model.addRow(new Object[]{
                     evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada,
-                    reloj + tiempoLlegada, rndAccion, "Utiliza mesa", 0, 0, 0, 0, 0, "",
-                    rndTiempoUtilizacionMesa, tiempoFinUtilizacionMesa, 0, 0, 0, cajero.getEstado(),
+                    reloj + tiempoLlegada, rndAccion, "Utiliza mesa", (double) (model.getValueAt(model.getRowCount() - 1, 8)), (double) (model.getValueAt(model.getRowCount() - 1, 9)), (double) (model.getValueAt(model.getRowCount() - 1, 10)), (double) (model.getValueAt(model.getRowCount() - 1, 11)), (double) (model.getValueAt(model.getRowCount() - 1, 12)), "",
+                    rndTiempoUtilizacionMesa, tiempoFinUtilizacionMesa, (double) (model.getValueAt(model.getRowCount() - 1, 16)), (double) (model.getValueAt(model.getRowCount() - 1, 17)), (double) (model.getValueAt(model.getRowCount() - 1, 18)), cajero.getEstado(),
                     cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(),
                     empleado2.getCola(),
                     (evento == EVN_FIN) ? tiempoPermanenciaAcumulador + (c1.getHoraPartida() - c1.getHoraLlegada()) : tiempoPermanenciaAcumulador,
@@ -193,7 +196,7 @@ public class Calculator {
 
                 model.addRow(new Object[]{
                     evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada,
-                    reloj + tiempoLlegada, rndAccion, "Compra", tiempoFinAtencionCaja, 0.0, 0.0, 0.0, 0.0, 0.0,
+                    reloj + tiempoLlegada, rndAccion, "Compra", tiempoFinAtencionCaja, 0.0, 0.0, 0.0, 0.0, "",
                     0.0, 0.0, 0.0, 0.0, 0.0, cajero.getEstado(),
                     cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(),
                     empleado2.getCola(),
@@ -204,23 +207,27 @@ public class Calculator {
         } else if ((tiempoFinAtencionCaja < tiempoEntregaPedido)
                 && (tiempoFinAtencionCaja < tiempoFinUsoMesa)
                 && (tiempoFinAtencionCaja < tiempoFinConsumicion)) {
+            
             // tiempoFinAtencionCaja es el proximo evento
             setEvento(EVN_FIN_ATENCION);
             setReloj(tiempoFinAtencionCaja);
+            
             if (cajero.getCola() == 0) {
                 cajero.setLibre();
             } else {
                 cajero.disminuirCola();
             }
             
+            float rndEspera = r.nextFloat();
+            double tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
+            
             model.addRow(new Object[]{
                 evento, reloj, 0.0, 0.0, 0.0,
-                tiempoProxLlegadaCliente, 0.0, "", 0.0, "aca"+0.0, 0.0, 0.0, 0.0, 0.0,
+                tiempoProxLlegadaCliente, 0.0, "", rndEspera, tiempoEntrega, reloj + tiempoEntrega, 0.0, 0.0, 0.0,
                 0.0, 0.0, 0.0, 0.0, 0.0, cajero.getEstado(),
                 cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(),
                 empleado2.getCola(),
                 0.0, 0.0});
-            setReloj(tiempoProxLlegadaCliente);
 
         } else if ((tiempoEntregaPedido < tiempoFinUsoMesa)
                 && (tiempoEntregaPedido < tiempoFinConsumicion)) {
@@ -228,7 +235,11 @@ public class Calculator {
 
         } else if (tiempoFinUsoMesa < tiempoFinConsumicion) {
             // tiempoUsoMesa es el proximo evento
-
+            setEvento(EVN_FIN);
+            setReloj(tiempoFinUsoMesa);
+            cantidadClientesEnCafeteria += 1;
+            //double tiempoPermanencia = ((double) (model.getValueAt(model.getRowCount() - 1, 25)))+ cliente;
+            //hasta acá llegue, tengo que meter una fila más , pero debo saber cuanto tiempo lleva este chabon adentro...
         } else {
             // tiempoFinConsumicion es el proximo evento
 

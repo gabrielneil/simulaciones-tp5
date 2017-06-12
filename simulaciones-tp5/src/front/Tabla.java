@@ -29,8 +29,7 @@ public class Tabla extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         simulationTable = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -46,7 +45,7 @@ public class Tabla extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Evento", "Reloj", "RND1", "RND2", "Llegada entre cliente", "Próxima llegada", "RND", "Acción", "Fin atención en caja", "RND", "Tiempo espera pedido", "Tiempo entrega pedido", "RND", "Acción - Mesa", "RND", "Tiempo de uso de mesa", "RND", "Tiempo de consumición", "Tiempo fin de consumición", "Estado", "Cola", "Estado", "Cola", "Estado", "Cola", "Tiempo permanencia", "Cantidad clientes en cafetería"
+                "Evento(0)", "Reloj(1)", "RND1(2)", "RND2(3)", "Llegada entre cliente(4)", "Próxima llegada(5)", "RND(6)", "Acción(7)", "Fin atención en caja(8)", "RND(9)", "Tiempo espera pedido(10)", "Tiempo entrega pedido(11)", "RND(12)", "Acción - Mesa(13)", "RND(14)", "Tiempo de uso de mesa(15)", "RND(16)", "Tiempo de consumición(17)", "Tiempo fin de consumición(18)", "Estado(19)", "Cola(20)", "Estado(21)", "Cola(22)", "Estado(23)", "Cola(24)", "Tiempo permanencia(25)", "Cantidad clientes en cafetería(26)"
             }
         ) {
             Class[] types = new Class [] {
@@ -125,10 +124,8 @@ public class Tabla extends javax.swing.JFrame {
         _tblSimulacion.getAccessibleContext().setAccessibleDescription("");
 
         jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });

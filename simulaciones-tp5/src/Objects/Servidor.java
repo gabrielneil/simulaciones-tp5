@@ -34,7 +34,9 @@ public class Servidor {
     public void setCola(int cola) {
         this.cola = cola;
     }
-
+    public void aumentarCola() {
+        cola++;
+    }
     public void setOcupado() {
         this.estado = "OCUPADO";
     }

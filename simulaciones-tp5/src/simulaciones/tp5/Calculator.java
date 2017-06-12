@@ -55,6 +55,7 @@ public class Calculator {
     public static final String EVN_INICIO = "Inicio";
     public static final String EVN_LLEGADA = "Llegada Cliente";
     public static final String EVN_ATENCION = "Atencion en caja";
+    public static final String EVN_FIN_ATENCION = "Fin atención caja";
     public static final String EVN_ENTREGA = "Entrega de pedido";
     public static final String EVN_UTILIZACION = "Utilizacion de mesa";
     public static final String EVN_CONSUMICION = "Consumicion de pedido";
@@ -156,6 +157,7 @@ public class Calculator {
 
             //tiempoProxLlegadaCliente es el proximo evento
             setEvento(EVN_LLEGADA);
+            setReloj(tiempoProxLlegadaCliente);
             Cliente c1;
             rnd1TiempoLlegada = r.nextFloat();
             rnd2TiempoLlegada = r.nextFloat();
@@ -179,8 +181,6 @@ public class Calculator {
                     (evento == EVN_FIN) ? tiempoPermanenciaAcumulador + (c1.getHoraPartida() - c1.getHoraLlegada()) : tiempoPermanenciaAcumulador,
                     (evento == EVN_FIN) ? cantidadClientesEnCafeteria += 1 : cantidadClientesEnCafeteria});
 
-                setReloj(tiempoProxLlegadaCliente);
-
             } //false, entra a comprar
             else {
                 System.out.println("entra a comprar");
@@ -198,8 +198,6 @@ public class Calculator {
                     cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(),
                     empleado2.getCola(),
                     0.0, 0.0});
-                
-                setReloj(tiempoProxLlegadaCliente);
 
             }
 
@@ -207,6 +205,22 @@ public class Calculator {
                 && (tiempoFinAtencionCaja < tiempoFinUsoMesa)
                 && (tiempoFinAtencionCaja < tiempoFinConsumicion)) {
             // tiempoFinAtencionCaja es el proximo evento
+            setEvento(EVN_FIN_ATENCION);
+            setReloj(tiempoFinAtencionCaja);
+            if (cajero.getCola() == 0) {
+                cajero.setLibre();
+            } else {
+                cajero.disminuirCola();
+            }
+            
+            model.addRow(new Object[]{
+                evento, reloj, 0.0, 0.0, 0.0,
+                tiempoProxLlegadaCliente, 0.0, "", 0.0, "aca"+0.0, 0.0, 0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0, 0.0, 0.0, cajero.getEstado(),
+                cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(),
+                empleado2.getCola(),
+                0.0, 0.0});
+            setReloj(tiempoProxLlegadaCliente);
 
         } else if ((tiempoEntregaPedido < tiempoFinUsoMesa)
                 && (tiempoEntregaPedido < tiempoFinConsumicion)) {

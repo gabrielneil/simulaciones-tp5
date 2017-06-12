@@ -45,4 +45,8 @@ public class Servidor {
         this.estado = "LIBRE";
     }
 
+    public void disminuirCola() {
+        cola--;
+    }
+
 }

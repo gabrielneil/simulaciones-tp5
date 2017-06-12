@@ -115,6 +115,7 @@ public class Calculator {
         primeraVuelta();
         masVueltas();
         masVueltas();
+      
         //puse 3600 porque si no, no puedo probar nunca nada ya que tira numeros altos la siguiente llegada(despues cambiar)
 //        while (reloj <= 3600) {
 //            masVueltas();
@@ -122,6 +123,7 @@ public class Calculator {
     }
 
     public void primeraVuelta() {
+       
         Random r = new Random();
         float rnd1TiempoLlegada;
         float rnd2TiempoLlegada;
@@ -130,6 +132,7 @@ public class Calculator {
         rnd2TiempoLlegada = r.nextFloat();
         double tiempoLlegada = llegadaEntreCliente(rnd1TiempoLlegada, rnd2TiempoLlegada);
         setEvento(EVN_INICIO);
+        
         model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj + tiempoLlegada, 0.0, "",
             0.0, 0.0, 0.0, 0.0, 0.0, "", 0.0, 0.0, 0.0, 0.0, 0.0, cajero.getEstado(), cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(), empleado2.getCola(),
             0.0, 0});
@@ -177,12 +180,22 @@ public class Calculator {
                 lista.add(c1);
                 model.addRow(new Object[]{
                     evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada,
-                    reloj + tiempoLlegada, rndAccion, "Utiliza mesa", (double) (model.getValueAt(model.getRowCount() - 1, 8)), (double) (model.getValueAt(model.getRowCount() - 1, 9)), (double) (model.getValueAt(model.getRowCount() - 1, 10)), (double) (model.getValueAt(model.getRowCount() - 1, 11)), (double) (model.getValueAt(model.getRowCount() - 1, 12)), "",
+                    
+                    reloj + tiempoLlegada, rndAccion, "Utiliza mesa", (double) (model.getValueAt(model.getRowCount() - 1, 8)),
+                    
+                    (double) (model.getValueAt(model.getRowCount() - 1, 9)), (double) (model.getValueAt(model.getRowCount() - 1, 10)), 
+                    
+                    (double) (model.getValueAt(model.getRowCount() - 1, 11)), (double) (model.getValueAt(model.getRowCount() - 1, 12)), "",
+                    
                     rndTiempoUtilizacionMesa, tiempoFinUtilizacionMesa, (double) (model.getValueAt(model.getRowCount() - 1, 16)), (double) (model.getValueAt(model.getRowCount() - 1, 17)), (double) (model.getValueAt(model.getRowCount() - 1, 18)), cajero.getEstado(),
+                    
                     cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(),
+                    
                     empleado2.getCola(),
+                    
                     (evento == EVN_FIN) ? tiempoPermanenciaAcumulador + (c1.getHoraPartida() - c1.getHoraLlegada()) : tiempoPermanenciaAcumulador,
                     (evento == EVN_FIN) ? cantidadClientesEnCafeteria += 1 : cantidadClientesEnCafeteria});
+                   
 
             } //false, entra a comprar
             else {
@@ -232,14 +245,17 @@ public class Calculator {
         } else if ((tiempoEntregaPedido < tiempoFinUsoMesa)
                 && (tiempoEntregaPedido < tiempoFinConsumicion)) {
             // tiempoEntregaPedido es el proximo evento
-
+            System.out.println("tiempoentregapedido");
         } else if (tiempoFinUsoMesa < tiempoFinConsumicion) {
             // tiempoUsoMesa es el proximo evento
+            System.out.println("tiempofinusomesa");
             setEvento(EVN_FIN);
             setReloj(tiempoFinUsoMesa);
             cantidadClientesEnCafeteria += 1;
             //double tiempoPermanencia = ((double) (model.getValueAt(model.getRowCount() - 1, 25)))+ cliente;
             //hasta acá llegue, tengo que meter una fila más , pero debo saber cuanto tiempo lleva este chabon adentro...
+                    //(evento == EVN_FIN) ? tiempoPermanenciaAcumulador + (c1.getHoraPartida() - c1.getHoraLlegada()) : tiempoPermanenciaAcumulador,
+                    //(evento == EVN_FIN) ? cantidadClientesEnCafeteria += 1 : cantidadClientesEnCafeteria});
         } else {
             // tiempoFinConsumicion es el proximo evento
 

@@ -21,9 +21,12 @@ public class Formulas {
         return (-tiempoCompra) * Math.log(1 - random);
     }
     
-    //box-muller
+    //box-muller.
+    //Tiempo de llegada entre clientes en minutos, 
+    //recibe como parametro la media y la desviacion en segundos y los randoms para box muller
+    //retorna el tiempo de llegada entre cliente en MINUTOS
     public static double llegadaCliente(float rnd1, float rnd2, float media, float desviacion){
-        return ((Math.sqrt(-2*Math.log(rnd1))*Math.cos(2*Math.PI*rnd2))*desviacion)+media;
+        return (((Math.sqrt(-2*Math.log(rnd1))*Math.cos(2*Math.PI*rnd2))*desviacion)+media)/60;
     }
     
     public static double tiempoUtilizacionMesa(float rnd){

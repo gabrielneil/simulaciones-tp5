@@ -130,7 +130,7 @@ public class Calculator {
         //primera vuelta
         rnd1TiempoLlegada = r.nextFloat();
         rnd2TiempoLlegada = r.nextFloat();
-        double tiempoLlegada = llegadaEntreCliente(rnd1TiempoLlegada, rnd2TiempoLlegada);
+        double tiempoLlegada = Formulas.llegadaCliente(rnd1TiempoLlegada, rnd1TiempoLlegada, media, desviacion);
         setEvento(EVN_INICIO);
         
         model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj + tiempoLlegada, 0.0, "",
@@ -166,7 +166,7 @@ public class Calculator {
             Cliente c1;
             rnd1TiempoLlegada = r.nextFloat();
             rnd2TiempoLlegada = r.nextFloat();
-            double tiempoLlegada = llegadaEntreCliente(rnd1TiempoLlegada, rnd2TiempoLlegada);
+            double tiempoLlegada = Formulas.llegadaCliente(rnd1TiempoLlegada, rnd1TiempoLlegada, media, desviacion);
             float rndAccion = r.nextFloat();
 
             //true y se calcula el tiempo que tarda en usar la mesa
@@ -263,19 +263,9 @@ public class Calculator {
 
     }
 
-    //Tiempo de llegada entre clientes en minutos, 
-    //recibe como parametro la media y la desviacion en segundos y los randoms para box muller
-    //retorna el tiempo de llegada entre cliente en MINUTOS
-    public double llegadaEntreCliente(float rnd1, float rnd2) {
-
-        double n1 = Formulas.llegadaCliente(rnd1, rnd2, media, desviacion); //devuelve el tiempo en segundos
-        double tiempo = n1 * 60; //Estaba calculado en segundos, lo paso a minutos
-        return tiempo;
-    }
-
     public double finUtilizacionDeMesa(float rnd) {
         double n = Formulas.tiempoUtilizacionMesa(rnd);
-        double tiempo = n * 60; //Estaba calculado en segundos, lo paso a minutos
+        double tiempo = n / 60; //Estaba calculado en segundos, lo paso a minutos
         return tiempo;
     }
 }

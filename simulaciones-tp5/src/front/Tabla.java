@@ -29,7 +29,8 @@ public class Tabla extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         simulationTable = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -41,32 +42,40 @@ public class Tabla extends javax.swing.JFrame {
         setTitle("Vector Estado");
 
         _tblSimulacion.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
-                "Evento(0)", "Reloj(1)", "RND1(2)", "RND2(3)", "Llegada entre cliente(4)", "Próxima llegada(5)", "RND(6)", "Acción(7)", "Fin atención en caja(8)", "RND(9)", "Tiempo espera pedido(10)", "Tiempo entrega pedido(11)", "RND(12)", "Acción - Mesa(13)", "RND(14)", "Tiempo de uso de mesa(15)", "RND(16)", "Tiempo de consumición(17)", "Tiempo fin de consumición(18)", "Estado(19)", "Cola(20)", "Estado(21)", "Cola(22)", "Estado(23)", "Cola(24)", "Tiempo permanencia(25)", "Cantidad clientes en cafetería(26)"
+            new String []
+            {
+                "Evento(0)", "Reloj(1)", "RND1(2)", "RND2(3)", "Llegada entre cliente(4)", "Próxima llegada(5)", "RND(6)", "Acción(7)", "Fin atención en caja(8)", "RND(9)", "Tiempo espera pedido(10)", "Tiempo entrega pedido(11)", "RND(12)", "Acción - Mesa(13)", "RND(14)", "Tiempo de uso de mesa(15)", "RND(16)", "Tiempo de consumición(17)", "Tiempo fin de consumición(18)", "Cajero Estado(19)", "Cajero cola(20)", "Empl 1 estado(21)", "Empl 1 Cola(22)", "Empl 2 Estado(23)", "Empl 2 Cola(24)", "Tiempo permanencia(25)", "Cantidad clientes en cafetería(26)"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Integer.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         _tblSimulacion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         _tblSimulacion.getTableHeader().setReorderingAllowed(false);
         _scpTabla.setViewportView(_tblSimulacion);
-        if (_tblSimulacion.getColumnModel().getColumnCount() > 0) {
+        if (_tblSimulacion.getColumnModel().getColumnCount() > 0)
+        {
             _tblSimulacion.getColumnModel().getColumn(0).setPreferredWidth(70);
             _tblSimulacion.getColumnModel().getColumn(1).setPreferredWidth(50);
             _tblSimulacion.getColumnModel().getColumn(2).setResizable(false);
@@ -124,8 +133,10 @@ public class Tabla extends javax.swing.JFrame {
         _tblSimulacion.getAccessibleContext().setAccessibleDescription("");
 
         jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton1ActionPerformed(evt);
             }
         });

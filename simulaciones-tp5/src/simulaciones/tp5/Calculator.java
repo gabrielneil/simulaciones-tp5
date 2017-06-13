@@ -53,14 +53,20 @@ public class Calculator {
     //Utilizacion de mesa
     //Consumicion de pedido
     //Fin permanencia
+    /**
+     * Inicio
+     * Llegada cliente
+     * Fin atención en caja 
+     * Entrega de pedido
+     * Fin utilización de mesa
+     * Fin consumición del pedido
+     */
     public static final String EVN_INICIO = "Inicio";
     public static final String EVN_LLEGADA = "Llegada Cliente";
-    public static final String EVN_ATENCION = "Atencion en caja";
     public static final String EVN_FIN_ATENCION = "Fin atención caja";
     public static final String EVN_ENTREGA = "Entrega de pedido";
-    public static final String EVN_UTILIZACION = "Utilizacion de mesa";
-    public static final String EVN_CONSUMICION = "Consumicion de pedido";
-    public static final String EVN_FIN = "Fin Permanencia";
+    public static final String EVN_UTILIZACION = "Fin Utilizacion de mesa";
+    public static final String EVN_CONSUMICION = "Fin Consumicion de pedido";
 
     /*
      * Indices de las columnas
@@ -193,8 +199,8 @@ public class Calculator {
                     
                     empleado2.getCola(),
                     
-                    (evento == EVN_FIN) ? tiempoPermanenciaAcumulador + (c1.getHoraPartida() - c1.getHoraLlegada()) : tiempoPermanenciaAcumulador,
-                    (evento == EVN_FIN) ? cantidadClientesEnCafeteria += 1 : cantidadClientesEnCafeteria});
+                    (evento == EVN_CONSUMICION || evento == EVN_UTILIZACION) ? tiempoPermanenciaAcumulador + (c1.getHoraPartida() - c1.getHoraLlegada()) : tiempoPermanenciaAcumulador,
+                    (evento == EVN_CONSUMICION || evento == EVN_UTILIZACION) ? cantidadClientesEnCafeteria += 1 : cantidadClientesEnCafeteria});
                    
 
             } //false, entra a comprar
@@ -213,7 +219,7 @@ public class Calculator {
                     0.0, 0.0, 0.0, 0.0, 0.0, cajero.getEstado(),
                     cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(),
                     empleado2.getCola(),
-                    0.0, 0.0});
+                    0.0, 0});
 
             }
 
@@ -249,16 +255,69 @@ public class Calculator {
         } else if (tiempoFinUsoMesa < tiempoFinConsumicion) {
             // tiempoUsoMesa es el proximo evento
             System.out.println("tiempofinusomesa");
-            setEvento(EVN_FIN);
+            setEvento(EVN_UTILIZACION);
             setReloj(tiempoFinUsoMesa);
-            cantidadClientesEnCafeteria += 1;
-            //double tiempoPermanencia = ((double) (model.getValueAt(model.getRowCount() - 1, 25)))+ cliente;
-            //hasta acá llegue, tengo que meter una fila más , pero debo saber cuanto tiempo lleva este chabon adentro...
-                    //(evento == EVN_FIN) ? tiempoPermanenciaAcumulador + (c1.getHoraPartida() - c1.getHoraLlegada()) : tiempoPermanenciaAcumulador,
-                    //(evento == EVN_FIN) ? cantidadClientesEnCafeteria += 1 : cantidadClientesEnCafeteria});
+            /*
+             * Copiar proxima llegada de arriba --
+             * Copiar fin atencion en caja de arriba
+             * Copiar tiempo entrega pedido de arriba
+             * Mantengo estado Cajero
+             * Tiempo permanencia = tiempo permanencia anterior + [sacar de arriba](diferencia entre tiempo de partida y tiempo de llegada del cliente que se va en este momento del reloj)
+             * Matar cliente que se va en este momento TODO (bah)
+             * Mantener clientes anteriores TODO
+             */
+            model.addRow(new Object[]{
+            evento, reloj, null, null, null, (double) model.getValueAt(model.getRowCount() -1,COL_TIEMPO_LLEGADA), null, null, (double) model.getValueAt(model.getRowCount() -1,COL_TIEMPO_ATENCION),
+                null, null, (double) model.getValueAt(model.getRowCount() -1,COL_TIEMPO_ENTREGA), null, null, null, null, null, null, null, (double) model.getValueAt(model.getRowCount() -1,COL_FIN_CONSUMICION),
+                (String) model.getValueAt(model.getRowCount() -1, 19), (int) model.getValueAt(model.getRowCount() -1, 20), (String) model.getValueAt(model.getRowCount() -1, 21), (int) model.getValueAt(model.getRowCount() -1, 22),
+                (String) model.getValueAt(model.getRowCount() -1, 23), calcularFinPermanencia(24) , (int) model.getValueAt(model.getRowCount() -1, 25), 
+            });
+            
         } else {
             // tiempoFinConsumicion es el proximo evento
-
+            System.out.println("tiempofinusomesa");
+            setEvento(EVN_CONSUMICION);
+            setReloj(tiempoFinConsumicion);
+           
+            /*
+             * Copiar proxima llegada de arriba --
+             * Copiar fin atencion en caja de arriba
+             * Copiar tiempo entrega pedido de arriba
+             * Mantengo estado Cajero
+             * Tiempo permanencia = tiempo permanencia anterior + [sacar de arriba](diferencia entre tiempo de partida y tiempo de llegada del cliente que se va en este momento del reloj)
+             * Matar cliente que se va en este momento TODO (bah)
+             * Mantener clientes anteriores TODO
+             */
+            model.addRow(new Object[]{
+            evento, 
+                reloj,
+                null,
+                null, 
+                null, 
+                (double) model.getValueAt(model.getRowCount() -1,COL_TIEMPO_LLEGADA), 
+                null, 
+                null, 
+                (double) model.getValueAt(model.getRowCount() -1,COL_TIEMPO_ATENCION),
+                null,
+                null, 
+                (double) model.getValueAt(model.getRowCount() -1,COL_TIEMPO_ENTREGA),
+                null, 
+                null, 
+                null, 
+                (double) model.getValueAt(model.getRowCount() -1,COL_FIN_USO),
+                null,
+                null,
+                null,
+                (String) model.getValueAt(model.getRowCount() -1, 19),
+                (int) model.getValueAt(model.getRowCount() -1, 20),
+                (String) model.getValueAt(model.getRowCount() -1, 21),
+                (int) model.getValueAt(model.getRowCount() -1, 22),
+                (String) model.getValueAt(model.getRowCount() -1, 23),
+                (int) model.getValueAt(model.getRowCount() -1, 24),
+                calcularFinPermanencia(25) , 
+                (int) model.getValueAt(model.getRowCount() -1, 26)
+            });
+            //TODO: agregar los clientes de alguna forma
         }
 
     }
@@ -269,13 +328,30 @@ public class Calculator {
     public double llegadaEntreCliente(float rnd1, float rnd2) {
 
         double n1 = Formulas.llegadaCliente(rnd1, rnd2, media, desviacion); //devuelve el tiempo en segundos
-        double tiempo = n1 * 60; //Estaba calculado en segundos, lo paso a minutos
+        double tiempo = n1 / 60; //Estaba calculado en segundos, lo paso a minutos
         return tiempo;
     }
 
     public double finUtilizacionDeMesa(float rnd) {
         double n = Formulas.tiempoUtilizacionMesa(rnd);
-        double tiempo = n * 60; //Estaba calculado en segundos, lo paso a minutos
+        double tiempo = n / 60; //Estaba calculado en segundos, lo paso a minutos
         return tiempo;
+    }
+
+    private double calcularFinPermanencia(int colTiempoPermanencia)
+    {
+        double ret = (double) model.getValueAt(model.getRowCount() -1, colTiempoPermanencia);
+        //Tiempo permanencia = tiempo permanencia anterior + 
+        //[sacar de arriba](diferencia entre tiempo de partida y tiempo de llegada del cliente que se va en este momento del reloj)
+        for (Cliente cl : lista)
+        {
+            if (cl.getHoraPartida() == reloj)
+            {
+                double dif = cl.getHoraPartida() - cl.getHoraLlegada();
+                lista.remove(cl);
+                return ret + dif;
+            }
+        }
+        return ret;
     }
 }

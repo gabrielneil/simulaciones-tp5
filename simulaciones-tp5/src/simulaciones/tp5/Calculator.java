@@ -332,12 +332,6 @@ public class Calculator {
         return tiempo;
     }
 
-    public double finUtilizacionDeMesa(float rnd) {
-        double n = Formulas.tiempoUtilizacionMesa(rnd);
-        double tiempo = n / 60; //Estaba calculado en segundos, lo paso a minutos
-        return tiempo;
-    }
-
     private double calcularFinPermanencia(int colTiempoPermanencia)
     {
         double ret = (double) model.getValueAt(model.getRowCount() -1, colTiempoPermanencia);

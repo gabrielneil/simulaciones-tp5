@@ -15,6 +15,9 @@ public class Cliente {
     double horaLlegada;
     double horaPartida;
 
+    public Cliente() {
+    }
+
     public String getEstado() {
         return estado;
     }

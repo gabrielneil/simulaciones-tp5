@@ -30,7 +30,7 @@ public class Formulas {
         return 10+(rnd*10);
     }
     
-//    public double tiempoConsumición(){
-//    
-//    }
+    public static double tiempoConsumicion(float rnd){
+        return 4+(rnd*2);
+    }
 }

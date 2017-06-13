@@ -38,8 +38,8 @@ public class Calculator {
     double reloj = 0;
     double tiempoPermanenciaAcumulador = 0;
 
-    int tiempoTicket = 20;
-    float tiempoEspera = 50;
+    float tiempoTicket = 20/60;
+    float tiempoEspera = 50/60;
     int tiempoConsumicion1 = 5;
     int tiempoConsumicion2 = 1;
     int tiempoUtilizacionMesa1 = 15;
@@ -124,8 +124,8 @@ public class Calculator {
     }
 
     public void cargaTiempos(int tiempoTicket, int tiempoEspera, int tiempoConsumicion1, int tiempoConsumicion2, int tiempoUtilizacionMesa1, int tiempoUtilizacionMesa2) {
-        this.tiempoTicket = tiempoTicket;
-        this.tiempoEspera = (float)tiempoEspera;
+        this.tiempoTicket = (float) tiempoTicket/60; //Regla de 3 para pasar a minutos
+        this.tiempoEspera = (float)tiempoEspera/60; //Regla de 3 para pasar a minutos
         this.tiempoConsumicion1 = tiempoConsumicion1;
         this.tiempoConsumicion2 = tiempoConsumicion2;
         this.tiempoUtilizacionMesa1 = tiempoUtilizacionMesa1;
@@ -161,7 +161,7 @@ public class Calculator {
         model = (DefaultTableModel) tabla._tblSimulacion.getModel();
 //        primeraVuelta();
         setEvento(NO_EVN);
-        double tiempoDeCorte = 3600;
+        double tiempoDeCorte = 60;
         while (reloj <= tiempoDeCorte)
         {
             simularAvance();
@@ -217,11 +217,11 @@ public class Calculator {
 
     public void simularAvance() {
         
+        Random r = new Random();
         if (NO_EVN.equalsIgnoreCase(evento))
         {
             
             setEvento(EVN_INICIO);
-            Random r = new Random();
             float rnd1TiempoLlegada;
             float rnd2TiempoLlegada;
             //primera vuelta
@@ -261,10 +261,6 @@ public class Calculator {
             return;
         }
         
-        Random r = new Random();
-        float rnd1TiempoLlegada;
-        float rnd2TiempoLlegada;
-
         boolean evitarTiempoLlegada = model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_LLEGADA) == null;
         double tiempoProxLlegadaCliente = (evitarTiempoLlegada ? 0.0 : (double) (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_LLEGADA)));
         
@@ -294,6 +290,8 @@ public class Calculator {
             setEvento(EVN_LLEGADA);
             setReloj(tiempoProxLlegadaCliente);
             
+            float rnd1TiempoLlegada;
+            float rnd2TiempoLlegada;
             rnd1TiempoLlegada = r.nextFloat();
             rnd2TiempoLlegada = r.nextFloat();
             double tiempoLlegada = Formulas.llegadaCliente(rnd1TiempoLlegada, rnd1TiempoLlegada, media, desviacion);

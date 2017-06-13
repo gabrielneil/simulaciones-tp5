@@ -20,7 +20,6 @@ public class Calculator {
 
     ArrayList<Cliente> lista = new ArrayList<>();
     Controller controller;
-    Formulas formulas = new Formulas();
     Tabla tabla;
     Servidor empleado1 = new Servidor();
     Servidor empleado2 = new Servidor();
@@ -147,12 +146,10 @@ public class Calculator {
     }
 
     public void masVueltas() {
-        System.out.println("ENTRO AJJAJA");
         Random r = new Random();
         float rnd1TiempoLlegada;
         float rnd2TiempoLlegada;
 
-        System.out.println((double) (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION)));
         double tiempoProxLlegadaCliente = (double) (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_LLEGADA));
         double tiempoFinAtencionCaja = (double) (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION));
         double tiempoEntregaPedido = (double) (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA));
@@ -181,7 +178,7 @@ public class Calculator {
 
                 System.out.println("entra a la mesa");
                 float rndTiempoUtilizacionMesa = r.nextFloat();
-                double tiempoFinUtilizacionMesa = formulas.tiempoUtilizacionMesa(tiempoUtilizacionMesa1,tiempoUtilizacionMesa2,rndTiempoUtilizacionMesa);
+                double tiempoFinUtilizacionMesa = Formulas.tiempoUtilizacionMesa(tiempoUtilizacionMesa1,tiempoUtilizacionMesa2,rndTiempoUtilizacionMesa);
                 Cliente c1 = new Cliente("Utilizando mesa", reloj, reloj + tiempoFinUtilizacionMesa);
                 
                 //la idea seria que donde hay ceros copia las cosas de la fila de arriba

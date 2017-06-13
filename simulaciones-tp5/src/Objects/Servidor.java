@@ -49,4 +49,14 @@ public class Servidor {
         cola--;
     }
 
+    public boolean estaLibre()
+    {
+        return "LIBRE".equals(estado);
+    }
+
+    public boolean estaOcupado()
+    {
+        return "OCUPADO".equals(estado);
+    }
+
 }

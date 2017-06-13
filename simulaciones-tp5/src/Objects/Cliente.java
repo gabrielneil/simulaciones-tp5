@@ -6,7 +6,13 @@
 package Objects;
 
 /**
- *
+ * Estados del cliente:
+ * Esperando atención en caja - 
+ * Atendido en caja - 
+ * Esperando pedido - 
+ * Consumiendo - 
+ * Utilizando mesa
+ * 
  * @author gabrielneil
  */
 public class Cliente {

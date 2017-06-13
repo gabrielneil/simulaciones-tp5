@@ -39,7 +39,7 @@ public class Calculator {
     double tiempoPermanenciaAcumulador = 0;
 
     int tiempoTicket = 20;
-    int tiempoEspera = 50;
+    float tiempoEspera = 50;
     int tiempoConsumicion1 = 5;
     int tiempoConsumicion2 = 1;
     int tiempoUtilizacionMesa1 = 15;
@@ -84,7 +84,7 @@ public class Calculator {
 
     public void cargaTiempos(int tiempoTicket, int tiempoEspera, int tiempoConsumicion1, int tiempoConsumicion2, int tiempoUtilizacionMesa1, int tiempoUtilizacionMesa2) {
         this.tiempoTicket = tiempoTicket;
-        this.tiempoEspera = tiempoEspera;
+        this.tiempoEspera = (float)tiempoEspera;
         this.tiempoConsumicion1 = tiempoConsumicion1;
         this.tiempoConsumicion2 = tiempoConsumicion2;
         this.tiempoUtilizacionMesa1 = tiempoUtilizacionMesa1;
@@ -136,7 +136,7 @@ public class Calculator {
         //primera vuelta
         rnd1TiempoLlegada = r.nextFloat();
         rnd2TiempoLlegada = r.nextFloat();
-        double tiempoLlegada = llegadaEntreCliente(rnd1TiempoLlegada, rnd2TiempoLlegada);
+        double tiempoLlegada = Formulas.llegadaCliente(rnd1TiempoLlegada, rnd1TiempoLlegada, media, desviacion);
         setEvento(EVN_INICIO);
         
         model.addRow(new Object[]{evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, reloj + tiempoLlegada, 0.0, "",
@@ -172,7 +172,7 @@ public class Calculator {
             Cliente c1;
             rnd1TiempoLlegada = r.nextFloat();
             rnd2TiempoLlegada = r.nextFloat();
-            double tiempoLlegada = llegadaEntreCliente(rnd1TiempoLlegada, rnd2TiempoLlegada);
+            double tiempoLlegada = Formulas.llegadaCliente(rnd1TiempoLlegada, rnd1TiempoLlegada, media, desviacion);
             float rndAccion = r.nextFloat();
 
             //true y se calcula el tiempo que tarda en usar la mesa
@@ -180,7 +180,7 @@ public class Calculator {
 
                 System.out.println("entra a la mesa");
                 float rndTiempoUtilizacionMesa = r.nextFloat();
-                double tiempoFinUtilizacionMesa = finUtilizacionDeMesa(rndTiempoUtilizacionMesa);
+                double tiempoFinUtilizacionMesa = formulas.tiempoUtilizacionMesa(tiempoUtilizacionMesa1,tiempoUtilizacionMesa2,rndTiempoUtilizacionMesa);
                 c1 = new Cliente("Utilizando mesa", reloj, reloj + tiempoFinUtilizacionMesa);
                 //la idea seria que donde hay ceros copia las cosas de la fila de arriba
                 lista.add(c1);

@@ -580,16 +580,6 @@ public class Calculator {
 
     }
 
-    //Tiempo de llegada entre clientes en minutos, 
-    //recibe como parametro la media y la desviacion en segundos y los randoms para box muller
-    //retorna el tiempo de llegada entre cliente en MINUTOS
-    public double llegadaEntreCliente(float rnd1, float rnd2) {
-
-        double n1 = Formulas.llegadaCliente(rnd1, rnd2, media, desviacion); //devuelve el tiempo en segundos
-        double tiempo = n1 / 60; //Estaba calculado en segundos, lo paso a minutos
-        return tiempo;
-    }
-
     private double calcularFinPermanencia(int colTiempoPermanencia)
     {
         double ret = (double) model.getValueAt(model.getRowCount() -1, colTiempoPermanencia);

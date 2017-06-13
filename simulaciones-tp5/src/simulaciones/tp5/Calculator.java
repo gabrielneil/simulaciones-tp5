@@ -38,8 +38,8 @@ public class Calculator {
     double reloj = 0;
     double tiempoPermanenciaAcumulador = 0;
 
-    float tiempoTicket = 20/60;
-    float tiempoEspera = 50/60;
+    float tiempoTicket = 20*60;
+    float tiempoEspera = 50*60;
     int tiempoConsumicion1 = 5;
     int tiempoConsumicion2 = 1;
     int tiempoUtilizacionMesa1 = 15;
@@ -124,8 +124,8 @@ public class Calculator {
     }
 
     public void cargaTiempos(int tiempoTicket, int tiempoEspera, int tiempoConsumicion1, int tiempoConsumicion2, int tiempoUtilizacionMesa1, int tiempoUtilizacionMesa2) {
-        this.tiempoTicket = (float) tiempoTicket/60; //Regla de 3 para pasar a minutos
-        this.tiempoEspera = (float)tiempoEspera/60; //Regla de 3 para pasar a minutos
+        this.tiempoTicket = (float) tiempoTicket*60; //Regla de 3 para pasar a minutos
+        this.tiempoEspera = (float)tiempoEspera*60; //Regla de 3 para pasar a minutos
         this.tiempoConsumicion1 = tiempoConsumicion1;
         this.tiempoConsumicion2 = tiempoConsumicion2;
         this.tiempoUtilizacionMesa1 = tiempoUtilizacionMesa1;
@@ -161,7 +161,7 @@ public class Calculator {
         model = (DefaultTableModel) tabla._tblSimulacion.getModel();
 //        primeraVuelta();
         setEvento(NO_EVN);
-        double tiempoDeCorte = 60;
+        double tiempoDeCorte = 5;
         while (reloj <= tiempoDeCorte)
         {
             simularAvance();

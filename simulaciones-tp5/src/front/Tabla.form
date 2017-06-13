@@ -110,12 +110,12 @@
                         <Column editable="false" title="RND(16)" type="java.lang.Float"/>
                         <Column editable="false" title="Tiempo de consumici&#xf3;n(17)" type="java.lang.Float"/>
                         <Column editable="false" title="Tiempo fin de consumici&#xf3;n(18)" type="java.lang.Float"/>
-                        <Column editable="false" title="Estado(19)" type="java.lang.String"/>
-                        <Column editable="false" title="Cola(20)" type="java.lang.Integer"/>
-                        <Column editable="false" title="Estado(21)" type="java.lang.String"/>
-                        <Column editable="false" title="Cola(22)" type="java.lang.Integer"/>
-                        <Column editable="false" title="Estado(23)" type="java.lang.String"/>
-                        <Column editable="false" title="Cola(24)" type="java.lang.Integer"/>
+                        <Column editable="false" title="Cajero Estado(19)" type="java.lang.String"/>
+                        <Column editable="false" title="Cajero cola(20)" type="java.lang.Integer"/>
+                        <Column editable="false" title="Empl 1 estado(21)" type="java.lang.String"/>
+                        <Column editable="false" title="Empl 1 Cola(22)" type="java.lang.Integer"/>
+                        <Column editable="false" title="Empl 2 Estado(23)" type="java.lang.String"/>
+                        <Column editable="false" title="Empl 2 Cola(24)" type="java.lang.Integer"/>
                         <Column editable="false" title="Tiempo permanencia(25)" type="java.lang.Float"/>
                         <Column editable="true" title="Cantidad clientes en cafeter&#xed;a(26)" type="java.lang.Integer"/>
                       </Table>

@@ -63,7 +63,7 @@ public class CargaDatos extends javax.swing.JFrame {
 
         desviacion_txt.setText("2");
 
-        media_txt.setText("12");
+        media_txt.setText("10");
 
         jLabel4.setText("Cantidad que entra a comprar:");
 

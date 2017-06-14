@@ -363,13 +363,13 @@ public class Calculator {
                 model.addColumn("Cliente: Partida del sistema");
                 
                 //TODO, revisar todo este add row!!!!
-//                model.addRow(new Object[]{
-//                    evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada,
-//                    reloj + tiempoLlegada, rndAccion, "Compra", tiempoFinAtencionCaja, 0.0, 0.0, 0.0, 0.0, "",
-//                    0.0, 0.0, 0.0, 0.0, 0.0, cajero.getEstado(),
-//                    cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(),
-//                    empleado2.getCola(),
-//                    0.0, 0.0,cl.getEstado(),cl.getHoraLlegada(),cl.getHoraPartida()});
+                model.addRow(new Object[]{
+                    evento, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada,
+                    null, rndAccion, "Compra", tiempoFinAtencionCaja, 0.0, 0.0, 0.0, 0.0, "",
+                    0.0, 0.0, 0.0, 0.0, 0.0, 0.0, cajero.getEstado(),
+                    cajero.getCola(), empleado1.getEstado(), empleado1.getCola(), empleado2.getEstado(),
+                    empleado2.getCola(),
+                    0.0, 0.0,cl.getEstado(),cl.getHoraLlegada(),cl.getHoraPartida()});
 
             }
 

@@ -24,6 +24,8 @@ public class Calculator {
     Servidor empleado1 = new Servidor();
     Servidor empleado2 = new Servidor();
     Servidor cajero = new Servidor();
+    int desde;
+    int hasta;
     DefaultTableModel model;
     int cantidadClientesEnCafeteria = 0;
 
@@ -132,13 +134,15 @@ public class Calculator {
         this.tiempoUtilizacionMesa2 = tiempoUtilizacionMesa2;
     }
 
-    public void cargaDatos(int media, int desviacion, int entranAComprar, int entranAMesa, int sientaEnMesa, int seRetira) {
+    public void cargaDatos(int media, int desviacion, int entranAComprar, int entranAMesa, int sientaEnMesa, int seRetira, int desde, int hasta) {
         this.media = media;
         this.desviacion = desviacion;
         this.entranAComprar = entranAComprar;
         this.entranAMesa = entranAMesa;
         this.sientaEnMesa = sientaEnMesa;
         this.seRetira = seRetira;
+        this.desde = desde;
+        this.hasta = hasta;
     }
 
     //Eventos: 

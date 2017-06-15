@@ -48,8 +48,8 @@ public class Controller {
     }
 
     public void valoresCargaDatos(int media, int desviacion, int entranAComprar, 
-            int entranAMesa, int sientaEnMesa, int seRetira) {
-        calculator.cargaDatos(media, desviacion, entranAComprar, entranAMesa, sientaEnMesa, seRetira);
+            int entranAMesa, int sientaEnMesa, int seRetira, int desde, int hasta) {
+        calculator.cargaDatos(media, desviacion, entranAComprar, entranAMesa, sientaEnMesa, seRetira, desde, hasta);
     }
 
     public void simulacion() {

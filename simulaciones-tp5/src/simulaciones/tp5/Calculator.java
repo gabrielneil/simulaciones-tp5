@@ -234,33 +234,33 @@ public class Calculator {
             double tiempoLlegada = Formulas.llegadaCliente(rnd1TiempoLlegada, rnd1TiempoLlegada, media, desviacion);
             model.addRow(new Object[]
             {
-                evento, //0
-                reloj, //1
-                rnd1TiempoLlegada, //2
-                rnd2TiempoLlegada, // 3
-                tiempoLlegada, //4
-                reloj + tiempoLlegada, //5
-                null,//6
-                "",//7
-                null,//8
-                null,//9
-                null,//10
-                null,//11
-                null,//12
-                "",//13
-                null,//14
-                null,//15
-                null,//16
-                null,//17
-                null, //18
-                null, //19
-                cajero.getEstado(),//20
-                cajero.getCola(),//21
-                empleado1.getEstado(),//22
-                empleado1.getCola(),//23
-                empleado2.getEstado(),//24
-                0.0,//25
-                0 //26
+                evento, //Evento (0)
+                reloj, //Reloj (1)
+                rnd1TiempoLlegada, //Llegada cliente - RND1 (2)
+                rnd2TiempoLlegada, //Llegada cliente - RND2 (3)
+                tiempoLlegada, //Tiempo llegada cliente (4)
+                reloj + tiempoLlegada, //Próxima Llegada cliente (5)
+                null,   //Acción - RND (6)
+                "", //Accion : mesa o a comprar (7)
+                null, //Tiempo fin atención caja (8)
+                null, //Tiempo espera pedido - RND (9)
+                null, //Tiempo espera pedido (10)
+                null, //Accion mesa: - RND (11)
+                null, //Accion mesa (12)
+                "", //Tiempo uso de mesa - RND (13)
+                null, //Tiempo uso de mesa (14)
+                null, //Tiempo fin uso mesa (15)
+                null, //Tiempo consumicion - RND (16)
+                null, //Tiempo de consumicion (17)
+                null, //Tiempo fin de consumicion (18)
+                null, //Cajero - Estado (19)
+                cajero.getEstado(),//Cajero - Cola (20)
+                cajero.getCola(), //Empleado 1 - Estado (21)
+                empleado1.getEstado(), //Empleado 1 - Cola (21)
+                empleado1.getCola(), //Empleado 2 - Estado (21)
+                empleado2.getEstado(), //Empleado 2 - Cola (21)
+                0.0, //Tiempo de permanencia acumulado (25)
+                0 //Cantidad clientes en cafeteria (26)
             });
             return;
         }
@@ -316,37 +316,35 @@ public class Calculator {
                 model.addColumn("Cliente: Partida del sistema");
                 
                 model.addRow(new Object[]{
-                    evento, 
-                    reloj, 
-                    rnd1TiempoLlegada, 
-                    rnd2TiempoLlegada, 
-                    tiempoLlegada,                    
-                    reloj + tiempoLlegada,
-                    rndAccion,
-                    "Utiliza mesa", 
-                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION)),
-                    null,
-                    null, 
-                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA)),
-                    null, 
-                    "",
-                    //14                        //15                    //16 COL_FIN_USO
-                    rndTiempoUtilizacionMesa,
-                    tiempoFinUtilizacionMesa,
-                    reloj + tiempoFinUtilizacionMesa ,
-                    null,
-                    null,
-                    (model.getValueAt(model.getRowCount() - 1, COL_FIN_CONSUMICION)),
-                    //20                //21            //22                    //23                //24
-                    cajero.getEstado(),
-                    cajero.getCola(),
-                    empleado1.getEstado(),
-                    empleado1.getCola(),
-                    empleado2.getEstado(),
+                    evento, //Evento (0)
+                    reloj, //Reloj (1)
+                    rnd1TiempoLlegada, //Llegada cliente - RND1 (2)
+                    rnd2TiempoLlegada, //Llegada cliente - RND2 (3)
+                    tiempoLlegada, //Tiempo llegada cliente (4)
+                    reloj + tiempoLlegada, //Próxima Llegada cliente (5)
+                    rndAccion,//Acción - RND (6)
+                    "Utiliza mesa", //Accion : mesa o a comprar (7)
+                    null,//Tiempo fin atención caja (8)
+                    null,//Tiempo espera pedido - RND (9)
+                    null, //Tiempo espera pedido (10)
+                    null,//Accion mesa: - RND (11)
+                    null, //Accion mesa (12)
+                    rndTiempoUtilizacionMesa,//Tiempo uso de mesa - RND (13)
+                    tiempoFinUtilizacionMesa,//Tiempo uso de mesa (14)
+                    c1.getHoraPartida(),//Tiempo fin uso mesa (15)
+                    null ,//Tiempo consumicion - RND (16)
+                    null,//Tiempo de consumicion (17)
+                    null,//Tiempo fin de consumicion (18)
+                    cajero.getEstado(),//Cajero - Estado (19)
+                    cajero.getCola(),//Cajero - Cola (20)
+                    empleado1.getEstado(),//Empleado 1 - Estado (21)
+                    empleado1.getCola(),//Empleado 1 - Cola (22)
+                    empleado2.getEstado(),//Empleado 2 - Estado (23)
+                    empleado2.getCola(),//Empleado 2 - Cola(24)
                     // mantengo porque no se va aun.
-                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC)),
+                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC)), //Tiempo de permanencia acumulado(25)
                     // Se incrementa siempre que entra un cliente
-                    ((int)(model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT))) + 1});
+                    ((int)(model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT))) + 1}); //Cantidad clientes en cafeteria (26)
                     
                 
             } //false, entra a comprar

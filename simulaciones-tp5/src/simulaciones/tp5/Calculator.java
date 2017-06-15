@@ -364,38 +364,35 @@ public class Calculator {
                 model.addColumn("Cliente: Entrada al sistema");
                 model.addColumn("Cliente: Partida del sistema");
                 
-                //TODO, revisar todo este add row!!!!
+                //TODO, revisar todo este add row!!!!   --- Faltaba un campo
                 model.addRow(new Object[]{
-                    evento,
-                    reloj, 
-                    rnd1TiempoLlegada, 
-                    rnd2TiempoLlegada, 
-                    tiempoLlegada,
-                    null,
-                    rndAccion, 
-                    "Compra", 
-                    tiempoFinAtencionCaja, 
-                    0.0, 
-                    0.0, 
-                    0.0, 
-                    0.0, 
-                    "",
-                    0.0, 
-                    0.0, 
-                    0.0, 
-                    0.0, 
-                    0.0, 
-                    0.0, 
-                    cajero.getEstado(),
-                    cajero.getCola(), 
-                    empleado1.getEstado(), 
-                    empleado1.getCola(), 
-                    empleado2.getEstado(),
-                    empleado2.getCola(),
-                    0.0, 0.0,cl.getEstado(),
-                    cl.getHoraLlegada(),
-                    cl.getHoraPartida()});
-
+                    evento, //Evento (0)
+                    reloj, //Reloj (1)
+                    rnd1TiempoLlegada, //Llegada cliente - RND1 (2)
+                    rnd2TiempoLlegada, //Llegada cliente - RND2 (3)
+                    tiempoLlegada, //Tiempo llegada cliente (4)
+                    reloj + tiempoLlegada, //Próxima Llegada cliente (5)
+                    rndAccion, //Acción - RND (6)
+                    "Compra", //Accion : mesa o a comprar (7)
+                    tiempoFinAtencionCaja, //Tiempo fin atención caja (8)
+                    null, //Tiempo espera pedido - RND (9)
+                    null, //Tiempo espera pedido (10)
+                    null, //Accion mesa: - RND (11)
+                    null, //Accion mesa (12)
+                    "",//Tiempo uso de mesa - RND (13)
+                    null, //Tiempo uso de mesa (14)
+                    null, //Tiempo fin uso mesa (15)
+                    null, //Tiempo consumicion - RND (16)
+                    null, //Tiempo de consumicion (17)
+                    null, //Tiempo fin de consumicion (18)
+                    cajero.getEstado(), //Cajero - Estado (19)
+                    cajero.getCola(), //Cajero - Cola (20)
+                    empleado1.getEstado(), //Empleado 1 - Estado (21)
+                    empleado1.getCola(), //Empleado 1 - Cola (22)
+                    empleado2.getEstado(),//Empleado 2 - Estado (23)
+                    empleado2.getCola(),//Empleado 2 - Cola (24)
+                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC)), //Tiempo de permanencia (25)
+                    ((int)(model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT))) + 1}); //Cantidad clientes en cafeteria (26)
             }
 
         } else if ((tiempoFinAtencionCaja < tiempoEntregaPedido || evitarTiempoEntregaPedido)

@@ -192,8 +192,10 @@ public class Calculator {
 //        primeraVuelta();
         setEvento(NO_EVN);
         double tiempoDeCorte = 5;
+        int cantFilas=1;
         while (reloj <= tiempoDeCorte) {
             simularAvance();
+            cantFilas++;
         }
     }
 

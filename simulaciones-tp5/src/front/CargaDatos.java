@@ -131,6 +131,10 @@ public class CargaDatos extends javax.swing.JFrame {
 
         jLabel3.setText("Mostrar hasta:");
 
+        desde_txt.setText("1");
+
+        hasta_txt.setText("10");
+
         jLabel17.setText("Fila");
 
         jLabel18.setText("Fila");

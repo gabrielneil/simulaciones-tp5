@@ -128,11 +128,11 @@ public class Calculator {
     /**
      * Col 23 - Cola EmpleadoS
      */
-    public static final int COL_COLA_EMPLEADOS = 23;
+    public static final int COL_COLA_EMPLEADOS = 24;
     /**
      * Col 24 - Estado Empleado 2
      */
-    public static final int COL_ESTADO_EMPL2 = 24;
+    public static final int COL_ESTADO_EMPL2 = 23;
     /**
      * Col 25 - Tiempo permanencia acumulado
      */

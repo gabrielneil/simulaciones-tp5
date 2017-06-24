@@ -114,8 +114,8 @@
                         <Column editable="false" title="Estado Cajero(20)" type="java.lang.String"/>
                         <Column editable="false" title="Cola Cajero(21)" type="java.lang.Integer"/>
                         <Column editable="false" title="Estado Empl 1(22)" type="java.lang.String"/>
-                        <Column editable="false" title="Cola Empleados(23)" type="java.lang.Integer"/>
-                        <Column editable="false" title="Estado Empl 2(24)" type="java.lang.String"/>
+                        <Column editable="false" title="Estado Empl 2(23)" type="java.lang.String"/>
+                        <Column editable="false" title="Cola Empleados(24)" type="java.lang.Integer"/>
                         <Column editable="false" title="Tiempo permanencia AC(25)" type="java.lang.Float"/>
                         <Column editable="false" title="Cantidad clientes en cafeter&#xed;a CONT(26)" type="java.lang.Integer"/>
                       </Table>

@@ -29,8 +29,7 @@ public class Tabla extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         simulationTable = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -42,40 +41,32 @@ public class Tabla extends javax.swing.JFrame {
         setTitle("Vector Estado");
 
         _tblSimulacion.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
-                "Evento(0)", "Reloj(1)", "Llegada Cl RND1(2)", "Llegada Cl RND2(3)", "Llegada entre clientes(4)", "Próxima llegada cliente(5)", "Accion RND(6)", "Acción(7)", "Tiempo Fin atención en caja(8)", "RND tiempo espera(9)", "Tiempo espera pedido(10)", "Tiempo entrega pedido(11)", "RND acc mesa(12)", "Acción - Mesa(13)", "RND tiempo uso mesa(14)", "Tiempo de uso de mesa(15)", "Tiempo Fin uso mesa (16)", "RND tiempo consumicion(17)", "Tiempo de consumición(18)", "Tiempo fin de consumición(19)", "Estado Cajero(20)", "Cola Cajero(21)", "Estado Empl 1(22)", "Cola Empleados(23)", "Estado Empl 2(24)", "Tiempo permanencia AC(25)", "Cantidad clientes en cafetería CONT(26)"
+            new String [] {
+                "Evento(0)", "Reloj(1)", "Llegada Cl RND1(2)", "Llegada Cl RND2(3)", "Llegada entre clientes(4)", "Próxima llegada cliente(5)", "Accion RND(6)", "Acción(7)", "Tiempo Fin atención en caja(8)", "RND tiempo espera(9)", "Tiempo espera pedido(10)", "Tiempo entrega pedido(11)", "RND acc mesa(12)", "Acción - Mesa(13)", "RND tiempo uso mesa(14)", "Tiempo de uso de mesa(15)", "Tiempo Fin uso mesa (16)", "RND tiempo consumicion(17)", "Tiempo de consumición(18)", "Tiempo fin de consumición(19)", "Estado Cajero(20)", "Cola Cajero(21)", "Estado Empl 1(22)", "Estado Empl 2(23)", "Cola Empleados(24)", "Tiempo permanencia AC(25)", "Cantidad clientes en cafetería CONT(26)"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Integer.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         _tblSimulacion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         _tblSimulacion.getTableHeader().setReorderingAllowed(false);
         _scpTabla.setViewportView(_tblSimulacion);
-        if (_tblSimulacion.getColumnModel().getColumnCount() > 0)
-        {
+        if (_tblSimulacion.getColumnModel().getColumnCount() > 0) {
             _tblSimulacion.getColumnModel().getColumn(0).setResizable(false);
             _tblSimulacion.getColumnModel().getColumn(0).setPreferredWidth(120);
             _tblSimulacion.getColumnModel().getColumn(1).setResizable(false);

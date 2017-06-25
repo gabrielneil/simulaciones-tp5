@@ -198,7 +198,7 @@ public class Calculator {
             cantFilas++;
         }
     }
-
+int avance=1;
     public void simularAvance() {
 
         Random r = new Random();
@@ -223,20 +223,20 @@ public class Calculator {
                 null, //Tiempo fin atención caja (8)
                 null, //Tiempo espera pedido - RND (9)
                 null, //Tiempo espera pedido (10)
-                null, //Accion mesa: - RND (11)
-                null, //Accion mesa (12)
-                "", //Tiempo uso de mesa - RND (13)
-                null, //Tiempo uso de mesa (14)
-                null, //Tiempo fin uso mesa (15)
-                null, //Tiempo consumicion - RND (16)
-                null, //Tiempo de consumicion (17)
-                null, //Tiempo fin de consumicion (18)
-                null, //Cajero - Estado (19)
-                cajero.getEstado(),//Cajero - Cola (20)
-                cajero.getCola(), //Empleado 1 - Estado (21)
-                empleado1.getEstado(), //Empleado 1 - Cola (21)
-                empleado1.getCola(), //Empleado 2 - Estado (21)
-                empleado2.getEstado(), //Empleado 2 - Cola (21)
+                null, //Tiempo entrega de pedido: - RND (11)
+                null, //Accion mesa: - RND (12)
+                "", //Accion mesa (13)
+                null, //Tiempo uso de mesa - RND (14)
+                null, //Tiempo uso de mesa (15)
+                null, //Tiempo fin uso mesa (16)
+                null, //Tiempo consumicion - RND (17)
+                null, //Tiempo de consumicion (18)
+                null, //Tiempo fin de consumicion (19)
+                cajero.getEstado(),//Cajero - Estado (20)
+                cajero.getCola(), //Cajero - Cola (21)
+                empleado1.getEstado(), //Empleado 1 - Estado (22)
+                empleado2.getEstado(), //Empleado 2 - Cola (23)
+                empleado2.getCola(), //Empleado 2 - Cola (24)
                 0.0, //Tiempo de permanencia acumulado (25)
                 0 //Cantidad clientes en cafeteria (26)
             });
@@ -254,10 +254,13 @@ public class Calculator {
 
         boolean evitarTiempoFinUsoMesa = model.getValueAt(model.getRowCount() - 1, COL_FIN_USO) == null;
         double tiempoFinUsoMesa = evitarTiempoFinUsoMesa ? 0.0 : (double) (model.getValueAt(model.getRowCount() - 1, COL_FIN_USO));
-
+        
+        if (avance==2) {
+            System.out.println("para viejaa");
+        }
         boolean evitarTiempoConsumicion = model.getValueAt(model.getRowCount() - 1, COL_FIN_CONSUMICION) == null;
         double tiempoFinConsumicion = evitarTiempoConsumicion ? 0.0 : (double) (model.getValueAt(model.getRowCount() - 1, COL_FIN_CONSUMICION));
-
+        avance++;
         if (((tiempoProxLlegadaCliente < tiempoFinAtencionCaja || evitarTiempoFinAtencionCaja)
                 && (tiempoProxLlegadaCliente < tiempoEntregaPedido || evitarTiempoEntregaPedido)
                 && (tiempoProxLlegadaCliente < tiempoFinUsoMesa || evitarTiempoFinUsoMesa)
@@ -303,18 +306,18 @@ public class Calculator {
                     null,//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null, //Tiempo espera pedido (10)
-                    null,//Accion mesa: - RND (11)
-                    null, //Accion mesa (12)
-                    rndTiempoUtilizacionMesa,//Tiempo uso de mesa - RND (13)
-                    tiempoFinUtilizacionMesa,//Tiempo uso de mesa (14)
-                    c1.getHoraPartida(),//Tiempo fin uso mesa (15)
-                    null,//Tiempo consumicion - RND (16)
-                    null,//Tiempo de consumicion (17)
-                    null,//Tiempo fin de consumicion (18)
-                    cajero.getEstado(),//Cajero - Estado (19)
-                    cajero.getCola(),//Cajero - Cola (20)
-                    empleado1.getEstado(),//Empleado 1 - Estado (21)
-                    empleado1.getCola(),//Empleado 1 - Cola (22)
+                    null,//Tiempo entrega de pedido: - RND (11)
+                    null,//Accion mesa: - RND (12)
+                    null, //Accion mesa (13)
+                    rndTiempoUtilizacionMesa,//Tiempo uso de mesa - RND (14)
+                    tiempoFinUtilizacionMesa,//Tiempo uso de mesa (15)
+                    c1.getHoraPartida(),//Tiempo fin uso mesa (16)
+                    null,//Tiempo consumicion - RND (17)
+                    null,//Tiempo de consumicion (18)
+                    null,//Tiempo fin de consumicion (19)
+                    cajero.getEstado(),//Cajero - Estado (20)
+                    cajero.getCola(),//Cajero - Cola (21)
+                    empleado1.getEstado(),//Empleado 1 - Estado (22)
                     empleado2.getEstado(),//Empleado 2 - Estado (23)
                     empleado2.getCola(),//Empleado 2 - Cola(24)
                     // mantengo porque no se va aun.
@@ -340,8 +343,7 @@ public class Calculator {
 //                model.addColumn("Cliente: Estado");
 //                model.addColumn("Cliente: Entrada al sistema");
 //                model.addColumn("Cliente: Partida del sistema");
-
-//TODO, revisar todo este add row!!!!   --- Faltaba un campo
+//DONE
                 model.addRow(new Object[]{
                     evento, //Evento (0)
                     reloj, //Reloj (1)
@@ -354,21 +356,21 @@ public class Calculator {
                     tiempoFinAtencionCaja, //Tiempo fin atención caja (8)
                     null, //Tiempo espera pedido - RND (9)
                     null, //Tiempo espera pedido (10)
-                    null, //Accion mesa: - RND (11)
-                    null, //Accion mesa (12)
-                    "",//Tiempo uso de mesa - RND (13)
-                    null, //Tiempo uso de mesa (14)
-                    null, //Tiempo fin uso mesa (15)
-                    null, //Tiempo consumicion - RND (16)
-                    null, //Tiempo de consumicion (17)
-                    null, //Tiempo fin de consumicion (18)
-                    cajero.getEstado(), //Cajero - Estado (19)
-                    cajero.getCola(), //Cajero - Cola (20)
-                    empleado1.getEstado(), //Empleado 1 - Estado (21)
-                    empleado1.getCola(), //Empleado 1 - Cola (22)
+                    null,//Tiempo entrega de pedido: - RND (11)
+                    null, //Accion mesa: - RND (12)
+                    null, //Accion mesa (13)
+                    null,//Tiempo uso de mesa - RND (14)
+                    null, //Tiempo uso de mesa (15)
+                    null, //Tiempo fin uso mesa (16)
+                    null, //Tiempo consumicion - RND (17)
+                    null, //Tiempo de consumicion (18)
+                    null, //Tiempo fin de consumicion (19)
+                    cajero.getEstado(), //Cajero - Estado (20)
+                    cajero.getCola(), //Cajero - Cola (21)
+                    empleado1.getEstado(), //Empleado 1 - Estado (22)
                     empleado2.getEstado(),//Empleado 2 - Estado (23)
                     empleado2.getCola(),//Empleado 2 - Cola (24)
-                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC)), //Tiempo de permanencia (25)
+                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC)), //Tiempo de permanencia acumulado(25)
                     ((int) (model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT))) + 1}); //Cantidad clientes en cafeteria (26)
             }
 
@@ -378,6 +380,7 @@ public class Calculator {
                 && !evitarTiempoFinAtencionCaja) {
 
             // tiempoFinAtencionCaja es el proximo evento
+            //SE MANDA A LA COLA DE LOS DOS CHABONES
             setEvento(EVN_FIN_ATENCION);
             setReloj(tiempoFinAtencionCaja);
             float rndEspera = r.nextFloat();
@@ -422,21 +425,21 @@ public class Calculator {
                 model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION), //Tiempo fin atención caja (8)(me parece que trae el mismo que estoy manipulando)
                 rndEspera, //Tiempo espera pedido - RND (9)
                 reloj + tiempoEntrega, //Tiempo espera pedido (10)
-                null, //Accion mesa: - RND (11)
-                model.getValueAt(model.getRowCount() - 1, COL_ACCION_MESA), //Accion mesa (12)
-                null, //Tiempo uso de mesa - RND (13)
-                null,//Tiempo uso de mesa (14)
-                null, //Tiempo fin uso mesa (15)
-                null, //Tiempo consumicion - RND (16)
-                null, //Tiempo de consumicion (17)
-                null,//Tiempo fin de consumicion (18)
-                cajero.getEstado(), //Cajero - Estado (19)
-                cajero.getCola(), //Cajero - Cola (20)
-                empleado1.getEstado(), //Empleado 1 - Estado (21)
-                empleado1.getCola(), //Empleado 1 - Cola (22)
+                null, //Tiempo entrega de pedido: - RND (11)
+                null, //Accion mesa: - RND (12)
+                model.getValueAt(model.getRowCount() - 1, COL_ACCION_MESA), //Accion mesa (13)
+                null, //Tiempo uso de mesa - RND (14)
+                null,//Tiempo uso de mesa (15)
+                null, //Tiempo fin uso mesa (16)
+                null, //Tiempo consumicion - RND (17)
+                null, //Tiempo de consumicion (18)
+                null,//Tiempo fin de consumicion (19)
+                cajero.getEstado(), //Cajero - Estado (20)
+                cajero.getCola(), //Cajero - Cola (21)
+                empleado1.getEstado(), //Empleado 1 - Estado (22)
                 empleado2.getEstado(), //Empleado 2 - Estado (23)
                 empleado2.getCola(),//Empleado 2 - Cola (24)
-                model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC), //Tiempo de permanencia (25)
+                model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC), //Tiempo de permanencia acumulado(25)
                 model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
 
         } else if ((tiempoEntregaPedido < tiempoFinUsoMesa || evitarTiempoFinUsoMesa)
@@ -463,11 +466,11 @@ public class Calculator {
             float rndAccion = r.nextFloat();
 
             if (rndAccion <= ((float) sientaEnMesa / 100)) {
-                //COMPRÓ Y SE SIENTA EN LA MESA
+                //COMPRÓ Y SE SIENTA EN LA MESA ESTOY AKI
                 float rndTiempoConsumicion = r.nextFloat();
-                double finUsoMesa = Formulas.tiempoConsumicion(rndTiempoConsumicion);
+                double finConsumicion = Formulas.tiempoConsumicion(rndTiempoConsumicion);
                 c1.setEstado("Sienta en mesa");
-                c1.setHoraPartida(reloj + finUsoMesa);
+                c1.setHoraPartida(reloj + finConsumicion);
                 model.addRow(new Object[]{
                     evento,//Evento (0)
                     reloj, //Reloj (1)
@@ -480,21 +483,21 @@ public class Calculator {
                     (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION)),//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null,//Tiempo espera pedido (10)
-                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA)),//Accion mesa: - RND (11)
-                    rndAccion, //Accion mesa - se sienta en mesa(12)
-                    "Sienta en mesa",//Tiempo uso de mesa - RND (13)
-                    null, //Tiempo uso de mesa (14)
-                    (model.getValueAt(model.getRowCount() - 1, COL_FIN_USO)), //Tiempo fin uso mesa (15)
-                    rndTiempoConsumicion, //Tiempo consumicion - RND (16)
-                    finUsoMesa,//Tiempo de consumicion (17)
-                    c1.getHoraPartida(), //Tiempo fin de consumicion (18)
-                    cajero.getEstado(),//Cajero - Estado (19)
-                    cajero.getCola(), //Cajero - Cola (20)
-                    empleado1.getEstado(), //Empleado 1 - Estado (21)
-                    empleado1.getCola(),//Empleado 1 - Cola (22)
+                    null,//Tiempo entrega de pedido: - RND (11)
+                    rndAccion,//Accion mesa: - RND (12)
+                    "Sienta en mesa",//Accion mesa (13)
+                    null, //Tiempo uso de mesa - RND (14)
+                    null, //Tiempo uso mesa (15)
+                    null, //Tiempo fin uso mesa (16)
+                    rndTiempoConsumicion, //Tiempo consumicion - RND (17)
+                    finConsumicion,//Tiempo de consumicion (18)
+                    c1.getHoraPartida(), //Tiempo fin de consumicion (19)
+                    cajero.getEstado(),//Cajero - Estado (20)
+                    cajero.getCola(), //Cajero - Cola (21)
+                    empleado1.getEstado(), //Empleado 1 - Estado (22)
                     empleado2.getEstado(),//Empleado 2 - Estado (23)
                     empleado2.getCola(),//Empleado 2 - Cola (24)
-                    model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC), //Tiempo de permanencia (25)
+                    model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC), //Tiempo de permanencia acumulado(25)
                     model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
             } //false se retira
             else {
@@ -512,8 +515,8 @@ public class Calculator {
                     (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION)),//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null,//Tiempo espera pedido (10)
-                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA)),//Accion mesa: - RND (11)
-                    rndAccion, //Accion mesa - se retira (12)
+                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA)),//Tiempo entrega de pedido: - RND (11)
+                    rndAccion, //Accion mesa: - RND (12)
                     "Se retira",//Tiempo uso de mesa - RND (13)
                     null, //Tiempo uso de mesa (14)
                     null,//Tiempo fin uso mesa (15)
@@ -523,10 +526,9 @@ public class Calculator {
                     cajero.getEstado(),//Cajero - Estado (19)
                     cajero.getCola(), //Cajero - Cola (20)
                     empleado1.getEstado(), //Empleado 1 - Estado (21)
-                    empleado1.getCola(),//Empleado 1 - Cola (22)
                     empleado2.getEstado(),//Empleado 2 - Estado (23)
                     empleado2.getCola(),//Empleado 2 - Cola (24)
-                    (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC) + (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)
+                    (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC) + (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia acumulado(25)
                     (int) model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT) + 1});//Cantidad clientes en cafeteria (26)
                 lista.remove(posicion);
             }

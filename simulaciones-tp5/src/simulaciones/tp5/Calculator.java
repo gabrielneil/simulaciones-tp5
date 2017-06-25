@@ -223,7 +223,7 @@ int avance=1;
                 null, //Tiempo fin atención caja (8)
                 null, //Tiempo espera pedido - RND (9)
                 null, //Tiempo espera pedido (10)
-                null, //Tiempo entrega de pedido: - RND (11)
+                null, //Tiempo entrega de pedido (11)
                 null, //Accion mesa: - RND (12)
                 "", //Accion mesa (13)
                 null, //Tiempo uso de mesa - RND (14)
@@ -306,7 +306,7 @@ int avance=1;
                     null,//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null, //Tiempo espera pedido (10)
-                    null,//Tiempo entrega de pedido: - RND (11)
+                    null,//Tiempo entrega de pedido(11)
                     null,//Accion mesa: - RND (12)
                     null, //Accion mesa (13)
                     rndTiempoUtilizacionMesa,//Tiempo uso de mesa - RND (14)
@@ -356,7 +356,7 @@ int avance=1;
                     tiempoFinAtencionCaja, //Tiempo fin atención caja (8)
                     null, //Tiempo espera pedido - RND (9)
                     null, //Tiempo espera pedido (10)
-                    null,//Tiempo entrega de pedido: - RND (11)
+                    null,//Tiempo entrega de pedido(11)
                     null, //Accion mesa: - RND (12)
                     null, //Accion mesa (13)
                     null,//Tiempo uso de mesa - RND (14)
@@ -424,10 +424,10 @@ int avance=1;
                 "",//Accion : mesa o a comprar (7)
                 model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION), //Tiempo fin atención caja (8)(me parece que trae el mismo que estoy manipulando)
                 rndEspera, //Tiempo espera pedido - RND (9)
-                reloj + tiempoEntrega, //Tiempo espera pedido (10)
-                null, //Tiempo entrega de pedido: - RND (11)
+                tiempoEntrega, //Tiempo espera pedido (10)
+                reloj + tiempoEntrega, //Tiempo entrega de pedido (11)
                 null, //Accion mesa: - RND (12)
-                model.getValueAt(model.getRowCount() - 1, COL_ACCION_MESA), //Accion mesa (13)
+                null, //Accion mesa (13)
                 null, //Tiempo uso de mesa - RND (14)
                 null,//Tiempo uso de mesa (15)
                 null, //Tiempo fin uso mesa (16)
@@ -445,7 +445,7 @@ int avance=1;
         } else if ((tiempoEntregaPedido < tiempoFinUsoMesa || evitarTiempoFinUsoMesa)
                 && (tiempoEntregaPedido < tiempoFinConsumicion || evitarTiempoConsumicion)
                 && !evitarTiempoEntregaPedido) {
-            // tiempoEntregaPedido es el proximo evento -- QUEDE acá
+            // tiempoEntregaPedido es el proximo evento
             setEvento(EVN_ENTREGA);
             setReloj(tiempoEntregaPedido);
             int posicion = 0;
@@ -483,7 +483,7 @@ int avance=1;
                     (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION)),//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null,//Tiempo espera pedido (10)
-                    null,//Tiempo entrega de pedido: - RND (11)
+                    null,//Tiempo entrega de pedido (11)
                     rndAccion,//Accion mesa: - RND (12)
                     "Sienta en mesa",//Accion mesa (13)
                     null, //Tiempo uso de mesa - RND (14)
@@ -501,7 +501,7 @@ int avance=1;
                     model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
             } //false se retira
             else {
-                //ESTE ES EL QUE SE RETIRA Y SOLO COMPRÓ
+                //ESTE ES EL QUE SE RETIRA Y SOLO COMPRÓ -- AKAKAKAKAKAKA
                 System.out.println("SOLO COMPRO Y SE TOMA EL PALO");
                 model.addRow(new Object[]{
                     evento,//Evento (0)
@@ -515,7 +515,7 @@ int avance=1;
                     (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION)),//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null,//Tiempo espera pedido (10)
-                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA)),//Tiempo entrega de pedido: - RND (11)
+                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA)),//Tiempo entrega de pedido (11)
                     rndAccion, //Accion mesa: - RND (12)
                     "Se retira",//Tiempo uso de mesa - RND (13)
                     null, //Tiempo uso de mesa (14)
@@ -558,19 +558,19 @@ int avance=1;
                 null, //Accion : mesa o a comprar (7)
                 (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION)),//Tiempo fin atención caja (8)
                 null,//Tiempo espera pedido - RND (9)
-                null,//Tiempo espera pedido (10)
-                (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA)),//Accion mesa: - RND (11)
-                null, //Accion mesa - se retira (12)
-                null,//Tiempo uso de mesa - RND (13)
-                null, //Tiempo uso de mesa (14)
-                null,//Tiempo fin uso mesa (15)
-                null, //Tiempo consumicion - RND (16)
-                null,//Tiempo de consumicion (17)
-                null, //Tiempo fin de consumicion (18)
-                cajero.getEstado(),//Cajero - Estado (19)
-                cajero.getCola(), //Cajero - Cola (20)
-                empleado1.getEstado(), //Empleado 1 - Estado (21)
-                empleado1.getCola(),//Empleado 1 - Cola (22)
+                (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA)),//Tiempo espera pedido (10)
+                null,//Tiempo entrega de pedido (11)
+                null,//Accion mesa: - RND (12)
+                null, //Accion mesa - se retira (13)
+                null,//Tiempo uso de mesa - RND (14)
+                null, //Tiempo uso de mesa (15)
+                null,//Tiempo fin uso mesa (16)
+                null, //Tiempo consumicion - RND (17)
+                null,//Tiempo de consumicion (18)
+                null, //Tiempo fin de consumicion (19)
+                cajero.getEstado(),//Cajero - Estado (20)
+                cajero.getCola(), //Cajero - Cola (21)
+                empleado1.getEstado(), //Empleado 1 - Estado (22)
                 empleado2.getEstado(),//Empleado 2 - Estado (23)
                 empleado2.getCola(),//Empleado 2 - Cola (24)
                 (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC) + (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)
@@ -578,7 +578,7 @@ int avance=1;
             lista.remove(posicion);
             //Faltan los clientes
         } else {
-            // tiempoFinConsumicion es el proximo evento
+            // tiempoFinConsumicion es el proximo evento -- ESTOY AKIV3
             System.out.println("TERMINO DE CONSUMIR Y SE LAS TOMA");
             setEvento(EVN_CONSUMICION);
             setReloj(tiempoFinConsumicion);
@@ -602,19 +602,19 @@ int avance=1;
                 null, //Accion : mesa o a comprar (7)
                 (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION)),//Tiempo fin atención caja (8)
                 null,//Tiempo espera pedido - RND (9)
-                null,//Tiempo espera pedido (10)
-                (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA)),//Accion mesa: - RND (11)
-                null, //Accion mesa - se retira (12)
-                null,//Tiempo uso de mesa - RND (13)
-                null, //Tiempo uso de mesa (14)
-                null,//Tiempo fin uso mesa (15)
-                null, //Tiempo consumicion - RND (16)
-                null,//Tiempo de consumicion (17)
-                null, //Tiempo fin de consumicion (18)
-                cajero.getEstado(),//Cajero - Estado (19)
-                cajero.getCola(), //Cajero - Cola (20)
-                empleado1.getEstado(), //Empleado 1 - Estado (21)
-                empleado1.getCola(),//Empleado 1 - Cola (22)
+                (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ENTREGA)),//Tiempo espera pedido (10)
+                null,//Tiempo entrega de pedido (11)
+                null,//Accion mesa: - RND (12)
+                null, //Accion mesa - se retira (13)
+                null,//Tiempo uso de mesa - RND (14)
+                null, //Tiempo uso de mesa (15)
+                null,//Tiempo fin uso mesa (16)
+                null, //Tiempo consumicion - RND (17)
+                null,//Tiempo de consumicion (18)
+                null, //Tiempo fin de consumicion (19)
+                cajero.getEstado(),//Cajero - Estado (20)
+                cajero.getCola(), //Cajero - Cola (21)
+                empleado1.getEstado(), //Empleado 1 - Estado (22)
                 empleado2.getEstado(),//Empleado 2 - Estado (23)
                 empleado2.getCola(),//Empleado 2 - Cola (24)
                 (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC) + (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)

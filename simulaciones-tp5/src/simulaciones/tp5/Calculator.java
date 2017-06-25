@@ -191,10 +191,13 @@ public class Calculator {
         model = (DefaultTableModel) tabla._tblSimulacion.getModel();
 //        primeraVuelta();
         setEvento(NO_EVN);
-        double tiempoDeCorte = 1000;
+        double tiempoDeCorte = 5;
         int cantFilas = 1;
         while (reloj <= tiempoDeCorte) {
             simularAvance();
+            if (numeroVuelta ==7) {
+            break;
+        }
             cantFilas++;
         }
     }
@@ -204,6 +207,7 @@ public class Calculator {
     double minTerminaEntrega = 0;
     double minTerminaUsarMesa = 0;
     double minTerminaConsumicion = 0;
+    int numeroVuelta=0;
     public void simularAvance() {
 
         Random r = new Random();
@@ -247,13 +251,24 @@ public class Calculator {
             });
             return;
         }
+        System.out.println(numeroVuelta);
         
         boolean evitarTiempoLlegada = (minProximaLLegada == 0)? true:false;
+        System.out.println(evitarTiempoLlegada);
+        
         boolean evitarTiempoFinAtencionCaja = (minTerminaAtencionCaja == 0)? true:false;
+        System.out.println(evitarTiempoFinAtencionCaja);
+        
         boolean evitarTiempoEntregaPedido = (minTerminaEntrega == 0)? true:false;
+        System.out.println(evitarTiempoEntregaPedido);
+        
         boolean evitarTiempoFinUsoMesa = (minTerminaUsarMesa == 0)? true:false;
+        System.out.println(evitarTiempoFinUsoMesa);
+        
         boolean evitarTiempoConsumicion = (minTerminaConsumicion == 0)? true:false;
-      
+        System.out.println(evitarTiempoConsumicion);
+        numeroVuelta++;
+        
         if (!evitarTiempoLlegada && 
                 (minProximaLLegada < minTerminaAtencionCaja || evitarTiempoFinAtencionCaja) &&
                 (minProximaLLegada < minTerminaEntrega || evitarTiempoEntregaPedido)&&
@@ -379,7 +394,7 @@ public class Calculator {
                 (minTerminaAtencionCaja < minTerminaUsarMesa || evitarTiempoFinUsoMesa)&&
                 (minTerminaAtencionCaja < minTerminaConsumicion || evitarTiempoConsumicion)) 
         {
-
+            System.out.println("Fin atención caja");
             // tiempoFinAtencionCaja es el proximo evento - SE MANDA A LA COLA DE LOS DOS CHABONES
             setEvento(EVN_FIN_ATENCION);
             setReloj(minTerminaAtencionCaja);
@@ -391,9 +406,10 @@ public class Calculator {
             } else {
                 cajero.disminuirCola();
             }
-
+            int posicion = 0;
             for (int i = 0; i < lista.size(); i++) {
                 if (lista.get(i).getHoraPartida() == minTerminaAtencionCaja) {
+                    posicion = i;
                     c1 = lista.get(i);
                     c1.setEstado(evento);
                     c1.setHoraPartida(reloj + tiempoEntrega);
@@ -442,6 +458,16 @@ public class Calculator {
                 model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC), //Tiempo de permanencia acumulado(25)
                 model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
 
+            lista.remove(posicion);
+            double menorProximo = 0;
+            for (int i = 0; i < lista.size(); i++) {
+                if ((menorProximo == 0 && lista.get(i).getEstado().equals("Comprando"))|| menorProximo>lista.get(i).getHoraPartida()) {
+                    menorProximo = lista.get(i).getHoraPartida();
+                }
+            }
+            lista.add(c1);
+            minTerminaAtencionCaja = menorProximo;
+            
         } else if(!evitarTiempoEntregaPedido && 
                 (minTerminaEntrega < minTerminaUsarMesa || evitarTiempoFinUsoMesa)&&
                 (minTerminaEntrega < minTerminaConsumicion || evitarTiempoConsumicion)) 
@@ -544,6 +570,7 @@ public class Calculator {
             setEvento(EVN_UTILIZACION);
             setReloj(minTerminaUsarMesa);
             int posicion = 0;
+            
             for (int i = 0; i < lista.size(); i++) {
                 if (lista.get(i).getHoraPartida() == minTerminaUsarMesa) {
                     c1 = lista.get(i);

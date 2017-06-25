@@ -400,6 +400,7 @@ public class Calculator {
             setReloj(minTerminaAtencionCaja);
             float rndEspera = r.nextFloat();
             double tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
+            double finTiempoEntrega = tiempoEntrega + reloj;
 
             if (cajero.getCola() == 0) {
                 cajero.setLibre();
@@ -410,9 +411,10 @@ public class Calculator {
             for (int i = 0; i < lista.size(); i++) {
                 if (lista.get(i).getHoraPartida() == minTerminaAtencionCaja) {
                     posicion = i;
+                    System.out.println("el numero de posicion es"+ i);
                     c1 = lista.get(i);
                     c1.setEstado(evento);
-                    c1.setHoraPartida(reloj + tiempoEntrega);
+                    c1.setHoraPartida(finTiempoEntrega);
                     break;
                 }
             }
@@ -441,7 +443,7 @@ public class Calculator {
                 model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION), //Tiempo fin atención caja (8)(me parece que trae el mismo que estoy manipulando)
                 rndEspera, //Tiempo espera pedido - RND (9)
                 tiempoEntrega, //Tiempo espera pedido (10)
-                reloj + tiempoEntrega, //Tiempo entrega de pedido (11)
+                finTiempoEntrega, //Tiempo entrega de pedido (11)
                 null, //Accion mesa: - RND (12)
                 null, //Accion mesa (13)
                 null, //Tiempo uso de mesa - RND (14)
@@ -467,6 +469,9 @@ public class Calculator {
             }
             lista.add(c1);
             minTerminaAtencionCaja = menorProximo;
+            if (minTerminaEntrega> finTiempoEntrega) {
+                minTerminaEntrega = finTiempoEntrega;
+            }
             
         } else if(!evitarTiempoEntregaPedido && 
                 (minTerminaEntrega < minTerminaUsarMesa || evitarTiempoFinUsoMesa)&&

@@ -415,6 +415,7 @@ public class Calculator {
                     c1 = lista.get(i);
                     c1.setEstado(evento);
                     c1.setHoraPartida(finTiempoEntrega);
+                    c1.changeIgnorar();
                     break;
                 }
             }
@@ -460,15 +461,17 @@ public class Calculator {
                 model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC), //Tiempo de permanencia acumulado(25)
                 model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
 
-            lista.remove(posicion);
             double menorProximo = 0;
             for (int i = 0; i < lista.size(); i++) {
-                if ((menorProximo == 0 && lista.get(i).getEstado().equals("Comprando"))|| menorProximo>lista.get(i).getHoraPartida()) {
+                Cliente aux= lista.get(i);
+                if ((menorProximo == 0 && aux.getEstado().equals("Comprando")) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals("Comprando") && !aux.ignorar())) {
+                    System.out.println("AHI ENTRO Y SE ESTA FIJANDO");
                     menorProximo = lista.get(i).getHoraPartida();
                 }
             }
-            lista.add(c1);
+            
             minTerminaAtencionCaja = menorProximo;
+            c1.changeIgnorar();
             if (minTerminaEntrega> finTiempoEntrega) {
                 minTerminaEntrega = finTiempoEntrega;
             }

@@ -21,6 +21,7 @@ public class Cliente {
     double horaLlegada;
     double horaPartida;
     String quienMeAtiende;
+    boolean ignorar = false;
     
     public Cliente() {
     }
@@ -61,5 +62,13 @@ public class Cliente {
     
     public String getQuienMeAtiende(){
         return quienMeAtiende;
+    }
+    
+    public void changeIgnorar(){
+        ignorar = (!ignorar)? true: false;   
+    }
+    
+    public boolean ignorar(){
+        return ignorar;
     }
 }

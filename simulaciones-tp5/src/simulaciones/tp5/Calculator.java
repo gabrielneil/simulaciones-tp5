@@ -70,6 +70,7 @@ public class Calculator {
     public static final String EVN_FIN_ATENCION_EMPLEADO = "Fin atención empleado";
     public static final String EVN_ENTREGA = "Entrega de pedido";
     public static final String EVN_UTILIZACION = "Fin Utilizacion de mesa";
+    public static final String EVN_CONSUMIENDO = "Consumiendo";
     public static final String EVN_CONSUMICION = "Fin Consumicion de pedido";
 
     /*
@@ -618,7 +619,7 @@ public class Calculator {
                 float rndTiempoConsumicion = r.nextFloat();
                 double tiempoConsumicion = Formulas.tiempoConsumicion(rndTiempoConsumicion);
                 double finConsumicion = tiempoConsumicion + reloj;
-                c1.setEstado("Consumiendo");
+                c1.setEstado(EVN_CONSUMIENDO);
 
 //              minTerminaConsumicion
                 c1.setHoraPartida(finConsumicion);
@@ -654,7 +655,7 @@ public class Calculator {
                 menorProximo = 0;
                 for (int i = 0; i < lista.size(); i++) {
                     Cliente aux = lista.get(i);
-                    if ((menorProximo == 0 && aux.getEstado().equals("Consumiendo")) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals("Consumiendo"))) {
+                    if ((menorProximo == 0 && aux.getEstado().equals(EVN_CONSUMIENDO)) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals(EVN_CONSUMIENDO))) {
                         menorProximo = lista.get(i).getHoraPartida();
                     }
                 }
@@ -795,9 +796,17 @@ public class Calculator {
                 empleado2.getCola(),//Empleado 2 - Cola (24)
                 (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC) + (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)
                 (int) model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
+                
             lista.remove(posicion);
+            double minProx= 0;
+            for (int i = 0; i < lista.size(); i++) {
+                Cliente aux = lista.get(i);
+                if ((minProx == 0 && aux.getEstado().equals(EVN_CONSUMIENDO)) || (aux.getEstado().equals(EVN_CONSUMIENDO) && aux.getHoraPartida()< minProx)) {
+                    minProx = aux.getHoraPartida();
+                }
+            }
+            minTerminaConsumicion = minProx;
         }
-
     }
 
     private double calcularFinPermanencia(int colTiempoPermanencia) {

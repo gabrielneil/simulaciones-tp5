@@ -56,6 +56,12 @@ public class Cliente {
         this.horaPartida = horaPartida;
     }
     
+     public Cliente(String estado, double horaLlegada) {
+        this.estado = estado;
+        this.horaLlegada = horaLlegada;
+        this.horaPartida = 0;
+    }
+    
     public void quienMeAtiende(String quienMeAtiende){
         this.quienMeAtiende = quienMeAtiende;
     }

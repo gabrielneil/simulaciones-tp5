@@ -276,6 +276,7 @@ public class Calculator {
                 && (minProximaLLegada < minTerminaUsarMesa || evitarTiempoFinUsoMesa)
                 && (minProximaLLegada < minTerminaConsumicion || evitarTiempoConsumicion)) {
             //tiempoProxLlegadaCliente es el proximo evento
+            //llega cliente
             System.out.println("el próximo cliente");
             setEvento(EVN_LLEGADA);
             setReloj(minProximaLLegada);
@@ -341,7 +342,7 @@ public class Calculator {
             else {
                 System.out.println("entra a comprar");
                 double tiempoFinAtencionCaja = 0;
-                c1 = new Cliente(EVN_ATENCION_CAJA, reloj, tiempoFinAtencionCaja);
+                c1 = new Cliente(EVN_ATENCION_CAJA, reloj);
 
                 if (cajero.getEstado().equals("LIBRE")) {
 
@@ -408,11 +409,10 @@ public class Calculator {
             double tiempoEntrega = 0;
             double finTiempoEntrega = 0;
 
-            int posicion = 0;
+            //busco quien es el minimo que voy a tratar ahora
             for (int i = 0; i < lista.size(); i++) {
                 Cliente aux = lista.get(i);
-                if (aux.getHoraPartida() == minTerminaAtencionCaja && aux.getEstado().equals("Atendido en caja")) {
-                    posicion = i;
+                if (aux.getHoraPartida() == minTerminaAtencionCaja && aux.getEstado().equals(EVN_ATENDIDO_CAJA)) {
                     c1 = aux;
                     break;
                 }
@@ -425,10 +425,18 @@ public class Calculator {
                 c1.setHoraPartida(finTiempoEntrega);
                 empleado1.setOcupado();
                 c1.quienMeAtiende("EMPLEADO1");
+                
+                System.out.println("Me atiende el empleado 1");
+                c1.setEstado(EVN_ENTREGA);
+                
+                if (minTerminaEntrega == 0 || minTerminaEntrega> finTiempoEntrega) {
+                    minTerminaEntrega = finTiempoEntrega;
+                }
+                
                 for (int i = 0; i < lista.size(); i++) {
                     Cliente aux = lista.get(i);
                     if (aux.getEstado().equals(EVN_ENTREGA)) {
-                        if (aux.getHoraPartida() > c1.getHoraPartida()) {
+                        if (aux.getHoraPartida() >= c1.getHoraPartida()) {
                             minTerminaEntrega = c1.getHoraPartida();
                         } else {
                             minTerminaEntrega = aux.getHoraPartida();
@@ -436,8 +444,28 @@ public class Calculator {
                         break;
                     }
                 }
+                
+            //busco quien va a reemplazar al que se acaba de ir
+            int elMasViejo = 0;
+            for (int i = 0; i < lista.size(); i++) {
+                Cliente aux = lista.get(i);
+              if ((aux.getEstado().equals(EVN_ATENCION_CAJA) && elMasViejo == 0) || elMasViejo > aux.getHoraLlegada()) {
+                    elMasViejo = i;
+                }  
+   
+            }
+            
+                double tiempoFinAtencionCaja = reloj + tiempoTicket;
+                    c1 = lista.get(elMasViejo);
+                    c1.setHoraPartida(tiempoFinAtencionCaja);
+                    cajero.setOcupado();
+                    c1.quienMeAtiende("CAJERO");
+                    c1.setEstado(EVN_ATENDIDO_CAJA);
+
+                    if (tiempoFinAtencionCaja < minTerminaAtencionCaja || minTerminaAtencionCaja == 0) {
+                        minTerminaAtencionCaja = tiempoFinAtencionCaja;
+                    }
                 //minTerminaEntrega
-                c1.setEstado(EVN_ENTREGA);
             } else if (empleado2.getEstado().equals("LIBRE")) {
                 rndEspera = r.nextFloat();
                 tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
@@ -445,10 +473,18 @@ public class Calculator {
                 c1.setHoraPartida(finTiempoEntrega);
                 empleado2.setOcupado();
                 c1.quienMeAtiende("EMPLEADO1");
+                
+                System.out.println("Me atiende el empleado 2");
+                c1.setEstado(EVN_ENTREGA);
+                
+                if (minTerminaEntrega == 0 || minTerminaEntrega> finTiempoEntrega) {
+                    minTerminaEntrega = finTiempoEntrega;
+                }
+                
                 for (int i = 0; i < lista.size(); i++) {
                     Cliente aux = lista.get(i);
                     if (aux.getEstado().equals(EVN_ENTREGA)) {
-                        if (aux.getHoraPartida() > c1.getHoraPartida()) {
+                        if (aux.getHoraPartida() >= c1.getHoraPartida()) {
                             minTerminaEntrega = c1.getHoraPartida();
                         } else {
                             minTerminaEntrega = aux.getHoraPartida();
@@ -456,7 +492,27 @@ public class Calculator {
                         break;
                     }
                 }
-                c1.setEstado(EVN_ENTREGA);
+                
+            //busco quien va a reemplazar al que se acaba de ir
+            int elMasViejo = 0;
+            for (int i = 0; i < lista.size(); i++) {
+                Cliente aux = lista.get(i);
+              if ((aux.getEstado().equals(EVN_ATENCION_CAJA) && elMasViejo == 0) || elMasViejo > aux.getHoraLlegada()) {
+                    elMasViejo = i;
+                }  
+   
+            }
+            
+               double tiempoFinAtencionCaja = reloj + tiempoTicket;
+                    c1 = lista.get(elMasViejo);
+                    c1.setHoraPartida(tiempoFinAtencionCaja);
+                    cajero.setOcupado();
+                    c1.quienMeAtiende("CAJERO");
+                    c1.setEstado(EVN_ATENDIDO_CAJA);
+
+                    if (tiempoFinAtencionCaja < minTerminaAtencionCaja || minTerminaAtencionCaja == 0) {
+                        minTerminaAtencionCaja = tiempoFinAtencionCaja;
+                    }
             } else {
                 empleado1.aumentarCola();
                 empleado2.aumentarCola();
@@ -524,7 +580,8 @@ public class Calculator {
                     break;
                 }
             }
-
+            
+            System.out.println("Cliente11111"+c1);
             if (c1.getQuienMeAtiende().equals("EMPLEADO1")) {
                 if (empleado1.getCola() == 0) {
                     empleado1.setLibre();

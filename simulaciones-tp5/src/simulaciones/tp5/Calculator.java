@@ -451,7 +451,7 @@ public class Calculator {
                 (minProximaLLegada == 0)?null:minProximaLLegada, //Próxima Llegada cliente (5)
                 null, //Acción - RND (6)
                 "",//Accion : mesa o a comprar (7)
-                (minTerminaAtencionCaja == 0)?null:minTerminaAtencionCaja, //Tiempo fin atención caja (8)
+                null, //Tiempo fin atención caja (8)
                 (rndEspera ==0)?null:rndEspera, //Tiempo espera pedido - RND (9)
                 (tiempoEntrega == 0)? null:tiempoEntrega, //Tiempo espera pedido (10)
                 (finTiempoEntrega == 0)? null:finTiempoEntrega, //Tiempo entrega de pedido (11)

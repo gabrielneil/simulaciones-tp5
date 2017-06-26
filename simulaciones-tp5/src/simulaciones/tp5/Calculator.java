@@ -201,13 +201,14 @@ public class Calculator {
             cantFilas++;
         }
     }
-    
+
     double minProximaLLegada = 0;
     double minTerminaAtencionCaja = 0;
     double minTerminaEntrega = 0;
     double minTerminaUsarMesa = 0;
     double minTerminaConsumicion = 0;
-    int numeroVuelta=0;
+    int numeroVuelta = 0;
+
     public void simularAvance() {
 
         Random r = new Random();
@@ -252,34 +253,33 @@ public class Calculator {
             return;
         }
         System.out.println(numeroVuelta);
-        
-        boolean evitarTiempoLlegada = (minProximaLLegada == 0)? true:false;
+
+        boolean evitarTiempoLlegada = (minProximaLLegada == 0) ? true : false;
         System.out.println(evitarTiempoLlegada);
-        
-        boolean evitarTiempoFinAtencionCaja = (minTerminaAtencionCaja == 0)? true:false;
+
+        boolean evitarTiempoFinAtencionCaja = (minTerminaAtencionCaja == 0) ? true : false;
         System.out.println(evitarTiempoFinAtencionCaja);
-        
-        boolean evitarTiempoEntregaPedido = (minTerminaEntrega == 0)? true:false;
+
+        boolean evitarTiempoEntregaPedido = (minTerminaEntrega == 0) ? true : false;
         System.out.println(evitarTiempoEntregaPedido);
-        
-        boolean evitarTiempoFinUsoMesa = (minTerminaUsarMesa == 0)? true:false;
+
+        boolean evitarTiempoFinUsoMesa = (minTerminaUsarMesa == 0) ? true : false;
         System.out.println(evitarTiempoFinUsoMesa);
-        
-        boolean evitarTiempoConsumicion = (minTerminaConsumicion == 0)? true:false;
+
+        boolean evitarTiempoConsumicion = (minTerminaConsumicion == 0) ? true : false;
         System.out.println(evitarTiempoConsumicion);
         numeroVuelta++;
-        
-        if (!evitarTiempoLlegada && 
-                (minProximaLLegada < minTerminaAtencionCaja || evitarTiempoFinAtencionCaja) &&
-                (minProximaLLegada < minTerminaEntrega || evitarTiempoEntregaPedido)&&
-                (minProximaLLegada < minTerminaUsarMesa || evitarTiempoFinUsoMesa)&&
-                (minProximaLLegada < minTerminaConsumicion || evitarTiempoConsumicion)) 
-        {
+
+        if (!evitarTiempoLlegada
+                && (minProximaLLegada < minTerminaAtencionCaja || evitarTiempoFinAtencionCaja)
+                && (minProximaLLegada < minTerminaEntrega || evitarTiempoEntregaPedido)
+                && (minProximaLLegada < minTerminaUsarMesa || evitarTiempoFinUsoMesa)
+                && (minProximaLLegada < minTerminaConsumicion || evitarTiempoConsumicion)) {
             //tiempoProxLlegadaCliente es el proximo evento
             System.out.println("el próximo cliente");
             setEvento(EVN_LLEGADA);
             setReloj(minProximaLLegada);
-            
+
             float rnd1TiempoLlegada;
             float rnd2TiempoLlegada;
             rnd1TiempoLlegada = r.nextFloat();
@@ -297,11 +297,11 @@ public class Calculator {
                 double tiempoFinUtilizacionMesa = reloj + tiempoUtilizacionMesa;
                 c1 = new Cliente("Utilizando mesa", reloj, tiempoFinUtilizacionMesa);
                 lista.add(c1);
-                
-                    //si sos el menor, seteate
-                    if (tiempoFinUtilizacionMesa < minTerminaUsarMesa || minTerminaUsarMesa == 0 ) {
-                        minTerminaUsarMesa = tiempoFinUtilizacionMesa; 
-                    }
+
+                //si sos el menor, seteate
+                if (tiempoFinUtilizacionMesa < minTerminaUsarMesa || minTerminaUsarMesa == 0) {
+                    minTerminaUsarMesa = tiempoFinUtilizacionMesa;
+                }
 //                model.addColumn("Cliente: Estado");
 //                model.addColumn("Cliente: Entrada al sistema");
 //                model.addColumn("Cliente: Partida del sistema");
@@ -312,13 +312,13 @@ public class Calculator {
                     rnd1TiempoLlegada, //Llegada cliente - RND1 (2)
                     rnd2TiempoLlegada, //Llegada cliente - RND2 (3)
                     tiempoLlegada, //Tiempo llegada cliente (4)
-                    (minProximaLLegada==0)?null:minProximaLLegada, //Próxima Llegada cliente (5)
+                    (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
                     rndAccion,//Acción - RND (6)
                     "Utiliza mesa", //Accion : mesa o a comprar (7)
                     null,//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null, //Tiempo espera pedido (10)
-                    (minTerminaEntrega==0)?null:minTerminaEntrega,//Tiempo entrega de pedido(11)
+                    (minTerminaEntrega == 0) ? null : minTerminaEntrega,//Tiempo entrega de pedido(11)
                     null,//Accion mesa: - RND (12)
                     null, //Accion mesa (13)
                     rndTiempoUtilizacionMesa,//Tiempo uso de mesa - RND (14)
@@ -326,7 +326,7 @@ public class Calculator {
                     tiempoFinUtilizacionMesa,//Tiempo fin uso mesa (16)
                     null,//Tiempo consumicion - RND (17)
                     null,//Tiempo de consumicion (18)
-                    (minTerminaConsumicion==0)?null:minTerminaConsumicion,//Tiempo fin de consumicion (19)
+                    (minTerminaConsumicion == 0) ? null : minTerminaConsumicion,//Tiempo fin de consumicion (19)
                     cajero.getEstado(),//Cajero - Estado (20)
                     cajero.getCola(),//Cajero - Cola (21)
                     empleado1.getEstado(),//Empleado 1 - Estado (22)
@@ -339,48 +339,48 @@ public class Calculator {
 
             } //false, entra a comprar
             else {
-                System.out.println("entra a comprar");    
+                System.out.println("entra a comprar");
                 double tiempoFinAtencionCaja = 0;
                 c1 = new Cliente(EVN_ATENCION_CAJA, reloj, tiempoFinAtencionCaja);
-                
+
                 if (cajero.getEstado().equals("LIBRE")) {
-                    
-                tiempoFinAtencionCaja = reloj + tiempoTicket;
-                c1.setHoraPartida(tiempoFinAtencionCaja);
-                cajero.setOcupado();
-                c1.quienMeAtiende("CAJERO");
-                c1.setEstado(EVN_ATENDIDO_CAJA);
-                
-                if (tiempoFinAtencionCaja < minTerminaAtencionCaja || minTerminaAtencionCaja == 0 ) {
-                        minTerminaAtencionCaja = tiempoFinAtencionCaja; 
+
+                    tiempoFinAtencionCaja = reloj + tiempoTicket;
+                    c1.setHoraPartida(tiempoFinAtencionCaja);
+                    cajero.setOcupado();
+                    c1.quienMeAtiende("CAJERO");
+                    c1.setEstado(EVN_ATENDIDO_CAJA);
+
+                    if (tiempoFinAtencionCaja < minTerminaAtencionCaja || minTerminaAtencionCaja == 0) {
+                        minTerminaAtencionCaja = tiempoFinAtencionCaja;
                     }
-                
+
                 } else {
                     cajero.aumentarCola();
                 }
                 lista.add(c1);
-                
+
                 model.addRow(new Object[]{
                     evento, //Evento (0)
                     reloj, //Reloj (1)
                     rnd1TiempoLlegada, //Llegada cliente - RND1 (2)
                     rnd2TiempoLlegada, //Llegada cliente - RND2 (3)
                     tiempoLlegada, //Tiempo llegada cliente (4)
-                    (minProximaLLegada==0)?null:minProximaLLegada, //Próxima Llegada cliente (5)
+                    (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
                     rndAccion, //Acción - RND (6)
                     "Compra", //Accion : mesa o a comprar (7)
-                    (tiempoFinAtencionCaja == 0)?null:tiempoFinAtencionCaja, //Tiempo fin atención caja (8)
+                    (tiempoFinAtencionCaja == 0) ? null : tiempoFinAtencionCaja, //Tiempo fin atención caja (8)
                     null, //Tiempo espera pedido - RND (9)
                     null, //Tiempo espera pedido (10)
-                    (minTerminaEntrega ==0 )?null:minTerminaEntrega,//Tiempo entrega de pedido(11)
+                    (minTerminaEntrega == 0) ? null : minTerminaEntrega,//Tiempo entrega de pedido(11)
                     null, //Accion mesa: - RND (12)
                     null, //Accion mesa (13)
                     null,//Tiempo uso de mesa - RND (14)
                     null, //Tiempo uso de mesa (15)
-                    (minTerminaUsarMesa ==0 )?null:minTerminaUsarMesa, //Tiempo fin uso mesa (16)
+                    (minTerminaUsarMesa == 0) ? null : minTerminaUsarMesa, //Tiempo fin uso mesa (16)
                     null, //Tiempo consumicion - RND (17)
                     null, //Tiempo de consumicion (18)
-                    (minTerminaConsumicion ==0 )?null:minTerminaConsumicion, //Tiempo fin de consumicion (19)
+                    (minTerminaConsumicion == 0) ? null : minTerminaConsumicion, //Tiempo fin de consumicion (19)
                     cajero.getEstado(), //Cajero - Estado (20)
                     cajero.getCola(), //Cajero - Cola (21)
                     empleado1.getEstado(), //Empleado 1 - Estado (22)
@@ -390,26 +390,24 @@ public class Calculator {
                     ((int) (model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT))) + 1}); //Cantidad clientes en cafeteria (26)
             }
 
-        } else if
-                (!evitarTiempoFinAtencionCaja && 
-                (minTerminaAtencionCaja < minTerminaEntrega || evitarTiempoEntregaPedido)&&
-                (minTerminaAtencionCaja < minTerminaUsarMesa || evitarTiempoFinUsoMesa)&&
-                (minTerminaAtencionCaja < minTerminaConsumicion || evitarTiempoConsumicion)) 
-        {
+        } else if (!evitarTiempoFinAtencionCaja
+                && (minTerminaAtencionCaja < minTerminaEntrega || evitarTiempoEntregaPedido)
+                && (minTerminaAtencionCaja < minTerminaUsarMesa || evitarTiempoFinUsoMesa)
+                && (minTerminaAtencionCaja < minTerminaConsumicion || evitarTiempoConsumicion)) {
             System.out.println("Fin atención caja");
             // tiempoFinAtencionCaja es el proximo evento - SE MANDA A LA COLA DE LOS DOS CHABONES
             setEvento(EVN_FIN_ATENCION);
             setReloj(minTerminaAtencionCaja);
-            
-              if (cajero.getCola() == 0) {
+
+            if (cajero.getCola() == 0) {
                 cajero.setLibre();
-                } else {
+            } else {
                 cajero.disminuirCola();
             }
-                 float rndEspera = 0; 
-                 double tiempoEntrega = 0;
-                 double finTiempoEntrega = 0;
-                 
+            float rndEspera = 0;
+            double tiempoEntrega = 0;
+            double finTiempoEntrega = 0;
+
             int posicion = 0;
             for (int i = 0; i < lista.size(); i++) {
                 Cliente aux = lista.get(i);
@@ -419,63 +417,73 @@ public class Calculator {
                     break;
                 }
             }
-            
+
             if (empleado1.getEstado().equals("LIBRE")) {
-                 rndEspera = r.nextFloat();
-                 tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
-                 finTiempoEntrega = tiempoEntrega + reloj;
-                 c1.setHoraPartida(finTiempoEntrega);
+                rndEspera = r.nextFloat();
+                tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
+                finTiempoEntrega = tiempoEntrega + reloj;
+                c1.setHoraPartida(finTiempoEntrega);
                 empleado1.setOcupado();
                 c1.quienMeAtiende("EMPLEADO1");
-                double minProx = 0;
                 for (int i = 0; i < lista.size(); i++) {
-                    Cliente aux=lista.get(i);
-                    if (aux.getEstado().equals(EVN_ENTREGA)){
-                        if (aux.getHoraPartida()>c1.getHoraPartida()) {
+                    Cliente aux = lista.get(i);
+                    if (aux.getEstado().equals(EVN_ENTREGA)) {
+                        if (aux.getHoraPartida() > c1.getHoraPartida()) {
                             minTerminaEntrega = c1.getHoraPartida();
-                        }else{
+                        } else {
                             minTerminaEntrega = aux.getHoraPartida();
                         }
-                    break;
+                        break;
                     }
                 }
                 //minTerminaEntrega
-                 c1.setEstado(EVN_ENTREGA);
-            } else if (empleado2.getEstado().equals("LIBRE")) {
-                 rndEspera = r.nextFloat();
-                 tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
-                 finTiempoEntrega = tiempoEntrega + reloj;
                 c1.setEstado(EVN_ENTREGA);
+            } else if (empleado2.getEstado().equals("LIBRE")) {
+                rndEspera = r.nextFloat();
+                tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
+                finTiempoEntrega = tiempoEntrega + reloj;
                 c1.setHoraPartida(finTiempoEntrega);
                 empleado2.setOcupado();
-                c1.quienMeAtiende("EMPLEADO2");
+                c1.quienMeAtiende("EMPLEADO1");
+                for (int i = 0; i < lista.size(); i++) {
+                    Cliente aux = lista.get(i);
+                    if (aux.getEstado().equals(EVN_ENTREGA)) {
+                        if (aux.getHoraPartida() > c1.getHoraPartida()) {
+                            minTerminaEntrega = c1.getHoraPartida();
+                        } else {
+                            minTerminaEntrega = aux.getHoraPartida();
+                        }
+                        break;
+                    }
+                }
+                c1.setEstado(EVN_ENTREGA);
             } else {
                 empleado1.aumentarCola();
                 empleado2.aumentarCola();
                 c1.setEstado(EVN_ATENCION_PEDIDO);
             }
-            
+
             model.addRow(new Object[]{
                 evento,//Evento (0)
                 reloj, //Reloj (1)
                 null, //Llegada cliente - RND1 (2)
                 null, //Llegada cliente - RND2 (3)
                 null, //Tiempo llegada cliente (4)
-                (minProximaLLegada == 0)?null:minProximaLLegada, //Próxima Llegada cliente (5)
+                (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
                 null, //Acción - RND (6)
                 "",//Accion : mesa o a comprar (7)
                 null, //Tiempo fin atención caja (8)
-                (rndEspera ==0)?null:rndEspera, //Tiempo espera pedido - RND (9)
-                (tiempoEntrega == 0)? null:tiempoEntrega, //Tiempo espera pedido (10)
-                (finTiempoEntrega == 0)? null:finTiempoEntrega, //Tiempo entrega de pedido (11)
+                (rndEspera == 0) ? null : rndEspera, //Tiempo espera pedido - RND (9)
+                (tiempoEntrega == 0) ? null : tiempoEntrega, //Tiempo espera pedido (10)
+                (finTiempoEntrega == 0) ? null : finTiempoEntrega, //Tiempo entrega de pedido (11)
                 null, //Accion mesa: - RND (12)
                 null, //Accion mesa (13)
                 null, //Tiempo uso de mesa - RND (14)
                 null,//Tiempo uso de mesa (15)
-                (minTerminaUsarMesa == 0)?null:minTerminaUsarMesa, //Tiempo fin uso mesa (16)
+                (minTerminaUsarMesa == 0) ? null : minTerminaUsarMesa, //Tiempo fin uso mesa (16)
                 null, //Tiempo consumicion - RND (17)
                 null, //Tiempo de consumicion (18)
-                (minTerminaConsumicion== 0)?null:minTerminaConsumicion,//Tiempo fin de consumicion (19)
+                (minTerminaConsumicion == 0) ? null : minTerminaConsumicion,//Tiempo fin de consumicion (19)
                 cajero.getEstado(), //Cajero - Estado (20)
                 cajero.getCola(), //Cajero - Cola (21)
                 empleado1.getEstado(), //Empleado 1 - Estado (22)
@@ -494,20 +502,19 @@ public class Calculator {
             }
             //ACA HAY ALGO RARO
             minTerminaAtencionCaja = menorProximo;
-            if (minTerminaAtencionCaja > finTiempoEntrega && finTiempoEntrega !=0) {
+            if (minTerminaAtencionCaja > finTiempoEntrega && finTiempoEntrega != 0) {
                 minTerminaAtencionCaja = finTiempoEntrega;
             }
-            
-        } else if(!evitarTiempoEntregaPedido && 
-                (minTerminaEntrega < minTerminaUsarMesa || evitarTiempoFinUsoMesa)&&
-                (minTerminaEntrega < minTerminaConsumicion || evitarTiempoConsumicion)) 
-        {
+
+        } else if (!evitarTiempoEntregaPedido
+                && (minTerminaEntrega < minTerminaUsarMesa || evitarTiempoFinUsoMesa)
+                && (minTerminaEntrega < minTerminaConsumicion || evitarTiempoConsumicion)) {
 
             System.out.println("fin atención del empleado osea que le terminó el pedido. es el proximo evento ");
 
             setEvento(EVN_FIN_ATENCION_EMPLEADO);
             setReloj(minTerminaEntrega);
-            
+
             int posicion = 0;
             for (int i = 0; i < lista.size(); i++) {
                 if (lista.get(i).getHoraPartida() == minTerminaEntrega) {
@@ -521,19 +528,19 @@ public class Calculator {
             if (c1.getQuienMeAtiende().equals("EMPLEADO1")) {
                 if (empleado1.getCola() == 0) {
                     empleado1.setLibre();
-                }else{
+                } else {
                     empleado1.disminuirCola();
                     empleado2.disminuirCola();
                 }
             } else if (c1.getQuienMeAtiende().equals("EMPLEADO2")) {
                 if (empleado2.getCola() == 0) {
                     empleado2.setLibre();
-                }else{
+                } else {
                     empleado1.disminuirCola();
                     empleado2.disminuirCola();
                 }
             }
-            
+
             double menorProximo = 0;
             for (int i = 0; i < lista.size(); i++) {
                 Cliente aux = lista.get(i);
@@ -542,7 +549,7 @@ public class Calculator {
                     break;
                 }
             }
-            
+
             c1.changeIgnorar();
             minTerminaEntrega = menorProximo;
             float rndAccion = r.nextFloat();
@@ -555,7 +562,7 @@ public class Calculator {
                 double tiempoConsumicion = Formulas.tiempoConsumicion(rndTiempoConsumicion);
                 double finConsumicion = tiempoConsumicion + reloj;
                 c1.setEstado("Consumiendo");
-                
+
 //              minTerminaConsumicion
                 c1.setHoraPartida(finConsumicion);
                 model.addRow(new Object[]{
@@ -564,18 +571,18 @@ public class Calculator {
                     null,//Llegada cliente - RND1 (2)
                     null,//Llegada cliente - RND2 (3)
                     null,//Tiempo llegada cliente (4)
-                    (minProximaLLegada == 0)?null: minProximaLLegada, //Próxima Llegada cliente (5)
+                    (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
                     null, //Acción - RND (6)
                     null, //Accion : mesa o a comprar (7)
-                    (minTerminaAtencionCaja == 0)?null: minTerminaAtencionCaja,//Tiempo fin atención caja (8)
+                    (minTerminaAtencionCaja == 0) ? null : minTerminaAtencionCaja,//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null,//Tiempo espera pedido (10)
-                    (minTerminaEntrega == 0)?null:minTerminaEntrega,//Tiempo entrega de pedido (11)
+                    (minTerminaEntrega == 0) ? null : minTerminaEntrega,//Tiempo entrega de pedido (11)
                     rndAccion,//Accion mesa: - RND (12)
                     c1.getEstado(),//Accion mesa (13)
                     null, //Tiempo uso de mesa - RND (14)
                     null, //Tiempo uso mesa (15)
-                    (minTerminaUsarMesa == 0)?null:minTerminaUsarMesa, //Tiempo fin uso mesa (16)
+                    (minTerminaUsarMesa == 0) ? null : minTerminaUsarMesa, //Tiempo fin uso mesa (16)
                     rndTiempoConsumicion, //Tiempo consumicion - RND (17)
                     tiempoConsumicion,//Tiempo de consumicion (18)
                     finConsumicion, //Tiempo fin de consumicion (19)
@@ -586,21 +593,20 @@ public class Calculator {
                     empleado2.getCola(),//Empleado 2 - Cola (24)
                     model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC), //Tiempo de permanencia acumulado(25)
                     model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
-            
+
                 menorProximo = 0;
                 for (int i = 0; i < lista.size(); i++) {
-                Cliente aux = lista.get(i);
-                if ((menorProximo == 0 && aux.getEstado().equals("Consumiendo")) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals("Consumiendo"))) {
-                    menorProximo = lista.get(i).getHoraPartida();
+                    Cliente aux = lista.get(i);
+                    if ((menorProximo == 0 && aux.getEstado().equals("Consumiendo")) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals("Consumiendo"))) {
+                        menorProximo = lista.get(i).getHoraPartida();
+                    }
                 }
-            }
-            minTerminaConsumicion = menorProximo;
-            
-            if (minTerminaConsumicion > finConsumicion) {
-                minTerminaConsumicion = finConsumicion;
+                minTerminaConsumicion = menorProximo;
+
+                if (minTerminaConsumicion > finConsumicion) {
+                    minTerminaConsumicion = finConsumicion;
                 }
-            }
-            else {
+            } else {
 
                 System.out.println("SOLO COMPRO Y SE TOMA EL PALO");
 
@@ -610,21 +616,21 @@ public class Calculator {
                     null,//Llegada cliente - RND1 (2)
                     null,//Llegada cliente - RND2 (3)
                     null,//Tiempo llegada cliente (4)
-                    (minProximaLLegada ==0)?null:minProximaLLegada, //Próxima Llegada cliente (5)
+                    (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
                     null, //Acción - RND (6)
                     null, //Accion : mesa o a comprar (7)
-                    (minTerminaAtencionCaja ==0)?null:minTerminaAtencionCaja,//Tiempo fin atención caja (8)
+                    (minTerminaAtencionCaja == 0) ? null : minTerminaAtencionCaja,//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null,//Tiempo espera pedido (10)
-                    (minTerminaEntrega ==0)?null:minTerminaEntrega,//Tiempo entrega de pedido (11)
+                    (minTerminaEntrega == 0) ? null : minTerminaEntrega,//Tiempo entrega de pedido (11)
                     rndAccion, //Accion mesa: - RND (12)
                     "Se retira",//Accion mesa (13)
                     null, //Tiempo uso de mesa - RND(14)
                     null,//Tiempo uso mesa (15)
-                    (minTerminaUsarMesa ==0)?null:minTerminaUsarMesa,//Tiempo fin uso mesa (16)
+                    (minTerminaUsarMesa == 0) ? null : minTerminaUsarMesa,//Tiempo fin uso mesa (16)
                     null, //Tiempo consumicion - RND (17)
                     null,//Tiempo de consumicion (18)
-                    (minTerminaConsumicion ==0)?null:minTerminaConsumicion, //Tiempo fin de consumicion (19)
+                    (minTerminaConsumicion == 0) ? null : minTerminaConsumicion, //Tiempo fin de consumicion (19)
                     cajero.getEstado(),//Cajero - Estado (20)
                     cajero.getCola(), //Cajero - Cola (21)
                     empleado1.getEstado(), //Empleado 1 - Estado (22)
@@ -637,15 +643,15 @@ public class Calculator {
 
         } else if ((minTerminaUsarMesa < minTerminaConsumicion || evitarTiempoConsumicion)
                 && !evitarTiempoFinUsoMesa) {
- 
+
             System.out.println("NO COMIO, SOLO USO LA MESA Y SE VA");
-            
+
             setEvento(EVN_UTILIZACION);
             setReloj(minTerminaUsarMesa);
             int posicion = 0;
-            
+
             for (int i = 0; i < lista.size(); i++) {
-                if (lista.get(i).getHoraPartida() == minTerminaUsarMesa && lista.get(i).getEstado().equals("Utilizando mesa") ) {
+                if (lista.get(i).getHoraPartida() == minTerminaUsarMesa && lista.get(i).getEstado().equals("Utilizando mesa")) {
                     c1 = lista.get(i);
                     break;
                 }
@@ -656,13 +662,13 @@ public class Calculator {
                 null,//Llegada cliente - RND1 (2)
                 null,//Llegada cliente - RND2 (3)
                 null,//Tiempo llegada cliente (4)
-                (minProximaLLegada == 0)?null:minProximaLLegada, //Próxima Llegada cliente (5)
+                (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
                 null, //Acción - RND (6)
                 null, //Accion : mesa o a comprar (7)
-                (minTerminaAtencionCaja == 0)?null:minTerminaAtencionCaja,//Tiempo fin atención caja (8)
+                (minTerminaAtencionCaja == 0) ? null : minTerminaAtencionCaja,//Tiempo fin atención caja (8)
                 null,//Tiempo espera pedido - RND (9)
                 null,//Tiempo espera pedido (10)
-                (minTerminaEntrega == 0)?null:minTerminaEntrega,//Tiempo entrega de pedido (11)
+                (minTerminaEntrega == 0) ? null : minTerminaEntrega,//Tiempo entrega de pedido (11)
                 null,//Accion mesa: - RND (12)
                 null, //Accion mesa - se retira (13)
                 null,//Tiempo uso de mesa - RND (14)
@@ -670,7 +676,7 @@ public class Calculator {
                 null,//Tiempo fin uso mesa (16)
                 null, //Tiempo consumicion - RND (17)
                 null,//Tiempo de consumicion (18)
-                (minTerminaConsumicion == 0)?null:minTerminaConsumicion, //Tiempo fin de consumicion (19)
+                (minTerminaConsumicion == 0) ? null : minTerminaConsumicion, //Tiempo fin de consumicion (19)
                 cajero.getEstado(),//Cajero - Estado (20)
                 cajero.getCola(), //Cajero - Cola (21)
                 empleado1.getEstado(), //Empleado 1 - Estado (22)
@@ -678,21 +684,20 @@ public class Calculator {
                 empleado2.getCola(),//Empleado 2 - Cola (24)
                 (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC) + (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)
                 (int) model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
-                lista.remove(c1);
+            lista.remove(c1);
 
-               double menorProximo = 0;
-                for (int i = 0; i < lista.size(); i++) {
+            double menorProximo = 0;
+            for (int i = 0; i < lista.size(); i++) {
                 Cliente aux = lista.get(i);
                 if ((menorProximo == 0 && aux.getEstado().equals("Utilizando mesa")) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals("Utilizando mesa"))) {
                     menorProximo = lista.get(i).getHoraPartida();
                 }
             }
-                minTerminaUsarMesa = menorProximo;
-            }
-         else {
-            
+            minTerminaUsarMesa = menorProximo;
+        } else {
+
             System.out.println("TERMINO DE CONSUMIR Y SE LAS TOMA");
-            
+
             setEvento(EVN_CONSUMICION);
             setReloj(minTerminaConsumicion);
 
@@ -704,28 +709,28 @@ public class Calculator {
                     break;
                 }
             }
-            
+
             model.addRow(new Object[]{
                 evento,//Evento (0)
                 reloj, //Reloj (1)
                 null,//Llegada cliente - RND1 (2)
                 null,//Llegada cliente - RND2 (3)
                 null,//Tiempo llegada cliente (4)
-                (minProximaLLegada == 0)?null:minProximaLLegada, //Próxima Llegada cliente (5)
+                (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
                 null, //Acción - RND (6)
                 null, //Accion : mesa o a comprar (7)
-                (minTerminaAtencionCaja ==0)?null:minTerminaAtencionCaja,//Tiempo fin atención caja (8)
+                (minTerminaAtencionCaja == 0) ? null : minTerminaAtencionCaja,//Tiempo fin atención caja (8)
                 null,//Tiempo espera pedido - RND (9)
                 null,//Tiempo espera pedido (10)
-                (minTerminaEntrega ==0)?null:minTerminaEntrega,//Tiempo entrega de pedido (11)
+                (minTerminaEntrega == 0) ? null : minTerminaEntrega,//Tiempo entrega de pedido (11)
                 null,//Accion mesa: - RND (12)
                 null, //Accion mesa - se retira (13)
                 null,//Tiempo uso de mesa - RND (14)
                 null, //Tiempo uso de mesa (15)
-                (minTerminaUsarMesa ==0)?null:minTerminaUsarMesa,//Tiempo fin uso mesa (16)
+                (minTerminaUsarMesa == 0) ? null : minTerminaUsarMesa,//Tiempo fin uso mesa (16)
                 null, //Tiempo consumicion - RND (17)
                 null,//Tiempo de consumicion (18)
-                (minTerminaConsumicion ==0)?null:minTerminaConsumicion, //Tiempo fin de consumicion (19)
+                (minTerminaConsumicion == 0) ? null : minTerminaConsumicion, //Tiempo fin de consumicion (19)
                 cajero.getEstado(),//Cajero - Estado (20)
                 cajero.getCola(), //Cajero - Cola (21)
                 empleado1.getEstado(), //Empleado 1 - Estado (22)

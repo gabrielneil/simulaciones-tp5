@@ -189,15 +189,14 @@ public class Calculator {
     public void initSimulacion() {
         tabla.setVisible(true);
         model = (DefaultTableModel) tabla._tblSimulacion.getModel();
-//        primeraVuelta();
         setEvento(NO_EVN);
-        double tiempoDeCorte = 5;
+        double tiempoDeCorte = 60;
         int cantFilas = 1;
         while (reloj <= tiempoDeCorte) {
             simularAvance();
-            if (numeroVuelta ==7) {
-            break;
-        }
+//            if (numeroVuelta ==100) {
+//            break;
+//        }
             cantFilas++;
         }
     }
@@ -275,9 +274,8 @@ public class Calculator {
                 (minProximaLLegada < minTerminaUsarMesa || evitarTiempoFinUsoMesa)&&
                 (minProximaLLegada < minTerminaConsumicion || evitarTiempoConsumicion)) 
         {
-
             //tiempoProxLlegadaCliente es el proximo evento
-            System.out.println("el próximo");
+            System.out.println("el próximo cliente");
             setEvento(EVN_LLEGADA);
             setReloj(minProximaLLegada);
             
@@ -316,10 +314,10 @@ public class Calculator {
                     minProximaLLegada, //Próxima Llegada cliente (5)
                     rndAccion,//Acción - RND (6)
                     "Utiliza mesa", //Accion : mesa o a comprar (7)
-                    null,//Tiempo fin atención caja (8)
+                    minTerminaAtencionCaja,//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null, //Tiempo espera pedido (10)
-                    null,//Tiempo entrega de pedido(11)
+                    minTerminaEntrega,//Tiempo entrega de pedido(11)
                     null,//Accion mesa: - RND (12)
                     null, //Accion mesa (13)
                     rndTiempoUtilizacionMesa,//Tiempo uso de mesa - RND (14)
@@ -327,7 +325,7 @@ public class Calculator {
                     tiempoFinUtilizacionMesa,//Tiempo fin uso mesa (16)
                     null,//Tiempo consumicion - RND (17)
                     null,//Tiempo de consumicion (18)
-                    null,//Tiempo fin de consumicion (19)
+                    minTerminaConsumicion,//Tiempo fin de consumicion (19)
                     cajero.getEstado(),//Cajero - Estado (20)
                     cajero.getCola(),//Cajero - Cola (21)
                     empleado1.getEstado(),//Empleado 1 - Estado (22)
@@ -370,7 +368,7 @@ public class Calculator {
                     tiempoFinAtencionCaja, //Tiempo fin atención caja (8)
                     null, //Tiempo espera pedido - RND (9)
                     null, //Tiempo espera pedido (10)
-                    null,//Tiempo entrega de pedido(11)
+                    minTerminaEntrega,//Tiempo entrega de pedido(11)
                     null, //Accion mesa: - RND (12)
                     null, //Accion mesa (13)
                     null,//Tiempo uso de mesa - RND (14)
@@ -378,7 +376,7 @@ public class Calculator {
                     minTerminaUsarMesa, //Tiempo fin uso mesa (16)
                     null, //Tiempo consumicion - RND (17)
                     null, //Tiempo de consumicion (18)
-                    null, //Tiempo fin de consumicion (19)
+                    minTerminaConsumicion, //Tiempo fin de consumicion (19)
                     cajero.getEstado(), //Cajero - Estado (20)
                     cajero.getCola(), //Cajero - Cola (21)
                     empleado1.getEstado(), //Empleado 1 - Estado (22)
@@ -411,7 +409,6 @@ public class Calculator {
             for (int i = 0; i < lista.size(); i++) {
                 if (lista.get(i).getHoraPartida() == minTerminaAtencionCaja) {
                     posicion = i;
-                    System.out.println("el numero de posicion es"+ i);
                     c1 = lista.get(i);
                     c1.setEstado(evento);
                     c1.setHoraPartida(finTiempoEntrega);
@@ -441,7 +438,7 @@ public class Calculator {
                 minProximaLLegada, //Próxima Llegada cliente (5)
                 null, //Acción - RND (6)
                 "",//Accion : mesa o a comprar (7)
-                model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_ATENCION), //Tiempo fin atención caja (8)(me parece que trae el mismo que estoy manipulando)
+                minTerminaAtencionCaja, //Tiempo fin atención caja (8)
                 rndEspera, //Tiempo espera pedido - RND (9)
                 tiempoEntrega, //Tiempo espera pedido (10)
                 finTiempoEntrega, //Tiempo entrega de pedido (11)
@@ -480,6 +477,7 @@ public class Calculator {
                 (minTerminaEntrega < minTerminaUsarMesa || evitarTiempoFinUsoMesa)&&
                 (minTerminaEntrega < minTerminaConsumicion || evitarTiempoConsumicion)) 
         {
+            System.out.println("Entró al tiempo de entrega");
             // tiempoEntregaPedido es el proximo evento 
             setEvento(EVN_ENTREGA);
             setReloj(minTerminaEntrega);
@@ -628,7 +626,7 @@ public class Calculator {
                 null, //Accion mesa - se retira (13)
                 null,//Tiempo uso de mesa - RND (14)
                 null, //Tiempo uso de mesa (15)
-                null,//Tiempo fin uso mesa (16)
+                minTerminaUsarMesa,//Tiempo fin uso mesa (16)
                 null, //Tiempo consumicion - RND (17)
                 null,//Tiempo de consumicion (18)
                 minTerminaConsumicion, //Tiempo fin de consumicion (19)
@@ -654,7 +652,7 @@ public class Calculator {
             }
     //Faltan los clientes
          else {
-            // tiempoFinConsumicion es el proximo evento AKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAKAK
+            // tiempoFinConsumicion es el proximo evento
             System.out.println("TERMINO DE CONSUMIR Y SE LAS TOMA");
             setEvento(EVN_CONSUMICION);
             setReloj(minTerminaConsumicion);

@@ -18,7 +18,7 @@ public class Formulas {
 
     //Exp negativa, devuelve en minutos
     public static double tiempoEntregaPedido(float tiempoCompra, float random) {
-        return ((-tiempoCompra) * Math.log(1 - random)) / 60;
+        return ((-tiempoCompra) * Math.log(1 - random));
     }
 
     //box-muller.

@@ -67,7 +67,6 @@ public class Tabla extends javax.swing.JFrame {
         _tblSimulacion.getTableHeader().setReorderingAllowed(false);
         _scpTabla.setViewportView(_tblSimulacion);
         if (_tblSimulacion.getColumnModel().getColumnCount() > 0) {
-            _tblSimulacion.getColumnModel().getColumn(0).setResizable(false);
             _tblSimulacion.getColumnModel().getColumn(0).setPreferredWidth(120);
             _tblSimulacion.getColumnModel().getColumn(1).setResizable(false);
             _tblSimulacion.getColumnModel().getColumn(1).setPreferredWidth(70);

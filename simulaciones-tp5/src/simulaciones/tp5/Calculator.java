@@ -210,7 +210,8 @@ public class Calculator {
     double minTerminaUsarMesa = 0;
     double minTerminaConsumicion = 0;
     int numeroVuelta = 0;
-
+    int cantClientes=0;
+    double tiempoAcumulado = 0;
     public void simularAvance() {
 
         Random r = new Random();
@@ -331,9 +332,9 @@ public class Calculator {
                     empleado2.getEstado(),//Empleado 2 - Estado (23)
                     empleado2.getCola(),//Empleado 2 - Cola(24)
                     // mantengo porque no se va aun.
-                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC)), //Tiempo de permanencia acumulado(25)
+                    tiempoAcumulado, //Tiempo de permanencia acumulado(25)
                     // Se incrementa siempre que entra un cliente
-                    ((int) (model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT))) + 1}); //Cantidad clientes en cafeteria (26)
+                    cantClientes+=1}); //Cantidad clientes en cafeteria (26)
 
             } //false, entra a comprar
             else {
@@ -381,8 +382,8 @@ public class Calculator {
                     empleado1.getEstado(), //Empleado 1 - Estado (22)
                     empleado2.getEstado(),//Empleado 2 - Estado (23)
                     empleado2.getCola(),//Empleado 2 - Cola (24)
-                    (model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC)), //Tiempo de permanencia acumulado(25)
-                    ((int) (model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT))) + 1}); //Cantidad clientes en cafeteria (26)
+                    tiempoAcumulado, //Tiempo de permanencia acumulado(25)
+                    cantClientes+=1}); //Cantidad clientes en cafeteria (26)
             }
 
         } else if (!evitarTiempoFinAtencionCaja
@@ -533,8 +534,8 @@ public class Calculator {
                 empleado1.getEstado(), //Empleado 1 - Estado (22)
                 empleado2.getEstado(), //Empleado 2 - Estado (23)
                 empleado2.getCola(),//Empleado 2 - Cola (24)
-                model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC), //Tiempo de permanencia acumulado(25)
-                model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
+                tiempoAcumulado, //Tiempo de permanencia acumulado(25)
+                cantClientes});//Cantidad clientes en cafeteria (26)
 
             double menorProximo = 0;
             for (int i = 0; i < lista.size(); i++) {
@@ -636,8 +637,8 @@ public class Calculator {
                     empleado1.getEstado(), //Empleado 1 - Estado (22)
                     empleado2.getEstado(),//Empleado 2 - Estado (23)
                     empleado2.getCola(),//Empleado 2 - Cola (24)
-                    model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC), //Tiempo de permanencia acumulado(25)
-                    model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
+                    tiempoAcumulado, //Tiempo de permanencia acumulado(25)
+                    cantClientes});//Cantidad clientes en cafeteria (26)
 
                 menorProximo = 0;
                 for (int i = 0; i < lista.size(); i++) {
@@ -681,8 +682,8 @@ public class Calculator {
                     empleado1.getEstado(), //Empleado 1 - Estado (22)
                     empleado2.getEstado(),//Empleado 2 - Estado (23)
                     empleado2.getCola(),//Empleado 2 - Cola (24)
-                    (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC) + (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia acumulado(25)
-                    (int) model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
+                    tiempoAcumulado += (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia acumulado(25)
+                    cantClientes});//Cantidad clientes en cafeteria (26)
                 lista.remove(posicion);
             }
 
@@ -727,8 +728,8 @@ public class Calculator {
                 empleado1.getEstado(), //Empleado 1 - Estado (22)
                 empleado2.getEstado(),//Empleado 2 - Estado (23)
                 empleado2.getCola(),//Empleado 2 - Cola (24)
-                (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC) + (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)
-                (int) model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
+                tiempoAcumulado += (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)
+                cantClientes});//Cantidad clientes en cafeteria (26)
             lista.remove(c1);
 
             double menorProximo = 0;
@@ -781,8 +782,8 @@ public class Calculator {
                 empleado1.getEstado(), //Empleado 1 - Estado (22)
                 empleado2.getEstado(),//Empleado 2 - Estado (23)
                 empleado2.getCola(),//Empleado 2 - Cola (24)
-                (double) model.getValueAt(model.getRowCount() - 1, COL_TIEMPO_PERMAN_AC) + (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)
-                (int) model.getValueAt(model.getRowCount() - 1, COL_CANT_CLIENTES_CONT)});//Cantidad clientes en cafeteria (26)
+                tiempoAcumulado += (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)
+                cantClientes});//Cantidad clientes en cafeteria (26)
                 
             lista.remove(posicion);
             double minProx= 0;
@@ -811,8 +812,6 @@ public class Calculator {
     }
 
     private double setMenor(double finCliente, double minimo){
-        System.out.println("VALORRRRRRR"+ finCliente);
-        System.out.println("VALORRRRRMINIMOO"+ minimo);
          if (finCliente < minimo || minimo == 0) {
                     minimo = finCliente;
                 }

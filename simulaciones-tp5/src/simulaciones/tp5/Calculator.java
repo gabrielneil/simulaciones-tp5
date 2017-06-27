@@ -290,12 +290,8 @@ public class Calculator {
             // tiempoFinAtencionCaja es el proximo evento - SE MANDA A LA COLA DE LOS DOS CHABONES
             setEvento(EVN_FIN_ATENCION);
             setReloj(minTerminaAtencionCaja);
-
-            if (cajero.getCola() == 0) {
-                cajero.setLibre();
-            } else {
-                cajero.disminuirCola();
-            }
+            actualizarCajero();
+            
             float rndEspera = 0;
             double tiempoEntrega = 0;
             double finTiempoEntrega = 0;
@@ -334,15 +330,8 @@ public class Calculator {
                     }
                 }
                 
-            //busco quien va a reemplazar al que se acaba de ir
-            int elMasViejo = 0;
-            for (int i = 0; i < lista.size(); i++) {
-                Cliente aux = lista.get(i);
-              if ((aux.getEstado().equals(EVN_ATENCION_CAJA) && elMasViejo == 0) || elMasViejo > aux.getHoraLlegada()) {
-                    elMasViejo = i;
-                }  
-   
-            }
+            //busco quien va a reemplazar al que se acaba de ir AKACCCC
+            int elMasViejo = quienReemplaza(EVN_ATENCION_CAJA);
             
                 double tiempoFinAtencionCaja = reloj + tiempoTicket;
                     c1 = lista.get(elMasViejo);
@@ -350,10 +339,7 @@ public class Calculator {
                     cajero.setOcupado();
                     c1.quienMeAtiende("CAJERO");
                     c1.setEstado(EVN_ATENDIDO_CAJA);
-
-                    if (tiempoFinAtencionCaja < minTerminaAtencionCaja || minTerminaAtencionCaja == 0) {
-                        minTerminaAtencionCaja = tiempoFinAtencionCaja;
-                    }
+                    minTerminaAtencionCaja = setMenor(tiempoFinAtencionCaja, minTerminaAtencionCaja);
                 //minTerminaEntrega
             } else if (empleado2.getEstado().equals("LIBRE")) {
                 rndEspera = r.nextFloat();
@@ -381,14 +367,7 @@ public class Calculator {
                 }
                 
             //busco quien va a reemplazar al que se acaba de ir
-            int elMasViejo = 0;
-            for (int i = 0; i < lista.size(); i++) {
-                Cliente aux = lista.get(i);
-              if ((aux.getEstado().equals(EVN_ATENCION_CAJA) && elMasViejo == 0) || elMasViejo > aux.getHoraLlegada()) {
-                    elMasViejo = i;
-                }  
-   
-            }
+            int elMasViejo = quienReemplaza(EVN_ATENCION_CAJA);
             
                double tiempoFinAtencionCaja = reloj + tiempoTicket;
                     c1 = lista.get(elMasViejo);
@@ -433,16 +412,11 @@ public class Calculator {
                 tiempoAcumulado, //Tiempo de permanencia acumulado(25)
                 cantClientes});//Cantidad clientes en cafeteria (26)
 
-            double menorProximo = 0;
-            for (int i = 0; i < lista.size(); i++) {
-                Cliente aux = lista.get(i);
-                if ((menorProximo == 0 && aux.getEstado().equals("Atendido en caja")) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals("Atendido en caja"))) {
-                    System.out.println("AHI ENTRO Y SE ESTA FIJANDO");
-                    menorProximo = lista.get(i).getHoraPartida();
-                }
-            }
+            double menorProximo = menorProximo(EVN_ATENDIDO_CAJA);
+            
             //ACA HAY ALGO RARO
             minTerminaAtencionCaja = menorProximo;
+            
             if (minTerminaAtencionCaja > finTiempoEntrega && finTiempoEntrega != 0) {
                 minTerminaAtencionCaja = finTiempoEntrega;
             }
@@ -821,5 +795,37 @@ public class Calculator {
                     tiempoAcumulado, //Tiempo de permanencia acumulado(25)
                     cantClientes+=1}); //Cantidad clientes en cafeteria (26)
             }
+    }
+    
+    public void actualizarCajero(){
+    if (cajero.getCola() == 0) {
+                cajero.setLibre();
+            } else {
+                cajero.disminuirCola();
+            }
+    }
+    
+    public int quienReemplaza(String evento){
+        int elMasViejo = 0;
+         for (int i = 0; i < lista.size(); i++) {
+                Cliente aux = lista.get(i);
+              if ((aux.getEstado().equals(EVN_ATENCION_CAJA) && elMasViejo == 0) || elMasViejo > aux.getHoraLlegada()) {
+                    elMasViejo = i;
+                }  
+   
+            }
+        return elMasViejo;
+    }
+    
+    public double menorProximo(String evento){
+        double menorProximo=0;
+        for (int i = 0; i < lista.size(); i++) {
+                Cliente aux = lista.get(i);
+                if ((menorProximo == 0 && aux.getEstado().equals(evento)) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals(evento))) {
+                    System.out.println("AHI ENTRO Y SE ESTA FIJANDO");
+                    menorProximo = lista.get(i).getHoraPartida();
+                }
+            }
+        return menorProximo;
     }
 }

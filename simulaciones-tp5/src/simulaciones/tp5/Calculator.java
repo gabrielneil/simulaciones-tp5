@@ -298,31 +298,12 @@ public class Calculator {
             System.out.println("fin atención del empleado osea que le terminó el pedido. es el proximo evento ");
             setEvento(EVN_FIN_ATENCION_EMPLEADO);
             setReloj(minTerminaEntrega);
-
-            int posicion = 0;
-            for (int i = 0; i < lista.size(); i++) {
-                if (lista.get(i).getHoraPartida() == minTerminaEntrega) {
-                    posicion = i;
-                    c1 = lista.get(i);
-                    c1.changeIgnorar();
-                    break;
-                }
-            }
+            buscarCliente(EVN_ENTREGA, minTerminaEntrega);
+            
+            //ver los empleados
             actualizarEmpleados();
-
-            double menorProximo = 0;
-            for (int i = 0; i < lista.size(); i++) {
-                Cliente aux = lista.get(i);
-                if ((menorProximo == 0 && aux.getEstado().equals(EVN_ENTREGA)) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals(EVN_ENTREGA) && !aux.ignorar())) {
-                    menorProximo = lista.get(i).getHoraPartida();
-                    break;
-                }
-            }
-
-            c1.changeIgnorar();
-            minTerminaEntrega = menorProximo;
+            
             float rndAccion = r.nextFloat();
-
             if (rndAccion <= ((float) sientaEnMesa / 100)) {
 
                 System.out.println("COMPRO Y SE SIENTA EN LA MESA");
@@ -331,9 +312,10 @@ public class Calculator {
             } else {
                 System.out.println("SOLO COMPRO Y SE TOMA EL PALO");
 
-                comproYSeRetira(rndAccion, posicion);
+                comproYSeRetira(rndAccion, buscarPosicion(minTerminaEntrega));
             }
-
+            double menorProximo = menorProximo(EVN_ENTREGA);
+            minTerminaEntrega = menorProximo;
         } else if ((minTerminaUsarMesa < minTerminaConsumicion || evitarTiempoConsumicion)
                 && !evitarTiempoFinUsoMesa) {
             System.out.println("NO COMIO, SOLO USO LA MESA Y SE VA");
@@ -708,7 +690,7 @@ public class Calculator {
             c1.getEstado(),//Accion mesa (13)
             null, //Tiempo uso de mesa - RND (14)
             null, //Tiempo uso mesa (15)
-            (minTerminaUsarMesa == 0) ? null : minTerminaUsarMesa, //Tiempo fin uso mesa (16)
+            null, //Tiempo fin uso mesa (16)
             rndTiempoConsumicion, //Tiempo consumicion - RND (17)
             tiempoConsumicion,//Tiempo de consumicion (18)
             finConsumicion, //Tiempo fin de consumicion (19)

@@ -299,17 +299,25 @@ public class Calculator {
             //busco quien es el minimo que voy a tratar ahora
             buscarCliente(EVN_ATENDIDO_CAJA, minTerminaAtencionCaja);
 
-            if (empleado1.getEstado().equals("LIBRE")) {
+            if (empleado1.getEstado().equals("LIBRE") || empleado2.getEstado().equals("LIBRE")) {
                 rndEspera = r.nextFloat();
                 tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
                 finTiempoEntrega = tiempoEntrega + reloj;
                 c1.setHoraPartida(finTiempoEntrega);
-                empleado1.setOcupado();
-                c1.quienMeAtiende("EMPLEADO1");
                 
-                System.out.println("Me atiende el empleado 1");
+                if (empleado1.getEstado().equals("LIBRE") ) {
+                    System.out.println("Me atiende el empleado 1");
+                    empleado1.setOcupado();
+                    c1.quienMeAtiende("EMPLEADO1");
+                    
+                }else{
+                    System.out.println("Me atiende el empleado 2");
+                    empleado2.setOcupado();
+                    c1.quienMeAtiende("EMPLEADO2");
+                
+                }
+
                 c1.setEstado(EVN_ENTREGA);
-                
                 minTerminaEntrega = setMenor(finTiempoEntrega, minTerminaEntrega);
                
                 for (int i = 0; i < lista.size(); i++) {
@@ -335,43 +343,7 @@ public class Calculator {
                     c1.setEstado(EVN_ATENDIDO_CAJA);
                     minTerminaAtencionCaja = setMenor(tiempoFinAtencionCaja, minTerminaAtencionCaja);
                 //minTerminaEntrega
-            } else if (empleado2.getEstado().equals("LIBRE")) {
-                rndEspera = r.nextFloat();
-                tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
-                finTiempoEntrega = tiempoEntrega + reloj;
-                c1.setHoraPartida(finTiempoEntrega);
-                empleado2.setOcupado();
-                c1.quienMeAtiende("EMPLEADO2");
-                
-                System.out.println("Me atiende el empleado 2");
-                c1.setEstado(EVN_ENTREGA);
-                
-                minTerminaEntrega = setMenor(finTiempoEntrega, minTerminaEntrega);
-                
-                for (int i = 0; i < lista.size(); i++) {
-                    Cliente aux = lista.get(i);
-                    if (aux.getEstado().equals(EVN_ENTREGA)) {
-                        if (aux.getHoraPartida() >= c1.getHoraPartida()) {
-                            minTerminaEntrega = c1.getHoraPartida();
-                        } else {
-                            minTerminaEntrega = aux.getHoraPartida();
-                        }
-                        break;
-                    }
-                }
-                
-            //busco quien va a reemplazar al que se acaba de ir
-            int elMasViejo = quienReemplaza(EVN_ATENCION_CAJA);
-            
-               double tiempoFinAtencionCaja = reloj + tiempoTicket;
-                    c1 = lista.get(elMasViejo);
-                    c1.setHoraPartida(tiempoFinAtencionCaja);
-                    cajero.setOcupado();
-                    c1.quienMeAtiende("CAJERO");
-                    c1.setEstado(EVN_ATENDIDO_CAJA);
-                    minTerminaAtencionCaja = setMenor(tiempoFinAtencionCaja, minTerminaAtencionCaja);
-                   
-            } else {
+            }else {
                 empleado1.aumentarCola();
                 empleado2.aumentarCola();
                 c1.setEstado(EVN_ATENCION_PEDIDO);

@@ -63,6 +63,7 @@ public class Calculator {
     private static final String NO_EVN = "NULL";
     public static final String EVN_INICIO = "Inicio";
     public static final String EVN_LLEGADA = "Llegada Cliente";
+    public static final String EVN_UTILIZANDO_MESA = "Utilizando mesa";
     public static final String EVN_ATENCION_CAJA = "Esperando atención en caja";
     public static final String EVN_ATENDIDO_CAJA = "Atendido en caja";
     public static final String EVN_FIN_ATENCION = "Fin atención caja";
@@ -297,7 +298,7 @@ public class Calculator {
                 float rndTiempoUtilizacionMesa = r.nextFloat();
                 double tiempoUtilizacionMesa = Formulas.tiempoUtilizacionMesa(tiempoUtilizacionMesa1, tiempoUtilizacionMesa2, rndTiempoUtilizacionMesa);
                 double tiempoFinUtilizacionMesa = reloj + tiempoUtilizacionMesa;
-                c1 = new Cliente("Utilizando mesa", reloj, tiempoFinUtilizacionMesa);
+                c1 = new Cliente(EVN_UTILIZANDO_MESA, reloj, tiempoFinUtilizacionMesa);
                 lista.add(c1);
 
                 //si sos el menor, seteate
@@ -316,7 +317,7 @@ public class Calculator {
                     tiempoLlegada, //Tiempo llegada cliente (4)
                     (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
                     rndAccion,//Acción - RND (6)
-                    "Utiliza mesa", //Accion : mesa o a comprar (7)
+                    EVN_UTILIZANDO_MESA, //Accion : mesa o a comprar (7)
                     null,//Tiempo fin atención caja (8)
                     null,//Tiempo espera pedido - RND (9)
                     null, //Tiempo espera pedido (10)
@@ -473,7 +474,7 @@ public class Calculator {
                 finTiempoEntrega = tiempoEntrega + reloj;
                 c1.setHoraPartida(finTiempoEntrega);
                 empleado2.setOcupado();
-                c1.quienMeAtiende("EMPLEADO1");
+                c1.quienMeAtiende("EMPLEADO2");
                 
                 System.out.println("Me atiende el empleado 2");
                 c1.setEstado(EVN_ENTREGA);
@@ -709,7 +710,7 @@ public class Calculator {
             int posicion = 0;
 
             for (int i = 0; i < lista.size(); i++) {
-                if (lista.get(i).getHoraPartida() == minTerminaUsarMesa && lista.get(i).getEstado().equals("Utilizando mesa")) {
+                if (lista.get(i).getHoraPartida() == minTerminaUsarMesa && lista.get(i).getEstado().equals(EVN_UTILIZANDO_MESA)) {
                     c1 = lista.get(i);
                     break;
                 }
@@ -747,7 +748,7 @@ public class Calculator {
             double menorProximo = 0;
             for (int i = 0; i < lista.size(); i++) {
                 Cliente aux = lista.get(i);
-                if ((menorProximo == 0 && aux.getEstado().equals("Utilizando mesa")) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals("Utilizando mesa"))) {
+                if ((menorProximo == 0 && aux.getEstado().equals(EVN_UTILIZANDO_MESA)) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals(EVN_UTILIZANDO_MESA))) {
                     menorProximo = lista.get(i).getHoraPartida();
                 }
             }

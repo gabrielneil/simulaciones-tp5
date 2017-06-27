@@ -302,12 +302,7 @@ public class Calculator {
                 lista.add(c1);
 
                 //si sos el menor, seteate
-                if (tiempoFinUtilizacionMesa < minTerminaUsarMesa || minTerminaUsarMesa == 0) {
-                    minTerminaUsarMesa = tiempoFinUtilizacionMesa;
-                }
-//                model.addColumn("Cliente: Estado");
-//                model.addColumn("Cliente: Entrada al sistema");
-//                model.addColumn("Cliente: Partida del sistema");
+                minTerminaUsarMesa = setMenor(tiempoFinUtilizacionMesa, minTerminaUsarMesa);
 
                 model.addRow(new Object[]{
                     evento, //Evento (0)
@@ -353,10 +348,7 @@ public class Calculator {
                     cajero.setOcupado();
                     c1.quienMeAtiende("CAJERO");
                     c1.setEstado(EVN_ATENDIDO_CAJA);
-
-                    if (tiempoFinAtencionCaja < minTerminaAtencionCaja || minTerminaAtencionCaja == 0) {
-                        minTerminaAtencionCaja = tiempoFinAtencionCaja;
-                    }
+                    minTerminaAtencionCaja = setMenor(tiempoFinAtencionCaja, minTerminaAtencionCaja);
 
                 } else {
                     cajero.aumentarCola();
@@ -431,10 +423,8 @@ public class Calculator {
                 System.out.println("Me atiende el empleado 1");
                 c1.setEstado(EVN_ENTREGA);
                 
-                if (minTerminaEntrega == 0 || minTerminaEntrega> finTiempoEntrega) {
-                    minTerminaEntrega = finTiempoEntrega;
-                }
-                
+                minTerminaEntrega = setMenor(finTiempoEntrega, minTerminaEntrega);
+               
                 for (int i = 0; i < lista.size(); i++) {
                     Cliente aux = lista.get(i);
                     if (aux.getEstado().equals(EVN_ENTREGA)) {
@@ -479,9 +469,7 @@ public class Calculator {
                 System.out.println("Me atiende el empleado 2");
                 c1.setEstado(EVN_ENTREGA);
                 
-                if (minTerminaEntrega == 0 || minTerminaEntrega> finTiempoEntrega) {
-                    minTerminaEntrega = finTiempoEntrega;
-                }
+                minTerminaEntrega = setMenor(finTiempoEntrega, minTerminaEntrega);
                 
                 for (int i = 0; i < lista.size(); i++) {
                     Cliente aux = lista.get(i);
@@ -511,10 +499,8 @@ public class Calculator {
                     cajero.setOcupado();
                     c1.quienMeAtiende("CAJERO");
                     c1.setEstado(EVN_ATENDIDO_CAJA);
-
-                    if (tiempoFinAtencionCaja < minTerminaAtencionCaja || minTerminaAtencionCaja == 0) {
-                        minTerminaAtencionCaja = tiempoFinAtencionCaja;
-                    }
+                    minTerminaAtencionCaja = setMenor(tiempoFinAtencionCaja, minTerminaAtencionCaja);
+                   
             } else {
                 empleado1.aumentarCola();
                 empleado2.aumentarCola();
@@ -822,5 +808,14 @@ public class Calculator {
             }
         }
         return ret;
+    }
+
+    private double setMenor(double finCliente, double minimo){
+        System.out.println("VALORRRRRRR"+ finCliente);
+        System.out.println("VALORRRRRMINIMOO"+ minimo);
+         if (finCliente < minimo || minimo == 0) {
+                    minimo = finCliente;
+                }
+         return minimo;
     }
 }

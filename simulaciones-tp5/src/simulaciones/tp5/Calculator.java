@@ -753,8 +753,7 @@ public class Calculator {
         for (int i = 0; i < lista.size(); i++) {
             Cliente aux = lista.get(i);
             if ((menorProximo == 0 && aux.getEstado().equals(evento)) || (menorProximo > aux.getHoraPartida() && aux.getEstado().equals(evento))) {
-                System.out.println("AHI ENTRO Y SE ESTA FIJANDO");
-                menorProximo = lista.get(i).getHoraPartida();
+                menorProximo = aux.getHoraPartida();
             }
         }
         return menorProximo;

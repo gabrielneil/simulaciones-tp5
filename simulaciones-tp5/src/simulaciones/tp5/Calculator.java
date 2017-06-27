@@ -406,7 +406,7 @@ public class Calculator {
                 null,//Tiempo fin atención caja (8)
                 null,//Tiempo espera pedido - RND (9)
                 null, //Tiempo espera pedido (10)
-                (minTerminaEntrega == 0) ? null : minTerminaEntrega,//Tiempo entrega de pedido(11)
+                null,//Tiempo entrega de pedido(11)
                 null,//Accion mesa: - RND (12)
                 null, //Accion mesa (13)
                 rndTiempoUtilizacionMesa,//Tiempo uso de mesa - RND (14)
@@ -462,10 +462,10 @@ public class Calculator {
                 null, //Accion mesa (13)
                 null,//Tiempo uso de mesa - RND (14)
                 null, //Tiempo uso de mesa (15)
-                (minTerminaUsarMesa == 0) ? null : minTerminaUsarMesa, //Tiempo fin uso mesa (16)
+                null, //Tiempo fin uso mesa (16)
                 null, //Tiempo consumicion - RND (17)
                 null, //Tiempo de consumicion (18)
-                (minTerminaConsumicion == 0) ? null : minTerminaConsumicion, //Tiempo fin de consumicion (19)
+                null, //Tiempo fin de consumicion (19)
                 cajero.getEstado(), //Cajero - Estado (20)
                 cajero.getCola(), //Cajero - Cola (21)
                 empleado1.getEstado(), //Empleado 1 - Estado (22)
@@ -521,15 +521,14 @@ public class Calculator {
         setReloj(minTerminaAtencionCaja);
         actualizarCajero();
 
-        float rndEspera = 0;
+        float rndEspera = r.nextFloat();
         double tiempoEntrega = 0;
         double finTiempoEntrega = 0;
 
         //busco quien es el minimo que voy a tratar ahora
         buscarCliente(EVN_ATENDIDO_CAJA, minTerminaAtencionCaja);
-
+           
         if (empleado1.getEstado().equals("LIBRE") || empleado2.getEstado().equals("LIBRE")) {
-            rndEspera = r.nextFloat();
             tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
             finTiempoEntrega = tiempoEntrega + reloj;
             c1.setHoraPartida(finTiempoEntrega);
@@ -571,26 +570,20 @@ public class Calculator {
             c1.quienMeAtiende("CAJERO");
             c1.setEstado(EVN_ATENDIDO_CAJA);
             minTerminaAtencionCaja = setMenor(tiempoFinAtencionCaja, minTerminaAtencionCaja);
-            //minTerminaEntrega
-        } else {
-            empleado1.aumentarCola();
-            empleado2.aumentarCola();
-            c1.setEstado(EVN_ATENCION_PEDIDO);
-        }
-
-        model.addRow(new Object[]{
+            
+            model.addRow(new Object[]{
             evento,//Evento (0)
             reloj, //Reloj (1)
             null, //Llegada cliente - RND1 (2)
             null, //Llegada cliente - RND2 (3)
             null, //Tiempo llegada cliente (4)
-            (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
+            null, //Próxima Llegada cliente (5)
             null, //Acción - RND (6)
             "",//Accion : mesa o a comprar (7)
             null, //Tiempo fin atención caja (8)
-            (rndEspera == 0) ? null : rndEspera, //Tiempo espera pedido - RND (9)
-            (tiempoEntrega == 0) ? null : tiempoEntrega, //Tiempo espera pedido (10)
-            (finTiempoEntrega == 0) ? null : finTiempoEntrega, //Tiempo entrega de pedido (11)
+            rndEspera, //Tiempo espera pedido - RND (9)
+            tiempoEntrega, //Tiempo espera pedido (10)
+            finTiempoEntrega, //Tiempo entrega de pedido (11)
             null, //Accion mesa: - RND (12)
             null, //Accion mesa (13)
             null, //Tiempo uso de mesa - RND (14)
@@ -607,6 +600,46 @@ public class Calculator {
             tiempoAcumulado, //Tiempo de permanencia acumulado(25)
             cantClientes});//Cantidad clientes en cafeteria (26)
 
+        } else {
+            empleado1.aumentarCola();
+            empleado2.aumentarCola();
+            c1.setEstado(EVN_ATENCION_PEDIDO);
+            
+            double tiempoFinAtencionCaja = reloj + tiempoTicket;
+            c1 = lista.get(quienReemplaza(EVN_ATENCION_CAJA));
+            c1.setHoraPartida(tiempoFinAtencionCaja);
+            
+            model.addRow(new Object[]{
+            evento,//Evento (0)
+            reloj, //Reloj (1)
+            null, //Llegada cliente - RND1 (2)
+            null, //Llegada cliente - RND2 (3)
+            null, //Tiempo llegada cliente (4)
+            (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
+            null, //Acción - RND (6)
+            "",//Accion : mesa o a comprar (7)
+            tiempoFinAtencionCaja, //Tiempo fin atención caja (8)
+            null, //Tiempo espera pedido - RND (9)
+            null, //Tiempo espera pedido (10)
+            null, //Tiempo entrega de pedido (11)
+            null, //Accion mesa: - RND (12)
+            null, //Accion mesa (13)
+            null, //Tiempo uso de mesa - RND (14)
+            null,//Tiempo uso de mesa (15)
+            (minTerminaUsarMesa == 0) ? null : minTerminaUsarMesa, //Tiempo fin uso mesa (16)
+            null, //Tiempo consumicion - RND (17)
+            null, //Tiempo de consumicion (18)
+            (minTerminaConsumicion == 0) ? null : minTerminaConsumicion,//Tiempo fin de consumicion (19)
+            cajero.getEstado(), //Cajero - Estado (20)
+            cajero.getCola(), //Cajero - Cola (21)
+            empleado1.getEstado(), //Empleado 1 - Estado (22)
+            empleado2.getEstado(), //Empleado 2 - Estado (23)
+            empleado2.getCola(),//Empleado 2 - Cola (24)
+            tiempoAcumulado, //Tiempo de permanencia acumulado(25)
+            cantClientes});//Cantidad clientes en cafeteria (26)
+        }
+        
+      
         double menorProximo = menorProximo(EVN_ATENDIDO_CAJA);
 
         //ACA HAY ALGO RARO
@@ -726,7 +759,7 @@ public class Calculator {
         int elMasViejo = 0;
         for (int i = 0; i < lista.size(); i++) {
             Cliente aux = lista.get(i);
-            if ((aux.getEstado().equals(EVN_ATENCION_CAJA) && elMasViejo == 0) || elMasViejo > aux.getHoraLlegada()) {
+            if ((aux.getEstado().equals(evento) && elMasViejo == 0) || elMasViejo > aux.getHoraLlegada()) {
                 elMasViejo = i;
             }
         }

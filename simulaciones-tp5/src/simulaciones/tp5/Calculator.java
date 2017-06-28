@@ -196,15 +196,16 @@ public class Calculator {
     public void initSimulacion() {
         tabla.setVisible(true);
         model = (DefaultTableModel) tabla._tblSimulacion.getModel();
+//        
         setEvento(NO_EVN);
         double tiempoDeCorte = 60;
-        int cantFilas = 1;
         while (reloj <= tiempoDeCorte) {
             simularAvance();
-            cantFilas++;
         }
     }
-
+    
+    Grafico grafico = new Grafico();
+    double cantMinutos = 0;
     double minProximaLLegada = 0;
     double minTerminaAtencionCaja = 0;
     double minTerminaEntrega = 0;
@@ -215,7 +216,7 @@ public class Calculator {
     double tiempoAcumulado = 0;
 
     public void simularAvance() {
-
+        cantMinutos = reloj;
         Random r = new Random();
         if (NO_EVN.equalsIgnoreCase(evento)) {
             setEvento(EVN_INICIO);
@@ -226,35 +227,8 @@ public class Calculator {
             rnd2TiempoLlegada = r.nextFloat();
             double tiempoLlegada = Formulas.llegadaCliente(rnd1TiempoLlegada, rnd1TiempoLlegada, media, desviacion);
             minProximaLLegada = reloj + tiempoLlegada;
-            model.addRow(new Object[]{
-                evento, //Evento (0)
-                reloj, //Reloj (1)
-                rnd1TiempoLlegada, //Llegada cliente - RND1 (2)
-                rnd2TiempoLlegada, //Llegada cliente - RND2 (3)
-                tiempoLlegada, //Tiempo llegada cliente (4)
-                reloj + tiempoLlegada, //Próxima Llegada cliente (5)
-                null, //Acción - RND (6)
-                "", //Accion : mesa o a comprar (7)
-                null, //Tiempo fin atención caja (8)
-                null, //Tiempo espera pedido - RND (9)
-                null, //Tiempo espera pedido (10)
-                null, //Tiempo entrega de pedido (11)
-                null, //Accion mesa: - RND (12)
-                "", //Accion mesa (13)
-                null, //Tiempo uso de mesa - RND (14)
-                null, //Tiempo uso de mesa (15)
-                null, //Tiempo fin uso mesa (16)
-                null, //Tiempo consumicion - RND (17)
-                null, //Tiempo de consumicion (18)
-                null, //Tiempo fin de consumicion (19)
-                cajero.getEstado(),//Cajero - Estado (20)
-                cajero.getCola(), //Cajero - Cola (21)
-                empleado1.getEstado(), //Empleado 1 - Estado (22)
-                empleado2.getEstado(), //Empleado 2 - Cola (23)
-                empleado2.getCola(), //Empleado 2 - Cola (24)
-                0.0, //Tiempo de permanencia acumulado (25)
-                0 //Cantidad clientes en cafeteria (26)
-            });
+            //la cant de minutos no es 0 entonces no entra
+            if((cantMinutos>=desde && cantMinutos<=hasta)|| cantMinutos ==0 )grafico.primeraVuelta(EVN_INICIO, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada , minProximaLLegada, cajero, empleado1, empleado2);
             return;
         }
         System.out.println(numeroVuelta);

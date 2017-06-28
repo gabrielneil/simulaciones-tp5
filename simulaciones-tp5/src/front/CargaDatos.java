@@ -61,8 +61,6 @@ public class CargaDatos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         desde_txt = new javax.swing.JTextField();
         hasta_txt = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,17 +125,13 @@ public class CargaDatos extends javax.swing.JFrame {
 
         jLabel16.setText(")");
 
-        jLabel2.setText("Mostrar desde:");
+        jLabel2.setText("Mostrar desde minuto:");
 
-        jLabel3.setText("Mostrar hasta:");
+        jLabel3.setText("Mostrar hasta minuto:");
 
         desde_txt.setText("1");
 
         hasta_txt.setText("10");
-
-        jLabel17.setText("Fila");
-
-        jLabel18.setText("Fila");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -203,11 +197,7 @@ public class CargaDatos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(hasta_txt)
                             .addComponent(desde_txt))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel18))
-                        .addGap(132, 132, 132))))
+                        .addGap(160, 160, 160))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,14 +244,11 @@ public class CargaDatos extends javax.swing.JFrame {
                                     .addComponent(jLabel13))))
                         .addGap(49, 49, 49)
                         .addComponent(jLabel2))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(desde_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel17)))
+                    .addComponent(desde_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(hasta_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
+                    .addComponent(hasta_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(editarTiempos_btn)
                 .addGap(18, 18, 18)
@@ -276,7 +263,7 @@ public class CargaDatos extends javax.swing.JFrame {
 
     private void aceptar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptar_btnActionPerformed
         // TODO add your handling code here:
-        if (Integer.parseInt(desde_txt.getText()) > 0 && Integer.parseInt(hasta_txt.getText()) > Integer.parseInt(desde_txt.getText())) {
+        if (Integer.parseInt(desde_txt.getText()) > 0 && Integer.parseInt(hasta_txt.getText()) <= 60 && Integer.parseInt(hasta_txt.getText()) > Integer.parseInt(desde_txt.getText())) {
 
             if (Integer.parseInt(media_txt.getText()) > 0 && Integer.parseInt(desviacion_txt.getText()) > 0 && Integer.parseInt(entranAComprar_txt.getText()) > 0 && Integer.parseInt(entranAMesa_txt.getText()) > 0 && Integer.parseInt(sientaEnMesa_txt.getText()) > 0 && Integer.parseInt(seRetira_txt.getText()) > 0) {
                 controller.valoresCargaTiempos(cargaTiempos.getTiempoTicket_txt(), cargaTiempos.getTiempoEspera_txt(), cargaTiempos.getTiempoConsumicion1_txt(), cargaTiempos.getTiempoConsumicion2_txt(), cargaTiempos.getTiempoUtilizacionMesa1_txt(), cargaTiempos.getTiempoUtilizacionMesa2_txt());
@@ -322,8 +309,6 @@ public class CargaDatos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

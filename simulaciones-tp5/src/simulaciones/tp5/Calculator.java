@@ -407,7 +407,7 @@ public class Calculator {
                 // mantengo porque no se va aun.
                 tiempoAcumulado, //Tiempo de permanencia acumulado(25)
                 // Se incrementa siempre que entra un cliente
-                cantClientes += 1}); //Cantidad clientes en cafeteria (26)
+                cantClientes}); //Cantidad clientes en cafeteria (26)
 
         } //false, entra a comprar
         else {
@@ -457,7 +457,7 @@ public class Calculator {
                 empleado2.getEstado(),//Empleado 2 - Estado (23)
                 empleado2.getCola(),//Empleado 2 - Cola (24)
                 tiempoAcumulado, //Tiempo de permanencia acumulado(25)
-                cantClientes += 1}); //Cantidad clientes en cafeteria (26)
+                cantClientes}); //Cantidad clientes en cafeteria (26)
         }
     }
 
@@ -493,7 +493,7 @@ public class Calculator {
             empleado2.getEstado(),//Empleado 2 - Estado (23)
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado += (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)
-            cantClientes});//Cantidad clientes en cafeteria (26)
+            cantClientes+=1});//Cantidad clientes en cafeteria (26)
 
         lista.remove(posicion);
         double menorProximo = menorProximo(EVN_CONSUMIENDO);
@@ -668,7 +668,7 @@ public class Calculator {
             empleado2.getEstado(),//Empleado 2 - Estado (23)
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado += (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia acumulado(25)
-            cantClientes});//Cantidad clientes en cafeteria (26)
+            cantClientes+=1});//Cantidad clientes en cafeteria (26)
         lista.remove(posicion);
     }
 
@@ -804,7 +804,7 @@ public class Calculator {
             empleado2.getEstado(),//Empleado 2 - Estado (23)
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado += (c1.getHoraPartida() - c1.getHoraLlegada()), //Tiempo de permanencia (25)
-            cantClientes});//Cantidad clientes en cafeteria (26)
+            cantClientes+=1});//Cantidad clientes en cafeteria (26)
         lista.remove(c1);
 
         double menorProximo = menorProximo(EVN_UTILIZANDO_MESA);

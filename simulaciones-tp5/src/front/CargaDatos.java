@@ -129,9 +129,14 @@ public class CargaDatos extends javax.swing.JFrame {
 
         jLabel3.setText("Mostrar hasta minuto:");
 
-        desde_txt.setText("1");
+        desde_txt.setText("0");
+        desde_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desde_txtActionPerformed(evt);
+            }
+        });
 
-        hasta_txt.setText("10");
+        hasta_txt.setText("60");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -263,7 +268,7 @@ public class CargaDatos extends javax.swing.JFrame {
 
     private void aceptar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptar_btnActionPerformed
         // TODO add your handling code here:
-        if (Integer.parseInt(desde_txt.getText()) > 0 && Integer.parseInt(hasta_txt.getText()) <= 60 && Integer.parseInt(hasta_txt.getText()) > Integer.parseInt(desde_txt.getText())) {
+        if (Integer.parseInt(desde_txt.getText()) >= 0 && Integer.parseInt(hasta_txt.getText()) <= 60 && Integer.parseInt(hasta_txt.getText()) > Integer.parseInt(desde_txt.getText())) {
 
             if (Integer.parseInt(media_txt.getText()) > 0 && Integer.parseInt(desviacion_txt.getText()) > 0 && Integer.parseInt(entranAComprar_txt.getText()) > 0 && Integer.parseInt(entranAMesa_txt.getText()) > 0 && Integer.parseInt(sientaEnMesa_txt.getText()) > 0 && Integer.parseInt(seRetira_txt.getText()) > 0) {
                 controller.valoresCargaTiempos(cargaTiempos.getTiempoTicket_txt(), cargaTiempos.getTiempoEspera_txt(), cargaTiempos.getTiempoConsumicion1_txt(), cargaTiempos.getTiempoConsumicion2_txt(), cargaTiempos.getTiempoUtilizacionMesa1_txt(), cargaTiempos.getTiempoUtilizacionMesa2_txt());
@@ -288,6 +293,10 @@ public class CargaDatos extends javax.swing.JFrame {
         controller.valoresCargaDatos(Integer.parseInt(media_txt.getText()), Integer.parseInt(desviacion_txt.getText()), Integer.parseInt(entranAComprar_txt.getText()), Integer.parseInt(entranAMesa_txt.getText()), Integer.parseInt(sientaEnMesa_txt.getText()), Integer.parseInt(seRetira_txt.getText()), Integer.parseInt(desde_txt.getText()), Integer.parseInt(hasta_txt.getText()));
         cargaTiempos.setVisible(true);
     }//GEN-LAST:event_editarTiempos_btnActionPerformed
+
+    private void desde_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desde_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_desde_txtActionPerformed
 
     /**
      * @param args the command line arguments

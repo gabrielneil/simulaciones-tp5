@@ -93,7 +93,7 @@ public class Grafico {
             cantClientes}); //Cantidad clientes en cafeteria (26)
     }
 
-    public void entraComprar(String eventoLlegadaComprar, double reloj, float rnd1TiempoLlegada, float rnd2TiempoLlegada, double tiempoLlegada, double proxLlegada, float rndAccion, String eventoCompra, double tiempoFinAtencionCaja, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
+    public void entraComprar(String eventoLlegadaComprar, double reloj, float rnd1TiempoLlegada, float rnd2TiempoLlegada, double tiempoLlegada, double proxLlegada, float rndAccion, String eventoCompra, double minimoTiempoFinAtencionCaja, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
         model.addRow(new Object[]{
             eventoLlegadaComprar, //Evento (0)
             reloj, //Reloj (1)
@@ -103,7 +103,7 @@ public class Grafico {
             proxLlegada, //Próxima Llegada cliente (5)
             rndAccion, //Acción - RND (6)
             eventoCompra, //Accion : mesa o a comprar (7)
-            (tiempoFinAtencionCaja == 0) ? null : tiempoFinAtencionCaja, //Tiempo fin atención caja (8)
+            (minimoTiempoFinAtencionCaja == 0) ? null : minimoTiempoFinAtencionCaja, //Tiempo fin atención caja (8)
             null, //Tiempo espera pedido - RND (9)
             null, //Tiempo espera pedido (10)
             null,//Tiempo entrega de pedido(11)

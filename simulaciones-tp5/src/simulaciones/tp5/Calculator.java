@@ -262,7 +262,7 @@ public class Calculator {
     }
 
     private void llegadaCliente() {
-        Cliente cliente = null;
+        Cliente cliente;
         setReloj(minProximaLLegada);
         rnd1TiempoLlegada = r.nextFloat();
         rnd2TiempoLlegada = r.nextFloat();
@@ -300,7 +300,7 @@ public class Calculator {
 
             lista.add(cliente);
             if (reloj >= desde && reloj <= hasta) {
-                grafico.entraComprar(EVN_LLEGADA, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, proxLlegada, minProximaLLegada, rndAccion, EVN_COMPRA, tiempoFinAtencionCaja, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
+                grafico.entraComprar(EVN_LLEGADA, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, proxLlegada, minProximaLLegada, rndAccion, EVN_COMPRA, minTerminaAtencionCaja, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
             }
         }
     }
@@ -423,7 +423,7 @@ public class Calculator {
         cliente.setEstado(EVN_ATENDIDO_CAJA);
         minTerminaAtencionCaja = buscar.setMenor(tiempoFinAtencionCaja, minTerminaAtencionCaja);
     }
-
+    Cliente siguienteParaEmpleado;
     public void calcularFinAtencionEmpleado() {
         System.out.println("fin atención del empleado osea que le terminó el pedido. es el proximo evento ");
         Cliente cliente = buscar.buscarCliente(EVN_ENTREGA, minTerminaEntrega);
@@ -445,7 +445,10 @@ public class Calculator {
             comproYSeRetira(rndAccion, buscar.buscarPosicion(minTerminaEntrega));
         }
 
-        cliente = buscar.siguienteAtender(EVN_ATENCION_PEDIDO);
+//        cliente = buscar.siguienteAtender(EVN_ATENCION_PEDIDO);
+        siguienteParaEmpleado = buscar.siguienteAtender(EVN_ATENCION_PEDIDO);
+        System.out.println("los datos del cliente sigujienteAtender son"+cliente);
+        System.out.println("los datos del cliente sigujienteAtender son"+cliente.getEstado());
         float rndEspera = r.nextFloat();
         tiempoEntrega = 0;
         finTiempoEntrega = 0;
@@ -456,6 +459,7 @@ public class Calculator {
     public void siguienteAtenderEmpleado(double tiempoEntrega, double finTiempoEntrega, Cliente cliente, float rndEspera) {
         tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
         finTiempoEntrega = tiempoEntrega + reloj;
+        System.out.println("los datos del cliente pero en el otro metodo son son"+cliente);
         cliente.setHoraPartida(finTiempoEntrega);
 
         if (empleado1.getEstado().equals("LIBRE")) {

@@ -45,20 +45,6 @@ public class Buscar {
         return posicion;
     }
 
-    public Cliente siguienteAtender(String evento) {
-        double elMasViejo = 0;
-        Cliente aux = null;
-        int posicion = 0;
-        for (int i = 0; i < lista.size(); i++) {
-            aux = lista.get(i);
-            if ((aux.getEstado().equals(evento) && elMasViejo == 0) || (elMasViejo > aux.getHoraLlegada() && (aux.getEstado().equals(evento)))) {
-                elMasViejo = aux.getHoraLlegada();
-                posicion = i;
-            }
-        }
-        return lista.get(posicion);
-    }
-
     public double setMenor(double finCliente, double minimo) {
         if (finCliente < minimo || minimo == 0) {
             minimo = finCliente;

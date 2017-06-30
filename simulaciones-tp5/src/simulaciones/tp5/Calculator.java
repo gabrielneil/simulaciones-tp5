@@ -490,6 +490,7 @@ public class Calculator {
         }
 
         cliente.setEstado(EVN_ATENDIDO_EMPLEADO);
-        minTerminaEntrega = buscar.setMenor(finTiempoEntrega, minTerminaEntrega);
+        Cliente menor = lista.get(buscar.quienCortaAntes(EVN_ATENDIDO_EMPLEADO));
+        minTerminaEntrega = menor.getHoraPartida();
     }
 }

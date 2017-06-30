@@ -99,4 +99,17 @@ public class Buscar {
         }
     }
 
+    public int quienCortaAntes(String evento) {
+        int menorPosicion = 0;
+        double menorTiempo = 0;
+        for (int i = 0; i < lista.size(); i++) {
+            
+            if((menorTiempo == 0 && lista.get(i).getEstado().equals(evento))||(menorTiempo> lista.get(i).getHoraPartida() && lista.get(i).getEstado().equals(evento)))  {
+                menorTiempo = lista.get(i).getHoraPartida();
+                menorPosicion = i;
+            }
+        }
+        return menorPosicion;
+    }
+
 }

@@ -67,10 +67,12 @@ public class Buscar {
     }
 
     public int quienReemplaza(String evento) {
-        int elMasViejo = 0;
+        int elMasViejo = -1;
+        double tiempoLlegada=0;
         for (int i = 0; i < lista.size(); i++) {
             Cliente aux = lista.get(i);
-            if ((aux.getEstado().equals(evento) && elMasViejo == 0) || (elMasViejo > aux.getHoraLlegada() && (aux.getEstado().equals(evento)))) {
+            if ((aux.getEstado().equals(evento) && tiempoLlegada == 0) || (tiempoLlegada > aux.getHoraLlegada() && (aux.getEstado().equals(evento)))) {
+                tiempoLlegada = aux.getHoraLlegada();
                 elMasViejo = i;
             }
         }

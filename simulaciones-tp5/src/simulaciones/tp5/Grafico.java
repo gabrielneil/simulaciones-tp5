@@ -188,14 +188,14 @@ public class Grafico {
             cantClientes});//Cantidad clientes en cafeteria (26)
     }
 
-    public void aColaEmpleados(String eventoFinAtencion, double reloj, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
+    public void aColaEmpleados(String eventoFinAtencion, double reloj, double minProximaLLegada,double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
         model.addRow(new Object[]{
             eventoFinAtencion,//Evento (0)
             reloj, //Reloj (1)
             null, //Llegada cliente - RND1 (2)
             null, //Llegada cliente - RND2 (3)
             null, //Tiempo llegada cliente (4)
-            null, //Próxima Llegada cliente (5)
+            (minProximaLLegada==0)?null:minProximaLLegada, //Próxima Llegada cliente (5)
             null, //Acción - RND (6)
             "",//Accion : mesa o a comprar (7)
             null, //Tiempo fin atención caja (8)

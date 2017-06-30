@@ -156,7 +156,7 @@ public class Grafico {
             cantClientes});//Cantidad clientes en cafeteria (26)
     }
 
-    public void atencionEmpleados(String eventoFinAtencion, double reloj, double minProxLlegada, float rndEspera, double tiempoEntrega, double finTiempoEntrega, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
+    public void atencionEmpleados(String eventoFinAtencion, double reloj, float rndEspera, double minProxLlegada, double minTerminaAtencionCaja,double tiempoEntrega, double finTiempoEntrega, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
 
         model.addRow(new Object[]{
             eventoFinAtencion,//Evento (0)
@@ -167,7 +167,7 @@ public class Grafico {
             (minProxLlegada==0)?null:minProxLlegada, //Próxima Llegada cliente (5)
             null, //Acción - RND (6)
             "",//Accion : mesa o a comprar (7)
-            null, //Tiempo fin atención caja (8)
+            (minTerminaAtencionCaja==0)?null:minTerminaAtencionCaja, //Tiempo fin atención caja (8)
             rndEspera, //Tiempo espera pedido - RND (9)
             tiempoEntrega, //Tiempo espera pedido (10)
             finTiempoEntrega, //Tiempo entrega de pedido (11)
@@ -188,7 +188,7 @@ public class Grafico {
             cantClientes});//Cantidad clientes en cafeteria (26)
     }
 
-    public void aColaEmpleados(String eventoFinAtencion, double reloj, double minProximaLLegada,double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
+    public void aColaEmpleados(String eventoFinAtencion, double reloj, double minProximaLLegada, double minTerminaAtencionCaja,double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
         model.addRow(new Object[]{
             eventoFinAtencion,//Evento (0)
             reloj, //Reloj (1)

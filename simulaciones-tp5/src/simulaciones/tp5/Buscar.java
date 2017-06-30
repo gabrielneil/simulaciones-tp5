@@ -68,7 +68,7 @@ public class Buscar {
 
     public int quienReemplaza(String evento) {
         int elMasViejo = -1;
-        double tiempoLlegada=0;
+        double tiempoLlegada = 0;
         for (int i = 0; i < lista.size(); i++) {
             Cliente aux = lista.get(i);
             if ((aux.getEstado().equals(evento) && tiempoLlegada == 0) || (tiempoLlegada > aux.getHoraLlegada() && (aux.getEstado().equals(evento)))) {
@@ -98,22 +98,18 @@ public class Buscar {
         }
     }
 
-     public void actualizarEmpleados(Cliente cliente, Servidor empleado1, Servidor empleado2) {
+    public void actualizarEmpleados(Cliente cliente, Servidor empleado1, Servidor empleado2) {
 
         if (cliente.getQuienMeAtiende().equals("EMPLEADO1")) {
-            if (empleado1.getCola() == 0) {
-                empleado1.setLibre();
-            } else {
-                empleado1.disminuirCola();
-                empleado2.disminuirCola();
-            }
-        } else if (cliente.getQuienMeAtiende().equals("EMPLEADO2")) {
-            if (empleado2.getCola() == 0) {
-                empleado2.setLibre();
-            } else {
-                empleado1.disminuirCola();
-                empleado2.disminuirCola();
-            }
+
+            empleado1.setLibre();
+        } else {
+            empleado2.setLibre();
+        }
+
+        if (empleado1.getCola() > 0 && empleado2.getCola() > 0) {
+            empleado1.disminuirCola();
+            empleado2.disminuirCola();
         }
     }
 

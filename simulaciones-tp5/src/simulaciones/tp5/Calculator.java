@@ -312,8 +312,12 @@ public class Calculator {
         }
 
         lista.remove(posicion);
-
-        minTerminaConsumicion = buscar.menorProximo(EVN_CONSUMIENDO, minTerminaConsumicion);
+        int elMasViejo = buscar.quienCortaAntes(EVN_CONSUMIENDO);
+        if (elMasViejo != -1) {
+            minTerminaConsumicion = lista.get(elMasViejo).getHoraPartida();
+        } else {
+            minTerminaConsumicion = 0;
+        }
     }
 
     private void finAtencionCaja() {
@@ -403,6 +407,8 @@ public class Calculator {
         if (reloj >= desde && reloj <= hasta) {
             grafico.comproYSeSienta(EVN_FIN_ATENCION_EMPLEADO, reloj, minProximaLlegada, minTerminaAtencionCaja, minTerminaEntrega, rndAccion, EVN_CONSUMIENDO, rndTiempoConsumicion, tiempoConsumicion, finConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
         }
+        
+        
         minTerminaConsumicion = lista.get(buscar.quienCortaAntes(EVN_CONSUMIENDO)).getHoraPartida();
 
     }
@@ -419,7 +425,12 @@ public class Calculator {
         }
         lista.remove(cliente);
 
-        minTerminaUsarMesa = lista.get(buscar.quienCortaAntes(EVN_UTILIZANDO_MESA)).getHoraPartida();
+        int elMasViejo = buscar.quienCortaAntes(EVN_UTILIZANDO_MESA);
+        if (elMasViejo != -1) {
+            minTerminaUsarMesa = lista.get(elMasViejo).getHoraPartida();
+        } else {
+            minTerminaUsarMesa = 0;
+        }
     }
 
     public void calcularFinAtencionCajero(Cliente cliente) {

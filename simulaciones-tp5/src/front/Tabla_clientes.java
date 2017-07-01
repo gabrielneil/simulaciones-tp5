@@ -22,6 +22,7 @@ public class Tabla_clientes extends javax.swing.JFrame {
     public Tabla_clientes(Controller controller) {
         this.controller = controller;
         initComponents();
+        this.setVisible(true);
     }
 
     /**

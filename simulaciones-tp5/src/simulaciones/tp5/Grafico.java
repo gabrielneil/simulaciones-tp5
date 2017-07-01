@@ -5,8 +5,11 @@
  */
 package simulaciones.tp5;
 
+import Objects.Cliente;
 import Objects.Servidor;
 import front.Tabla;
+import front.Tabla_clientes;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,12 +19,19 @@ import javax.swing.table.DefaultTableModel;
 public class Grafico {
 
     DefaultTableModel model;
-    Tabla tabla = new Tabla();
-
-    public Grafico() {
-
+    DefaultTableModel model_cliente;
+    Controller controller;
+    Tabla_clientes t;
+    Tabla tabla;
+    ArrayList<Cliente> lista = new ArrayList<>();
+    
+    
+    public Grafico(ArrayList lista, Controller controller) {
+        tabla = new Tabla(controller);
+        t = new Tabla_clientes(controller);
         model = (DefaultTableModel) tabla._tblSimulacion.getModel();
-
+        model_cliente = (DefaultTableModel) t._tblSimulacion.getModel();
+        this.lista = lista;
     }
 
     public void hacerVisible() {
@@ -156,7 +166,7 @@ public class Grafico {
             cantClientes});//Cantidad clientes en cafeteria (26)
     }
 
-    public void atencionEmpleados(String eventoFinAtencion, double reloj, float rndEspera, double minProxLlegada, double minTerminaAtencionCaja,double tiempoEntrega, double finTiempoEntrega, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
+    public void atencionEmpleados(String eventoFinAtencion, double reloj, float rndEspera, double minProxLlegada, double minTerminaAtencionCaja, double tiempoEntrega, double finTiempoEntrega, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
 
         model.addRow(new Object[]{
             eventoFinAtencion,//Evento (0)
@@ -164,10 +174,10 @@ public class Grafico {
             null, //Llegada cliente - RND1 (2)
             null, //Llegada cliente - RND2 (3)
             null, //Tiempo llegada cliente (4)
-            (minProxLlegada==0)?null:minProxLlegada, //Próxima Llegada cliente (5)
+            (minProxLlegada == 0) ? null : minProxLlegada, //Próxima Llegada cliente (5)
             null, //Acción - RND (6)
             "",//Accion : mesa o a comprar (7)
-            (minTerminaAtencionCaja==0)?null:minTerminaAtencionCaja, //Tiempo fin atención caja (8)
+            (minTerminaAtencionCaja == 0) ? null : minTerminaAtencionCaja, //Tiempo fin atención caja (8)
             rndEspera, //Tiempo espera pedido - RND (9)
             tiempoEntrega, //Tiempo espera pedido (10)
             finTiempoEntrega, //Tiempo entrega de pedido (11)
@@ -188,14 +198,14 @@ public class Grafico {
             cantClientes});//Cantidad clientes en cafeteria (26)
     }
 
-    public void aColaEmpleados(String eventoFinAtencion, double reloj, double minProximaLLegada, double minTerminaAtencionCaja,double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
+    public void aColaEmpleados(String eventoFinAtencion, double reloj, double minProximaLLegada, double minTerminaAtencionCaja, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
         model.addRow(new Object[]{
             eventoFinAtencion,//Evento (0)
             reloj, //Reloj (1)
             null, //Llegada cliente - RND1 (2)
             null, //Llegada cliente - RND2 (3)
             null, //Tiempo llegada cliente (4)
-            (minProximaLLegada==0)?null:minProximaLLegada, //Próxima Llegada cliente (5)
+            (minProximaLLegada == 0) ? null : minProximaLLegada, //Próxima Llegada cliente (5)
             null, //Acción - RND (6)
             "",//Accion : mesa o a comprar (7)
             null, //Tiempo fin atención caja (8)
@@ -280,8 +290,8 @@ public class Grafico {
             tiempoAcumulado, //Tiempo de permanencia (25)
             cantClientes});//Cantidad clientes en cafeteria (26)
     }
-    
-    public void comproYSeSienta(String eventoEntregaPedido, double reloj, double minProximaLLegada, double minTerminaAtencionCaja, double minTerminaEntrega, float rndAccion, String consumiendo, float rndTiempoConsumicion, double tiempoConsumicion, double finConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes){
+
+    public void comproYSeSienta(String eventoEntregaPedido, double reloj, double minProximaLLegada, double minTerminaAtencionCaja, double minTerminaEntrega, float rndAccion, String consumiendo, float rndTiempoConsumicion, double tiempoConsumicion, double finConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
         model.addRow(new Object[]{
             eventoEntregaPedido,//Evento (0)
             reloj, //Reloj (1)
@@ -310,5 +320,12 @@ public class Grafico {
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado, //Tiempo de permanencia acumulado(25)
             cantClientes});//Cantidad clientes en cafeteria (26)
+    }
+    
+    public void armarClientes(){
+    }
+
+    void mostrarClientes() {
+        t.setVisible(true);
     }
 }

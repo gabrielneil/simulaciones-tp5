@@ -15,11 +15,12 @@ import simulaciones.tp5.*;
  * @author gabrielneil
  */
 public class Tabla extends javax.swing.JFrame {
-
+    Controller controller;
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
-    public Tabla() {
+    public Tabla(Controller controller) {
         initComponents();
+        this.controller = controller;
     }
 
     /**
@@ -36,6 +37,7 @@ public class Tabla extends javax.swing.JFrame {
         _scpTabla = new javax.swing.JScrollPane();
         _tblSimulacion = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        verClientes_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vector Estado");
@@ -119,11 +121,16 @@ public class Tabla extends javax.swing.JFrame {
         _tblSimulacion.getAccessibleContext().setAccessibleDescription("");
 
         jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        verClientes_btn.setText("Ver Clientes");
+        verClientes_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verClientes_btnActionPerformed(evt);
             }
         });
 
@@ -133,6 +140,8 @@ public class Tabla extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jButton1)
+                .addGap(371, 371, 371)
+                .addComponent(verClientes_btn)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
@@ -144,8 +153,12 @@ public class Tabla extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(_scpTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(verClientes_btn)
+                        .addContainerGap())))
         );
 
         simulationTable.addTab("Simulacion", jPanel2);
@@ -173,12 +186,18 @@ public class Tabla extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void verClientes_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verClientes_btnActionPerformed
+        // TODO add your handling code here:
+       controller.mostrarClientes();
+    }//GEN-LAST:event_verClientes_btnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JScrollPane _scpTabla;
     public javax.swing.JTable _tblSimulacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane simulationTable;
+    private javax.swing.JButton verClientes_btn;
     // End of variables declaration//GEN-END:variables
 
 }

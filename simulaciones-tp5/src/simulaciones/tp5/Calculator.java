@@ -10,7 +10,6 @@ import Objects.Servidor;
 import front.Tabla;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,7 +27,6 @@ public class Calculator {
     Cliente c1;
     int desde;
     int hasta;
-    DefaultTableModel model;
     int cantidadClientesEnCafeteria = 0;
     Random r = new Random();
 
@@ -49,7 +47,7 @@ public class Calculator {
     int tiempoConsumicion2 = 1;
     int tiempoUtilizacionMesa1 = 15;
     int tiempoUtilizacionMesa2 = 5;
-    String evento = EVN_INICIO;
+    String evento;
 
     float rnd1TiempoLlegada;
     float rnd2TiempoLlegada;
@@ -159,7 +157,7 @@ public class Calculator {
 
     public Calculator(Controller controller) {
         this.controller = controller;
-        this.tabla = new Tabla();
+        this.tabla = new Tabla(controller);
     }
 
     public void cargaTiempos(int tiempoTicket, int tiempoEspera, int tiempoConsumicion1, int tiempoConsumicion2, int tiempoUtilizacionMesa1, int tiempoUtilizacionMesa2) {
@@ -198,7 +196,7 @@ public class Calculator {
     }
 
     public void initSimulacion() {
-        //   model = (DefaultTableModel) tabla._tblSimulacion.getModel();
+        grafico = new Grafico(lista, controller);
         buscar = new Buscar(lista);
         grafico.hacerVisible();
         setEvento(NO_EVN);
@@ -208,7 +206,7 @@ public class Calculator {
         }
     }
 
-    Grafico grafico = new Grafico();
+    Grafico grafico;
     double cantMinutos = 0;
     double minProximaLlegada = 0;
     double minTerminaAtencionCaja = 0;
@@ -456,7 +454,6 @@ public class Calculator {
             siguienteParaEmpleado = lista.get(elMasViejo);
             float rndEspera = r.nextFloat();
             siguienteAtenderEmpleado(siguienteParaEmpleado, rndEspera);
-            minTerminaEntrega = buscar.menorProximo(EVN_ATENDIDO_EMPLEADO, minTerminaEntrega);
         } else {
             minTerminaEntrega = 0;
         }
@@ -489,5 +486,9 @@ public class Calculator {
         cliente.setEstado(EVN_ATENDIDO_EMPLEADO);
         Cliente menor = lista.get(buscar.quienCortaAntes(EVN_ATENDIDO_EMPLEADO));
         minTerminaEntrega = menor.getHoraPartida();
+    }
+    
+    public void mostrarClientes(){
+        grafico.mostrarClientes();
     }
 }

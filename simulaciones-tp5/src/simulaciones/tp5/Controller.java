@@ -56,4 +56,8 @@ public class Controller {
         calculator.initSimulacion();
     }
 
+    public void mostrarClientes() {
+       calculator.mostrarClientes();
+    }
+
 }

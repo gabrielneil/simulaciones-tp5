@@ -52,7 +52,6 @@ public class Calculator {
     float rnd1TiempoLlegada;
     float rnd2TiempoLlegada;
 
-    
     Grafico grafico;
     double cantMinutos = 0;
     double minProximaLlegada = 0;
@@ -88,7 +87,7 @@ public class Calculator {
     public static final String EVN_CONSUMIENDO = "Consumiendo";
     public static final String EVN_CONSUMICION = "Fin Consumicion de pedido";
     public static final String EVN_COMPRA = "Compra";
-   
+
     public Calculator(Controller controller) {
         this.controller = controller;
         this.tabla = new Tabla(controller);
@@ -114,13 +113,6 @@ public class Calculator {
         this.hasta = hasta;
     }
 
-    //Eventos:
-    //Llegada cliente
-    //Atencion en caja
-    //Entrega de pedido
-    //Utilizacion de mesa
-    //Consumicion de pedido
-    //Fin permanencia
     public void setEvento(String evento) {
         this.evento = evento;
     }
@@ -140,7 +132,6 @@ public class Calculator {
         }
     }
 
-
     public void simularAvance() {
         cantMinutos = reloj;
 
@@ -150,7 +141,9 @@ public class Calculator {
             System.out.println("entro");
             double tiempoLlegada = Formulas.llegadaCliente(rnd1TiempoLlegada, rnd2TiempoLlegada, media, desviacion);
             minProximaLlegada = reloj + tiempoLlegada;
-            grafico.primeraVuelta(EVN_INICIO, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, minProximaLlegada, cajero, empleado1, empleado2);
+            if (cantMinutos >= desde) {
+                grafico.primeraVuelta(EVN_INICIO, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, tiempoLlegada, minProximaLlegada, cajero, empleado1, empleado2);
+            }
             reloj = minProximaLlegada;
             return;
         }
@@ -232,19 +225,18 @@ public class Calculator {
         cantClientes++;
         tiempoAcumulado += (cliente.getHoraPartida() - cliente.getHoraLlegada());
         lista.remove(posicion);
-        
+
         int elMasViejo = buscar.quienCortaAntes(EVN_CONSUMIENDO);
         if (elMasViejo != -1) {
             minTerminaConsumicion = lista.get(elMasViejo).getHoraPartida();
         } else {
             minTerminaConsumicion = 0;
         }
-       
+
         if (reloj >= desde && reloj <= hasta) {
             grafico.finConsumicion(EVN_CONSUMICION, reloj, minProximaLlegada, minTerminaAtencionCaja, minTerminaEntrega, minTerminaUsarMesa, minTerminaConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
         }
 
-       
     }
 
     private void finAtencionCaja() {
@@ -316,8 +308,16 @@ public class Calculator {
             float rndEspera = r.nextFloat();
             siguienteAtenderEmpleado(siguienteParaEmpleado, rndEspera);
         } else {
-            Cliente buscarParalelo = lista.get(buscar.quienCortaAntes(EVN_ATENDIDO_EMPLEADO));
-            minTerminaEntrega = buscarParalelo.getHoraPartida();
+            //no hay nadie esperando, pero capaz tengo otro atendido por el otro empleado
+            int posicion = buscar.quienCortaAntes(EVN_ATENDIDO_EMPLEADO);
+            //quiere decir que hay alguien en paralelo
+            if (posicion != -1) {
+                Cliente buscarParalelo = lista.get(posicion);
+                minTerminaEntrega = buscarParalelo.getHoraPartida();
+
+            } else {
+                minTerminaEntrega = 0;
+            }
         }
         if (reloj >= desde && reloj <= hasta) {
             grafico.comproYSeRetira(EVN_FIN_ATENCION_EMPLEADO, reloj, minProximaLlegada, minTerminaAtencionCaja, minTerminaEntrega, rndAccion, minTerminaUsarMesa, minTerminaConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
@@ -330,15 +330,20 @@ public class Calculator {
         double finConsumicion = tiempoConsumicion + reloj;
         cliente.setEstado(EVN_CONSUMIENDO);
         cliente.setHoraPartida(finConsumicion);
-        Cliente buscarParalelo = lista.get(buscar.quienCortaAntes(EVN_ATENDIDO_EMPLEADO));
-        minTerminaEntrega = buscarParalelo.getHoraPartida();
+
+        int posicion = buscar.quienCortaAntes(EVN_ATENDIDO_EMPLEADO);
+        //quiere decir que hay alguien en paralelo
+        if (posicion != -1) {
+            Cliente buscarParalelo = lista.get(posicion);
+            minTerminaEntrega = buscarParalelo.getHoraPartida();
+        } else {
+            minTerminaEntrega = 0;
+        }
+
         if (reloj >= desde && reloj <= hasta) {
             grafico.comproYSeSienta(EVN_FIN_ATENCION_EMPLEADO, reloj, minProximaLlegada, minTerminaAtencionCaja, minTerminaEntrega, rndAccion, EVN_CONSUMIENDO, rndTiempoConsumicion, tiempoConsumicion, finConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
         }
-        
-         
         minTerminaConsumicion = lista.get(buscar.quienCortaAntes(EVN_CONSUMIENDO)).getHoraPartida();
-
     }
 
     public void noComioYUsoMesa() {
@@ -380,6 +385,7 @@ public class Calculator {
         setReloj(minTerminaEntrega);
 
         cliente.setEstado(EVN_FIN_ATENCION_EMPLEADO);
+
         //ver los empleados
         System.out.println("El valor del cliente antes de que se rompa" + cliente.getQuienMeAtiende());
         buscar.actualizarEmpleados(cliente, empleado1, empleado2);
@@ -394,8 +400,17 @@ public class Calculator {
                 siguienteAtenderEmpleado(siguienteParaEmpleado, rndEspera);
 
             } else {
-                Cliente buscarParalelo = lista.get(buscar.quienCortaAntes(EVN_ATENDIDO_EMPLEADO));
-                minTerminaEntrega = buscarParalelo.getHoraPartida();
+
+                //no hay nadie esperando, pero capaz tengo otro atendido por el otro empleado
+                int posicion = buscar.quienCortaAntes(EVN_ATENDIDO_EMPLEADO);
+                //quiere decir que hay alguien en paralelo
+                if (posicion != -1) {
+                    Cliente buscarParalelo = lista.get(posicion);
+                    minTerminaEntrega = buscarParalelo.getHoraPartida();
+
+                } else {
+                    minTerminaEntrega = 0;
+                }
             }
             clienteParaDesdeYHasta = cliente;
             System.out.println("COMPRO Y SE SIENTA EN LA MESA");

@@ -38,7 +38,6 @@ public class Grafico {
     }
 
     public void primeraVuelta(String eventoInicio, double reloj, float rnd1TiempoLlegada, float rnd2TiempoLlegada, double tiempoLlegada, double proxLlegada, Servidor cajero, Servidor empleado1, Servidor empleado2) {
-        System.out.println("entra a la primera vuelta");
         model.addRow(new Object[]{
             eventoInicio, //Evento (0)
             reloj, //Reloj (1)
@@ -68,7 +67,6 @@ public class Grafico {
             0.0, //Tiempo de permanencia acumulado (25)
             0 //Cantidad clientes en cafeteria (26)
         });
-        cargaClientes();
     }
 
     public void entraMesa(String eventoLlegadaMesa, double reloj, float rnd1TiempoLlegada, float rnd2TiempoLlegada, double tiempoLlegada, double proxLlegada, float rndAccion, String eventoUtilizacionMesa, double minTerminaAtencionCaja, double minEntregaPedido, float rndTiempoUtilizacionMesa, double tiempoUtilizacionMesa, double tiempoFinUtilizacionMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
@@ -353,7 +351,6 @@ public class Grafico {
             i = suma;    
             contador++;
         }
-        
         model_cliente.setColumnIdentifiers(arreglo);
         
         contador = 0;
@@ -369,14 +366,11 @@ public class Grafico {
                 return;
             }
             
-            valoresClientes[suma] =lista.get(contador).getHoraPartida();
+            valoresClientes[suma] =(lista.get(contador).getHoraPartida()==-1)?null:lista.get(contador).getHoraPartida();
             i = suma;    
             contador++;
-            
         }
-        
          model_cliente.addRow(valoresClientes);
-//        System.out.println("el valor es" + model_cliente.getColumnCount());
     }
     
 }

@@ -33,11 +33,9 @@ public class Buscar {
     }
 
     public int buscarPosicion(double minimo) {
-        Cliente cliente;
         int posicion = 0;
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getHoraPartida() == minimo) {
-                cliente = lista.get(i);
                 posicion = i;
                 break;
             }
@@ -65,17 +63,6 @@ public class Buscar {
         return elMasViejo;
     }
 
-    public double menorProximo(String evento, double minimoAnterior) {
-
-        for (int i = 0; i < lista.size(); i++) {
-            Cliente aux = lista.get(i);
-            if ((minimoAnterior == 0 && aux.getEstado().equals(evento)) || (minimoAnterior > aux.getHoraPartida() && aux.getEstado().equals(evento))) {
-                minimoAnterior = aux.getHoraPartida();
-            }
-        }
-        return minimoAnterior;
-    }
-
     public void actualizarCajero(Servidor cajero) {
         if (cajero.getCola() == 0) {
             cajero.setLibre();
@@ -100,7 +87,7 @@ public class Buscar {
     }
 
     public int quienCortaAntes(String evento) {
-        int menorPosicion = 0;
+        int menorPosicion = -1;
         double menorTiempo = 0;
         for (int i = 0; i < lista.size(); i++) {
             

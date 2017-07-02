@@ -62,7 +62,7 @@ public class Calculator {
     int numeroVuelta = 0;
     int cantClientes = 0;
     double tiempoAcumulado = 0;
- 
+
     private static final String NO_EVN = "NULL";
     public static final String EVN_INICIO = "Inicio";
     public static final String EVN_LLEGADA = "Llegada Cliente";
@@ -120,7 +120,8 @@ public class Calculator {
         while (reloj <= tiempoDeCorte) {
             simularAvance();
         }
-        grafico.tiempoPermanencia(((double)tiempoAcumulado/cantClientes));
+        grafico.tiempoPermanencia(((double) tiempoAcumulado / cantClientes));
+        grafico.buscarLosMayores();
     }
 
     public void simularAvance() {
@@ -165,9 +166,10 @@ public class Calculator {
             finConsumicion();
         }
     }
-    
+
     Cliente nuevoCliente;
     int numeroOrdenCliente = 0;
+
     private void llegadaCliente() {
         setReloj(minProximaLlegada);
         rnd1TiempoLlegada = r.nextFloat();
@@ -185,7 +187,7 @@ public class Calculator {
             nuevoCliente = new Cliente(EVN_UTILIZANDO_MESA, reloj, tiempoFinUtilizacionMesa, numeroOrdenCliente);
             lista.add(nuevoCliente);
             numeroOrdenCliente++;
-            
+
             if (reloj >= desde && reloj <= hasta) {
                 grafico.entraMesa(EVN_LLEGADA, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, proxLlegada, minProximaLlegada, rndAccion, EVN_UTILIZANDO_MESA, minTerminaAtencionCaja, minTerminaEntrega, rndTiempoUtilizacionMesa, tiempoUtilizacionMesa, tiempoFinUtilizacionMesa, minTerminaConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
             }
@@ -205,7 +207,7 @@ public class Calculator {
 
             lista.add(nuevoCliente);
             numeroOrdenCliente++;
-            
+
             if (reloj >= desde && reloj <= hasta) {
                 grafico.entraComprar(EVN_LLEGADA, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, proxLlegada, minProximaLlegada, rndAccion, EVN_COMPRA, minTerminaAtencionCaja, minTerminaEntrega, minTerminaUsarMesa, minTerminaConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
             }
@@ -442,8 +444,8 @@ public class Calculator {
     public void mostrarClientes() {
         grafico.mostrarClientes();
     }
-    
-    public int cantClientes(){
+
+    public int cantClientes() {
         return numeroOrdenCliente;
     }
 }

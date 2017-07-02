@@ -375,4 +375,17 @@ public class Grafico {
         }
         model_cliente.addRow(valoresClientes);
     }
+    
+    public void buscarLosMayores(){
+        double menorEnCaja = 0;
+        for (int i = 1; i < model.getRowCount(); i++) {
+            //double value = Double.parseDouble(String.valueOf(model.getValueAt(i, 8)));
+            if (model.getValueAt(i, 8)!=null) {
+                if (menorEnCaja == 0|| menorEnCaja > (double) model.getValueAt(i, 8)) {
+                double value = (double) model.getValueAt(i, 8);
+                System.out.println("Entro con valor "+value);
+                }
+            }
+        }
+    }
 }

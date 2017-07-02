@@ -38,6 +38,8 @@ public class Tabla extends javax.swing.JFrame {
         _tblSimulacion = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         verClientes_btn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        resultado_txt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vector Estado");
@@ -134,6 +136,14 @@ public class Tabla extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Tiempo promedio de permanencia:");
+
+        resultado_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resultado_txtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -142,6 +152,10 @@ public class Tabla extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(371, 371, 371)
                 .addComponent(verClientes_btn)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resultado_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
@@ -157,7 +171,10 @@ public class Tabla extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(verClientes_btn)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(verClientes_btn)
+                            .addComponent(jLabel1)
+                            .addComponent(resultado_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
 
@@ -187,17 +204,24 @@ public class Tabla extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void verClientes_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verClientes_btnActionPerformed
-        // TODO add your handling code here:
        controller.mostrarClientes();
     }//GEN-LAST:event_verClientes_btnActionPerformed
+
+    private void resultado_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultado_txtActionPerformed
+    }//GEN-LAST:event_resultado_txtActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JScrollPane _scpTabla;
     public javax.swing.JTable _tblSimulacion;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
+    public javax.swing.JTextField resultado_txt;
     private javax.swing.JTabbedPane simulationTable;
     private javax.swing.JButton verClientes_btn;
     // End of variables declaration//GEN-END:variables
 
+    public void setResultado(double resultado){
+        resultado_txt.setText(String.valueOf(resultado));
+    }
 }

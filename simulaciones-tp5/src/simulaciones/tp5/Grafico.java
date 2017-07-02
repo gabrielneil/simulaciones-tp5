@@ -329,7 +329,8 @@ public class Grafico {
         cargaClientes();
     }
 
-    public void armarClientes() {
+    public void tiempoPermanencia(double resultado) {
+        tabla.setResultado(resultado);
     }
 
     public void mostrarClientes() {
@@ -352,7 +353,7 @@ public class Grafico {
             if (suma > 3 * cantidadClientes) {
                 return;
             }
-            arreglo[suma] = "Hora Llegada (" + contador + ")";
+            arreglo[suma] = "Hora Partida (" + contador + ")";
             i = suma;
             contador++;
         }
@@ -372,7 +373,6 @@ public class Grafico {
             valoresClientes[(posicion * 3) + 1] = lista.get(i).getHoraLlegada();
             valoresClientes[(posicion * 3) + 2] = (lista.get(i).getHoraPartida() == -1) ? null : lista.get(i).getHoraPartida();
         }
-//
         model_cliente.addRow(valoresClientes);
     }
 }

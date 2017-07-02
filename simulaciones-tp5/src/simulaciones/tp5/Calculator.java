@@ -120,6 +120,7 @@ public class Calculator {
         while (reloj <= tiempoDeCorte) {
             simularAvance();
         }
+        grafico.tiempoPermanencia(((double)tiempoAcumulado/cantClientes));
     }
 
     public void simularAvance() {
@@ -230,7 +231,6 @@ public class Calculator {
         if (reloj >= desde && reloj <= hasta) {
             grafico.finConsumicion(EVN_CONSUMICION, reloj, minProximaLlegada, minTerminaAtencionCaja, minTerminaEntrega, minTerminaUsarMesa, minTerminaConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
         }
-
     }
 
     private void finAtencionCaja() {

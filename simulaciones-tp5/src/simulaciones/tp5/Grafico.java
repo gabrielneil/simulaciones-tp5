@@ -335,62 +335,48 @@ public class Grafico {
     public void mostrarClientes() {
         t.setVisible(true);
     }
+    
     String arreglo[];
     public void cargaClientes() {
         arreglo = new String[3 * lista.size()];
-//        for (int i = 0; i < lista.size(); i++) {
-//            int numero = i;
-//            int suma = i;
-//            arreglo[suma++] = "Estado (" + numero + ")";
-//            arreglo[suma++] = "Hora Llegada";
-//            arreglo[suma++] = "Hora partida";
-//            i++;
-//        }
-
         int contador=0;
         for (int i = 0; i < 3 * lista.size(); i++) {
-          
             int suma = i;
-            System.out.println("valor de suma "+suma);
             arreglo[suma] = "Estado (" + contador + ")";
             suma++;
-            System.out.println("valor de suma "+suma);
             arreglo[suma] = "Hora Llegada (" + contador + ")";
             suma++;
-            
+            if (suma > 3 * lista.size()) {
+                return;
+            }
+            arreglo[suma] = "Hora partida (" + contador + ")";
+            i = suma;    
+            contador++;
+        }
+        
+        model_cliente.setColumnIdentifiers(arreglo);
+        
+        contador = 0;
+        Object valoresClientes[] = new Object[lista.size()*3];
+        
+        for (int i = 0; i < lista.size()*3; i++) {
+              int suma = i;
+            valoresClientes[suma] =lista.get(contador).getEstado();
+            suma++;
+            valoresClientes[suma] =lista.get(contador).getHoraLlegada();
+            suma++;
             if (suma > 3 * lista.size()) {
                 return;
             }
             
-//            if (aux.getHoraPartida() != -1) {
-            System.out.println("valor de suma "+suma);            
-            arreglo[suma] = "Hora partida (" + contador + ")";
+            valoresClientes[suma] =lista.get(contador).getHoraPartida();
             i = suma;    
-//            }
-            
             contador++;
+            
         }
-          System.out.println("TAMAÑO DE LA LISTA"+lista.size());
         
-//        String matriz[][] = new String[lista.size()][3];
-//        for (int i = 0; i < lista.size(); i++) {
-//            String estado = "Estado (" + i + ")";
-//            String hora_llegada = "Hora Llegada(" + i + ")";
-//            String hora_partida = "Hora partida(" + i + ")";
-//            matriz[i][0] = estado;
-//            matriz[i][1] = hora_llegada;
-//            matriz[i][2] = hora_partida;
-//        }
-        model_cliente.setColumnIdentifiers(arreglo);
-//        model_cliente.setColumnIdentifiers(new String[]{"Estado", "Hora Llegada", "Hora partida"});
-//         model_cliente.addRow(new Object[]{"pepito", 123, "sancho"});
+         model_cliente.addRow(valoresClientes);
 //        System.out.println("el valor es" + model_cliente.getColumnCount());
-////         model_cliente.setColumnIdentifiers(new String [] {"Estado", "Hora Llegada", "Hora partida"});
-////         model_cliente.addRow(new Object[]{"pepito", 123, "sancho"});
-//         model_cliente.addRow(new Object[]{"pepitoe", 122223, "1sancho"});
-////         model_cliente.addRow(new Object[]{"pepitoEEE", 123, "4san3cho"});
-//         model_cliente.setColumnIdentifiers(new String [] {"Test Name", "Status", "Description", "QUE"});
-//         model_cliente.addRow(new Object[]{"EEE", 23, "4sa","perepepe","potato"});
     }
     
 }

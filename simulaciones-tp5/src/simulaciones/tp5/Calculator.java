@@ -52,6 +52,17 @@ public class Calculator {
     float rnd1TiempoLlegada;
     float rnd2TiempoLlegada;
 
+    
+    Grafico grafico;
+    double cantMinutos = 0;
+    double minProximaLlegada = 0;
+    double minTerminaAtencionCaja = 0;
+    double minTerminaEntrega = 0;
+    double minTerminaUsarMesa = 0;
+    double minTerminaConsumicion = 0;
+    int numeroVuelta = 0;
+    int cantClientes = 0;
+    double tiempoAcumulado = 0;
     //Eventos:
     //Llegada cliente
     //Atencion en caja
@@ -77,84 +88,7 @@ public class Calculator {
     public static final String EVN_CONSUMIENDO = "Consumiendo";
     public static final String EVN_CONSUMICION = "Fin Consumicion de pedido";
     public static final String EVN_COMPRA = "Compra";
-    /*
-    * Indices de las columnas
-     */
-    //Col 0: Evento
-    //Col 1: Reloj
-    //Col 2: RND 1
-    //Col 3: RND 2
-    //Col 4: tiempo entre llegadas
-    /**
-     * Col 5 - Proxima llegada cliente
-     */
-    public static final int COL_TIEMPO_LLEGADA = 5;
-    //Col 6: RND accion del cliente
-    /**
-     * Col 7 - Accion cliente: Compra / Usa mesa.
-     */
-    public static final int COL_ACCION_CLIENTE = 7;
-    /**
-     * Col 8 - Tiempo fin atencion en caja (siempre reloj + 20s en el evento
-     * ...)
-     */
-    public static final int COL_TIEMPO_ATENCION = 8;
-    //Col 9: RND tiempo espera entrega pedido
-    //Col 10: Tiempo espera pedido.
-    /**
-     * Col 11 - Tiempo entrega pedido
-     */
-    public static final int COL_TIEMPO_ENTREGA = 11;
-    //Col 12:RND accion mesa
-    /**
-     * Col 13 - Accion mesa
-     */
-    public static final int COL_ACCION_MESA = 13;
-    //Col 14: RND tiempo uso mesa
-    //Col 15: tiempo uso mesa
-    /**
-     * Col 16 - Tiempo fin uso mesa (reloj + tiempo uso mesa
-     */
-    public static final int COL_FIN_USO = 16;
-    //Col 17 RND tiempo consumicion
-    //Col 18 Tiempo consumuicion
-    /**
-     * Col 19 - Tiempo fin consumicion
-     */
-    public static final int COL_FIN_CONSUMICION = 19;
-    /**
-     * Col 20 - Estado Cajero
-     */
-    public static final int COL_ESTADO_CAJERO = 20;
-    /**
-     * Col 21 - Cola Cajero
-     */
-    public static final int COL_COLA_CAJERO = 21;
-    /**
-     * Col 22 - Estado Empleado 1
-     */
-    public static final int COL_ESTADO_EMPL1 = 22;
-    /**
-     * Col 23 - Cola EmpleadoS
-     */
-    public static final int COL_COLA_EMPLEADOS = 24;
-    /**
-     * Col 24 - Estado Empleado 2
-     */
-    public static final int COL_ESTADO_EMPL2 = 23;
-    /**
-     * Col 25 - Tiempo permanencia acumulado
-     */
-    public static final int COL_TIEMPO_PERMAN_AC = 25;
-    /**
-     * Col 26 - Cantidad de clientes de la cantina Contador
-     */
-    public static final int COL_CANT_CLIENTES_CONT = 26;
-    /**
-     * Col 27 - Inicio columnas de clientes.
-     */
-    public static final int COL_INICIO_CLIENTES = 27;
-
+   
     public Calculator(Controller controller) {
         this.controller = controller;
         this.tabla = new Tabla(controller);
@@ -206,16 +140,6 @@ public class Calculator {
         }
     }
 
-    Grafico grafico;
-    double cantMinutos = 0;
-    double minProximaLlegada = 0;
-    double minTerminaAtencionCaja = 0;
-    double minTerminaEntrega = 0;
-    double minTerminaUsarMesa = 0;
-    double minTerminaConsumicion = 0;
-    int numeroVuelta = 0;
-    int cantClientes = 0;
-    double tiempoAcumulado = 0;
 
     public void simularAvance() {
         cantMinutos = reloj;
@@ -307,17 +231,20 @@ public class Calculator {
         Cliente cliente = lista.get(posicion);
         cantClientes++;
         tiempoAcumulado += (cliente.getHoraPartida() - cliente.getHoraLlegada());
-        if (reloj >= desde && reloj <= hasta) {
-            grafico.finConsumicion(EVN_CONSUMICION, reloj, minProximaLlegada, minTerminaAtencionCaja, minTerminaEntrega, minTerminaUsarMesa, minTerminaConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
-        }
-
         lista.remove(posicion);
+        
         int elMasViejo = buscar.quienCortaAntes(EVN_CONSUMIENDO);
         if (elMasViejo != -1) {
             minTerminaConsumicion = lista.get(elMasViejo).getHoraPartida();
         } else {
             minTerminaConsumicion = 0;
         }
+       
+        if (reloj >= desde && reloj <= hasta) {
+            grafico.finConsumicion(EVN_CONSUMICION, reloj, minProximaLlegada, minTerminaAtencionCaja, minTerminaEntrega, minTerminaUsarMesa, minTerminaConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
+        }
+
+       
     }
 
     private void finAtencionCaja() {
@@ -403,12 +330,13 @@ public class Calculator {
         double finConsumicion = tiempoConsumicion + reloj;
         cliente.setEstado(EVN_CONSUMIENDO);
         cliente.setHoraPartida(finConsumicion);
-
+        Cliente buscarParalelo = lista.get(buscar.quienCortaAntes(EVN_ATENDIDO_EMPLEADO));
+        minTerminaEntrega = buscarParalelo.getHoraPartida();
         if (reloj >= desde && reloj <= hasta) {
             grafico.comproYSeSienta(EVN_FIN_ATENCION_EMPLEADO, reloj, minProximaLlegada, minTerminaAtencionCaja, minTerminaEntrega, rndAccion, EVN_CONSUMIENDO, rndTiempoConsumicion, tiempoConsumicion, finConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
         }
         
-        
+         
         minTerminaConsumicion = lista.get(buscar.quienCortaAntes(EVN_CONSUMIENDO)).getHoraPartida();
 
     }

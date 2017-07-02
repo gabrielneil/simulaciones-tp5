@@ -325,7 +325,19 @@ public class Grafico {
     public void armarClientes(){
     }
 
-    void mostrarClientes() {
+    public void mostrarClientes() {
         t.setVisible(true);
     }
+    
+    public void cargaClientes(){
+      model_cliente.setColumnIdentifiers(new String [] {"Estado", "Hora Llegada", "Hora partida"});
+        System.out.println("el valor es"+model_cliente.getColumnCount());
+//         model_cliente.setColumnIdentifiers(new String [] {"Estado", "Hora Llegada", "Hora partida"});
+//         model_cliente.addRow(new Object[]{"pepito", 123, "sancho"});
+//         model_cliente.addRow(new Object[]{"pepitoe", 122223, "1sancho"});
+//         model_cliente.addRow(new Object[]{"pepitoEEE", 123, "4san3cho"});
+//         model_cliente.setColumnIdentifiers(new String [] {"Test Name", "Status", "Description", "QUE"});
+//         model_cliente.addRow(new Object[]{"EEE", 23, "4sa","perepepe","potato"});
+    }
+    
 }

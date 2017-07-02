@@ -24,8 +24,7 @@ public class Grafico {
     Tabla_clientes t;
     Tabla tabla;
     ArrayList<Cliente> lista = new ArrayList<>();
-    
-    
+
     public Grafico(ArrayList lista, Controller controller) {
         tabla = new Tabla(controller);
         t = new Tabla_clientes(controller);
@@ -69,9 +68,10 @@ public class Grafico {
             0.0, //Tiempo de permanencia acumulado (25)
             0 //Cantidad clientes en cafeteria (26)
         });
+        cargaClientes();
     }
 
-    public void entraMesa(String eventoLlegadaMesa, double reloj, float rnd1TiempoLlegada, float rnd2TiempoLlegada, double tiempoLlegada, double proxLlegada, float rndAccion, String eventoUtilizacionMesa, double minTerminaAtencionCaja, double minEntregaPedido, float rndTiempoUtilizacionMesa, double tiempoUtilizacionMesa, double tiempoFinUtilizacionMesa, double minTerminaConsumicion,Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
+    public void entraMesa(String eventoLlegadaMesa, double reloj, float rnd1TiempoLlegada, float rnd2TiempoLlegada, double tiempoLlegada, double proxLlegada, float rndAccion, String eventoUtilizacionMesa, double minTerminaAtencionCaja, double minEntregaPedido, float rndTiempoUtilizacionMesa, double tiempoUtilizacionMesa, double tiempoFinUtilizacionMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
 
         model.addRow(new Object[]{
             eventoLlegadaMesa, //Evento (0)
@@ -82,10 +82,10 @@ public class Grafico {
             proxLlegada, //Próxima Llegada cliente (5)
             rndAccion,//Acción - RND (6)
             eventoUtilizacionMesa, //Accion : mesa o a comprar (7)
-            (minTerminaAtencionCaja==0)?null:minTerminaAtencionCaja,//Tiempo fin atención caja (8)
+            (minTerminaAtencionCaja == 0) ? null : minTerminaAtencionCaja,//Tiempo fin atención caja (8)
             null,//Tiempo espera pedido - RND (9)
             null, //Tiempo espera pedido (10)
-            (minEntregaPedido==0)?null:minEntregaPedido,//Tiempo entrega de pedido(11)
+            (minEntregaPedido == 0) ? null : minEntregaPedido,//Tiempo entrega de pedido(11)
             null,//Accion mesa: - RND (12)
             null, //Accion mesa (13)
             rndTiempoUtilizacionMesa,//Tiempo uso de mesa - RND (14)
@@ -93,7 +93,7 @@ public class Grafico {
             tiempoFinUtilizacionMesa,//Tiempo fin uso mesa (16)
             null,//Tiempo consumicion - RND (17)
             null,//Tiempo de consumicion (18)
-            (minTerminaConsumicion==0)?null:minTerminaConsumicion,//Tiempo fin de consumicion (19)
+            (minTerminaConsumicion == 0) ? null : minTerminaConsumicion,//Tiempo fin de consumicion (19)
             cajero.getEstado(),//Cajero - Estado (20)
             cajero.getCola(),//Cajero - Cola (21)
             empleado1.getEstado(),//Empleado 1 - Estado (22)
@@ -101,9 +101,10 @@ public class Grafico {
             empleado2.getCola(),//Empleado 2 - Cola(24)
             tiempoAcumulado, //Tiempo de permanencia acumulado(25)
             cantClientes}); //Cantidad clientes en cafeteria (26)
+        cargaClientes();
     }
 
-    public void entraComprar(String eventoLlegadaComprar, double reloj, float rnd1TiempoLlegada, float rnd2TiempoLlegada, double tiempoLlegada, double proxLlegada, float rndAccion, String eventoCompra, double minimoTiempoFinAtencionCaja, double minTerminaEntrega, double minTerminaUsarMesa, double minTerminaConsumicion,Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
+    public void entraComprar(String eventoLlegadaComprar, double reloj, float rnd1TiempoLlegada, float rnd2TiempoLlegada, double tiempoLlegada, double proxLlegada, float rndAccion, String eventoCompra, double minimoTiempoFinAtencionCaja, double minTerminaEntrega, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
         model.addRow(new Object[]{
             eventoLlegadaComprar, //Evento (0)
             reloj, //Reloj (1)
@@ -116,15 +117,15 @@ public class Grafico {
             (minimoTiempoFinAtencionCaja == 0) ? null : minimoTiempoFinAtencionCaja, //Tiempo fin atención caja (8)
             null, //Tiempo espera pedido - RND (9)
             null, //Tiempo espera pedido (10)
-            (minTerminaEntrega==0)?null:minTerminaEntrega,//Tiempo entrega de pedido(11)
+            (minTerminaEntrega == 0) ? null : minTerminaEntrega,//Tiempo entrega de pedido(11)
             null, //Accion mesa: - RND (12)
             null, //Accion mesa (13)
             null,//Tiempo uso de mesa - RND (14)
             null, //Tiempo uso de mesa (15)
-            (minTerminaUsarMesa==0)?null:minTerminaUsarMesa, //Tiempo fin uso mesa (16)
+            (minTerminaUsarMesa == 0) ? null : minTerminaUsarMesa, //Tiempo fin uso mesa (16)
             null, //Tiempo consumicion - RND (17)
             null, //Tiempo de consumicion (18)
-            (minTerminaConsumicion==0)?null:minTerminaConsumicion, //Tiempo fin de consumicion (19)
+            (minTerminaConsumicion == 0) ? null : minTerminaConsumicion, //Tiempo fin de consumicion (19)
             cajero.getEstado(), //Cajero - Estado (20)
             cajero.getCola(), //Cajero - Cola (21)
             empleado1.getEstado(), //Empleado 1 - Estado (22)
@@ -132,7 +133,7 @@ public class Grafico {
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado, //Tiempo de permanencia acumulado(25)
             cantClientes}); //Cantidad clientes en cafeteria (26)
-
+        cargaClientes();
     }
 
     public void finConsumicion(String eventoFinConsumicion, double reloj, double minProximaLLegada, double minTerminaAtencionCaja, double minTerminaEntrega, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
@@ -164,6 +165,7 @@ public class Grafico {
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado, //Tiempo de permanencia (25)
             cantClientes});//Cantidad clientes en cafeteria (26)
+        cargaClientes();
     }
 
     public void atencionEmpleados(String eventoFinAtencion, double reloj, float rndEspera, double minProxLlegada, double minTerminaAtencionCaja, double tiempoEntrega, double finTiempoEntrega, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
@@ -196,9 +198,10 @@ public class Grafico {
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado, //Tiempo de permanencia acumulado(25)
             cantClientes});//Cantidad clientes en cafeteria (26)
+        cargaClientes();
     }
 
-    public void aColaEmpleados(String eventoFinAtencion, double reloj, double minProximaLLegada, double minTerminaAtencionCaja, double minTerminaEntrega,double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
+    public void aColaEmpleados(String eventoFinAtencion, double reloj, double minProximaLLegada, double minTerminaAtencionCaja, double minTerminaEntrega, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
         model.addRow(new Object[]{
             eventoFinAtencion,//Evento (0)
             reloj, //Reloj (1)
@@ -211,7 +214,7 @@ public class Grafico {
             null, //Tiempo fin atención caja (8)
             null, //Tiempo espera pedido - RND (9)
             null, //Tiempo espera pedido (10)
-            (minTerminaEntrega==0)?null:minTerminaEntrega, //Tiempo entrega de pedido (11)
+            (minTerminaEntrega == 0) ? null : minTerminaEntrega, //Tiempo entrega de pedido (11)
             null, //Accion mesa: - RND (12)
             null, //Accion mesa (13)
             null, //Tiempo uso de mesa - RND (14)
@@ -227,6 +230,7 @@ public class Grafico {
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado, //Tiempo de permanencia acumulado(25)
             cantClientes});//Cantidad clientes en cafeteria (26)
+        cargaClientes();
     }
 
     public void comproYSeRetira(String eventoFinAtencion, double reloj, double minProximaLLegada, double minTerminaAtencionCaja, double minTerminaEntrega, float rndAccion, double minTerminaUsarMesa, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
@@ -258,6 +262,7 @@ public class Grafico {
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado, //Tiempo de permanencia acumulado(25)
             cantClientes});//Cantidad clientes en cafeteria (26)
+        cargaClientes();
     }
 
     public void noComioYUsoMesa(String eventoFinMesa, double reloj, double minProximaLLegada, double minTerminaAtencionCaja, double minTerminaEntrega, double minTerminaConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
@@ -289,6 +294,7 @@ public class Grafico {
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado, //Tiempo de permanencia (25)
             cantClientes});//Cantidad clientes en cafeteria (26)
+        cargaClientes();
     }
 
     public void comproYSeSienta(String eventoEntregaPedido, double reloj, double minProximaLLegada, double minTerminaAtencionCaja, double minTerminaEntrega, float rndAccion, String consumiendo, float rndTiempoConsumicion, double tiempoConsumicion, double finConsumicion, Servidor cajero, Servidor empleado1, Servidor empleado2, double tiempoAcumulado, int cantClientes) {
@@ -320,22 +326,69 @@ public class Grafico {
             empleado2.getCola(),//Empleado 2 - Cola (24)
             tiempoAcumulado, //Tiempo de permanencia acumulado(25)
             cantClientes});//Cantidad clientes en cafeteria (26)
+        cargaClientes();
     }
-    
-    public void armarClientes(){
+
+    public void armarClientes() {
     }
 
     public void mostrarClientes() {
         t.setVisible(true);
     }
-    
-    public void cargaClientes(){
-      model_cliente.setColumnIdentifiers(new String [] {"Estado", "Hora Llegada", "Hora partida"});
-        System.out.println("el valor es"+model_cliente.getColumnCount());
-//         model_cliente.setColumnIdentifiers(new String [] {"Estado", "Hora Llegada", "Hora partida"});
+    String arreglo[];
+    public void cargaClientes() {
+        arreglo = new String[3 * lista.size()];
+//        for (int i = 0; i < lista.size(); i++) {
+//            int numero = i;
+//            int suma = i;
+//            arreglo[suma++] = "Estado (" + numero + ")";
+//            arreglo[suma++] = "Hora Llegada";
+//            arreglo[suma++] = "Hora partida";
+//            i++;
+//        }
+
+        int contador=0;
+        for (int i = 0; i < 3 * lista.size(); i++) {
+          
+            int suma = i;
+            System.out.println("valor de suma "+suma);
+            arreglo[suma] = "Estado (" + contador + ")";
+            suma++;
+            System.out.println("valor de suma "+suma);
+            arreglo[suma] = "Hora Llegada (" + contador + ")";
+            suma++;
+            
+            if (suma > 3 * lista.size()) {
+                return;
+            }
+            
+//            if (aux.getHoraPartida() != -1) {
+            System.out.println("valor de suma "+suma);            
+            arreglo[suma] = "Hora partida (" + contador + ")";
+            i = suma;    
+//            }
+            
+            contador++;
+        }
+          System.out.println("TAMAÑO DE LA LISTA"+lista.size());
+        
+//        String matriz[][] = new String[lista.size()][3];
+//        for (int i = 0; i < lista.size(); i++) {
+//            String estado = "Estado (" + i + ")";
+//            String hora_llegada = "Hora Llegada(" + i + ")";
+//            String hora_partida = "Hora partida(" + i + ")";
+//            matriz[i][0] = estado;
+//            matriz[i][1] = hora_llegada;
+//            matriz[i][2] = hora_partida;
+//        }
+        model_cliente.setColumnIdentifiers(arreglo);
+//        model_cliente.setColumnIdentifiers(new String[]{"Estado", "Hora Llegada", "Hora partida"});
 //         model_cliente.addRow(new Object[]{"pepito", 123, "sancho"});
+//        System.out.println("el valor es" + model_cliente.getColumnCount());
+////         model_cliente.setColumnIdentifiers(new String [] {"Estado", "Hora Llegada", "Hora partida"});
+////         model_cliente.addRow(new Object[]{"pepito", 123, "sancho"});
 //         model_cliente.addRow(new Object[]{"pepitoe", 122223, "1sancho"});
-//         model_cliente.addRow(new Object[]{"pepitoEEE", 123, "4san3cho"});
+////         model_cliente.addRow(new Object[]{"pepitoEEE", 123, "4san3cho"});
 //         model_cliente.setColumnIdentifiers(new String [] {"Test Name", "Status", "Description", "QUE"});
 //         model_cliente.addRow(new Object[]{"EEE", 23, "4sa","perepepe","potato"});
     }

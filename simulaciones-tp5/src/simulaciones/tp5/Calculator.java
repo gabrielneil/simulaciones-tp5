@@ -62,17 +62,7 @@ public class Calculator {
     int numeroVuelta = 0;
     int cantClientes = 0;
     double tiempoAcumulado = 0;
-    //Eventos:
-    //Llegada cliente
-    //Atencion en caja
-    //Entrega de pedido
-    //Utilizacion de mesa
-    //Consumicion de pedido
-    //Fin permanencia
-    /**
-     * Inicio Llegada cliente Fin atención en caja Entrega de pedido Fin
-     * utilización de mesa Fin consumición del pedido
-     */
+ 
     private static final String NO_EVN = "NULL";
     public static final String EVN_INICIO = "Inicio";
     public static final String EVN_LLEGADA = "Llegada Cliente";
@@ -174,8 +164,9 @@ public class Calculator {
             finConsumicion();
         }
     }
+    
     Cliente nuevoCliente;
-
+    int numeroOrdenCliente = 0;
     private void llegadaCliente() {
         setReloj(minProximaLlegada);
         rnd1TiempoLlegada = r.nextFloat();
@@ -190,9 +181,10 @@ public class Calculator {
             float rndTiempoUtilizacionMesa = r.nextFloat();
             double tiempoUtilizacionMesa = Formulas.tiempoUtilizacionMesa(tiempoUtilizacionMesa1, tiempoUtilizacionMesa2, rndTiempoUtilizacionMesa);
             double tiempoFinUtilizacionMesa = reloj + tiempoUtilizacionMesa;
-            nuevoCliente = new Cliente(EVN_UTILIZANDO_MESA, reloj, tiempoFinUtilizacionMesa);
+            nuevoCliente = new Cliente(EVN_UTILIZANDO_MESA, reloj, tiempoFinUtilizacionMesa, numeroOrdenCliente);
             lista.add(nuevoCliente);
-
+            numeroOrdenCliente++;
+            
             if (reloj >= desde && reloj <= hasta) {
                 grafico.entraMesa(EVN_LLEGADA, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, proxLlegada, minProximaLlegada, rndAccion, EVN_UTILIZANDO_MESA, minTerminaAtencionCaja, minTerminaEntrega, rndTiempoUtilizacionMesa, tiempoUtilizacionMesa, tiempoFinUtilizacionMesa, minTerminaConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
             }
@@ -201,7 +193,7 @@ public class Calculator {
             minTerminaUsarMesa = lista.get(buscar.quienCortaAntes(EVN_UTILIZANDO_MESA)).getHoraPartida();
         } else {
             System.out.println("entra a comprar");
-            nuevoCliente = new Cliente(EVN_ATENCION_CAJA, reloj);
+            nuevoCliente = new Cliente(EVN_ATENCION_CAJA, reloj, numeroOrdenCliente);
 
             if (cajero.getEstado().equals("LIBRE")) {
                 calcularFinAtencionCajero(nuevoCliente);
@@ -211,6 +203,8 @@ public class Calculator {
             }
 
             lista.add(nuevoCliente);
+            numeroOrdenCliente++;
+            
             if (reloj >= desde && reloj <= hasta) {
                 grafico.entraComprar(EVN_LLEGADA, reloj, rnd1TiempoLlegada, rnd2TiempoLlegada, proxLlegada, minProximaLlegada, rndAccion, EVN_COMPRA, minTerminaAtencionCaja, minTerminaEntrega, minTerminaUsarMesa, minTerminaConsumicion, cajero, empleado1, empleado2, tiempoAcumulado, cantClientes);
             }
@@ -447,5 +441,9 @@ public class Calculator {
 
     public void mostrarClientes() {
         grafico.mostrarClientes();
+    }
+    
+    public int cantClientes(){
+        return numeroOrdenCliente;
     }
 }

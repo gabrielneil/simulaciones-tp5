@@ -11,6 +11,7 @@ import front.Tabla;
 import front.Tabla_clientes;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.util.Collections;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Grafico {
     public Grafico(ArrayList lista, Controller controller) {
         tabla = new Tabla(controller);
         t = new Tabla_clientes(controller);
+        this.controller = controller;
         model = (DefaultTableModel) tabla._tblSimulacion.getModel();
         model_cliente = (DefaultTableModel) t._tblSimulacion.getModel();
         this.lista = lista;
@@ -333,44 +335,71 @@ public class Grafico {
     public void mostrarClientes() {
         t.setVisible(true);
     }
-    
+
     String arreglo[];
+
     public void cargaClientes() {
-        arreglo = new String[3 * lista.size()];
-        int contador=0;
-        for (int i = 0; i < 3 * lista.size(); i++) {
-            int suma = i;
+        int cantidadClientes = controller.mostrarCantidadClientes();
+        arreglo = new String[3 * cantidadClientes];
+//        Collections.sort(
+//                lista,
+//                (cliente1, cliente2) -> cliente1.getPosicion()
+//                - cliente2.getPosicion());
+        int contador = 0;
+        for (int i = 0; i < arreglo.length; i++) {
+              int suma = i;
             arreglo[suma] = "Estado (" + contador + ")";
             suma++;
             arreglo[suma] = "Hora Llegada (" + contador + ")";
             suma++;
-            if (suma > 3 * lista.size()) {
+            if (suma > 3 * cantidadClientes) {
                 return;
             }
-            arreglo[suma] = "Hora partida (" + contador + ")";
-            i = suma;    
+            arreglo[suma] = "Hora Llegada (" + contador + ")";
+            i=suma;
             contador++;
         }
+        
+        for (int i = 0; i < lista.size(); i++) {
+            int posicion = lista.get(i).getPosicion();
+            arreglo[(posicion * 3)] = "Estado (" + posicion + ")";
+            arreglo[(posicion * 3) + 1] = "Hora Llegada (" + posicion + ")";
+            arreglo[(posicion * 3) + 2] = "Hora Llegada (" + posicion + ")";
+        }
+        
+//        for (int i = 0; i < lista.size(); i++) {
+//            int suma = i;
+//            arreglo[lista.get(contador).getPosicion()] = "Estado (" + lista.get(contador).getPosicion() + ")";
+//            suma++;
+//            arreglo[suma] = "Hora Llegada (" + lista.get(contador).getPosicion() + ")";
+//            suma++;
+//            if (suma > 3 * lista.size()) {
+//                return;
+//            }
+//            arreglo[suma] = "Hora partida (" + lista.get(contador).getPosicion() + ")";
+//            i = suma;
+//            contador++;
+//        }
+
         model_cliente.setColumnIdentifiers(arreglo);
-        
-        contador = 0;
-        Object valoresClientes[] = new Object[lista.size()*3];
-        
-        for (int i = 0; i < lista.size()*3; i++) {
-              int suma = i;
-            valoresClientes[suma] =lista.get(contador).getEstado();
-            suma++;
-            valoresClientes[suma] =lista.get(contador).getHoraLlegada();
-            suma++;
-            if (suma > 3 * lista.size()) {
-                return;
-            }
-            
-            valoresClientes[suma] =(lista.get(contador).getHoraPartida()==-1)?null:lista.get(contador).getHoraPartida();
-            i = suma;    
-            contador++;
-        }
-         model_cliente.addRow(valoresClientes);
+       
+//        contador = 0;
+//        Object valoresClientes[] = new Object[lista.size() * 3];
+//
+//        for (int i = 0; i < lista.size() * 3; i++) {
+//            int suma = i;
+//            valoresClientes[suma] = lista.get(contador).getEstado();
+//            suma++;
+//            valoresClientes[suma] = lista.get(contador).getHoraLlegada();
+//            suma++;
+//            if (suma > 3 * lista.size()) {
+//                return;
+//            }
+//
+//            valoresClientes[suma] = (lista.get(contador).getHoraPartida() == -1) ? null : lista.get(contador).getHoraPartida();
+//            i = suma;
+//            contador++;
+//        }
+//        model_cliente.addRow(valoresClientes);
     }
-    
 }

@@ -59,5 +59,9 @@ public class Controller {
     public void mostrarClientes() {
        calculator.mostrarClientes();
     }
+    
+    public int mostrarCantidadClientes(){
+        return calculator.cantClientes();
+    }
 
 }

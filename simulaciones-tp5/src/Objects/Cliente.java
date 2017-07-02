@@ -21,8 +21,7 @@ public class Cliente {
     double horaLlegada;
     double horaPartida;
     String quienMeAtiende;
-    boolean ignorar = false;
-    
+    int posicion;
     public Cliente() {
     }
     
@@ -49,17 +48,19 @@ public class Cliente {
     public void setHoraPartida(double horaPartida) {
         this.horaPartida = horaPartida;
     }
-    
-    public Cliente(String estado, double horaLlegada, double horaPartida) {
+    //este es para el que usa la mesa
+    public Cliente(String estado, double horaLlegada, double horaPartida, int posicion) {
         this.estado = estado;
         this.horaLlegada = horaLlegada;
         this.horaPartida = horaPartida;
+        this.posicion = posicion;
     }
-    
-     public Cliente(String estado, double horaLlegada) {
+    //este es para el que viene a comprar
+     public Cliente(String estado, double horaLlegada, int posicion) {
         this.estado = estado;
         this.horaLlegada = horaLlegada;
         this.horaPartida = -1;
+        this.posicion = posicion;
     }
     
     public void quienMeAtiende(String quienMeAtiende){
@@ -69,12 +70,13 @@ public class Cliente {
     public String getQuienMeAtiende(){
         return quienMeAtiende;
     }
-    
-    public void changeIgnorar(){
-        ignorar = (!ignorar)? true: false;   
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
     
-    public boolean ignorar(){
-        return ignorar;
-    }
 }

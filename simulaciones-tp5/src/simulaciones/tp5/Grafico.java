@@ -341,13 +341,10 @@ public class Grafico {
     public void cargaClientes() {
         int cantidadClientes = controller.mostrarCantidadClientes();
         arreglo = new String[3 * cantidadClientes];
-//        Collections.sort(
-//                lista,
-//                (cliente1, cliente2) -> cliente1.getPosicion()
-//                - cliente2.getPosicion());
+
         int contador = 0;
         for (int i = 0; i < arreglo.length; i++) {
-              int suma = i;
+            int suma = i;
             arreglo[suma] = "Estado (" + contador + ")";
             suma++;
             arreglo[suma] = "Hora Llegada (" + contador + ")";
@@ -356,50 +353,26 @@ public class Grafico {
                 return;
             }
             arreglo[suma] = "Hora Llegada (" + contador + ")";
-            i=suma;
+            i = suma;
             contador++;
         }
-        
+
         for (int i = 0; i < lista.size(); i++) {
             int posicion = lista.get(i).getPosicion();
             arreglo[(posicion * 3)] = "Estado (" + posicion + ")";
             arreglo[(posicion * 3) + 1] = "Hora Llegada (" + posicion + ")";
-            arreglo[(posicion * 3) + 2] = "Hora Llegada (" + posicion + ")";
+            arreglo[(posicion * 3) + 2] = "Hora Partida (" + posicion + ")";
         }
-        
-//        for (int i = 0; i < lista.size(); i++) {
-//            int suma = i;
-//            arreglo[lista.get(contador).getPosicion()] = "Estado (" + lista.get(contador).getPosicion() + ")";
-//            suma++;
-//            arreglo[suma] = "Hora Llegada (" + lista.get(contador).getPosicion() + ")";
-//            suma++;
-//            if (suma > 3 * lista.size()) {
-//                return;
-//            }
-//            arreglo[suma] = "Hora partida (" + lista.get(contador).getPosicion() + ")";
-//            i = suma;
-//            contador++;
-//        }
-
         model_cliente.setColumnIdentifiers(arreglo);
-       
-//        contador = 0;
-//        Object valoresClientes[] = new Object[lista.size() * 3];
+
+        Object valoresClientes[] = new Object[3 * cantidadClientes];
+        for (int i = 0; i < lista.size(); i++) {
+            int posicion = lista.get(i).getPosicion();
+            valoresClientes[(posicion * 3)] = lista.get(i).getEstado();
+            valoresClientes[(posicion * 3) + 1] = lista.get(i).getHoraLlegada();
+            valoresClientes[(posicion * 3) + 2] = (lista.get(i).getHoraPartida() == -1) ? null : lista.get(i).getHoraPartida();
+        }
 //
-//        for (int i = 0; i < lista.size() * 3; i++) {
-//            int suma = i;
-//            valoresClientes[suma] = lista.get(contador).getEstado();
-//            suma++;
-//            valoresClientes[suma] = lista.get(contador).getHoraLlegada();
-//            suma++;
-//            if (suma > 3 * lista.size()) {
-//                return;
-//            }
-//
-//            valoresClientes[suma] = (lista.get(contador).getHoraPartida() == -1) ? null : lista.get(contador).getHoraPartida();
-//            i = suma;
-//            contador++;
-//        }
-//        model_cliente.addRow(valoresClientes);
+        model_cliente.addRow(valoresClientes);
     }
 }

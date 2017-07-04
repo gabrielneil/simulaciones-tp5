@@ -117,6 +117,10 @@ public class Calculator {
         grafico.hacerVisible();
         setEvento(NO_EVN);
         double tiempoDeCorte = 60;
+        if (hasta>tiempoDeCorte) {
+            tiempoDeCorte = hasta;
+        }
+        
         while (reloj <= tiempoDeCorte) {
             simularAvance();
         }
@@ -130,7 +134,6 @@ public class Calculator {
         if (cantMinutos == 0) {
             rnd1TiempoLlegada = r.nextFloat();
             rnd2TiempoLlegada = r.nextFloat();
-            System.out.println("entro");
             double tiempoLlegada = Formulas.llegadaCliente(rnd1TiempoLlegada, rnd2TiempoLlegada, media, desviacion);
             minProximaLlegada = reloj + tiempoLlegada;
             if (cantMinutos >= desde) {
@@ -152,17 +155,14 @@ public class Calculator {
 
         } else if (!evitarTiempoFinAtencionCaja && (minTerminaAtencionCaja < minTerminaEntrega || evitarTiempoEntregaPedido) && (minTerminaAtencionCaja < minTerminaUsarMesa || evitarTiempoFinUsoMesa) && (minTerminaAtencionCaja < minTerminaConsumicion || evitarTiempoConsumicion)) {
             // tiempoFinAtencionCaja es el proximo evento - SE MANDA A LA COLA DE LOS DOS CHABONES
-            System.out.println("Fin atención caja");
             finAtencionCaja();
 
         } else if (!evitarTiempoEntregaPedido && (minTerminaEntrega < minTerminaUsarMesa || evitarTiempoFinUsoMesa) && (minTerminaEntrega < minTerminaConsumicion || evitarTiempoConsumicion)) {
             calcularFinAtencionEmpleado();
 
         } else if ((minTerminaUsarMesa < minTerminaConsumicion || evitarTiempoConsumicion) && !evitarTiempoFinUsoMesa) {
-            System.out.println("NO COMIO, SOLO USO LA MESA Y SE VA");
             noComioYUsoMesa();
         } else {
-            System.out.println("TERMINO DE CONSUMIR Y SE LAS TOMA");
             finConsumicion();
         }
     }
@@ -180,7 +180,6 @@ public class Calculator {
 
         if (rndAccion <= ((float) entranAMesa / 100)) {
 
-            System.out.println("entra a la mesa");
             float rndTiempoUtilizacionMesa = r.nextFloat();
             double tiempoUtilizacionMesa = Formulas.tiempoUtilizacionMesa(tiempoUtilizacionMesa1, tiempoUtilizacionMesa2, rndTiempoUtilizacionMesa);
             double tiempoFinUtilizacionMesa = reloj + tiempoUtilizacionMesa;
@@ -195,7 +194,6 @@ public class Calculator {
             //si sos el menor, seteate
             minTerminaUsarMesa = lista.get(buscar.quienCortaAntes(EVN_UTILIZANDO_MESA)).getHoraPartida();
         } else {
-            System.out.println("entra a comprar");
             nuevoCliente = new Cliente(EVN_ATENCION_CAJA, reloj, numeroOrdenCliente);
 
             if (cajero.getEstado().equals("LIBRE")) {
@@ -375,7 +373,6 @@ public class Calculator {
     Cliente clienteParaDesdeYHasta;
 
     public void calcularFinAtencionEmpleado() {
-        System.out.println("fin atención del empleado osea que le terminó el pedido. es el proximo evento ");
         Cliente cliente = buscar.buscarCliente(EVN_ATENDIDO_EMPLEADO, minTerminaEntrega);
         setEvento(EVN_FIN_ATENCION_EMPLEADO);
         setReloj(minTerminaEntrega);
@@ -383,7 +380,6 @@ public class Calculator {
         cliente.setEstado(EVN_FIN_ATENCION_EMPLEADO);
 
         //ver los empleados
-        System.out.println("El valor del cliente antes de que se rompa" + cliente.getQuienMeAtiende());
         buscar.actualizarEmpleados(cliente, empleado1, empleado2);
 
         float rndAccion = r.nextFloat();
@@ -409,11 +405,9 @@ public class Calculator {
                 }
             }
             clienteParaDesdeYHasta = cliente;
-            System.out.println("COMPRO Y SE SIENTA EN LA MESA");
             comproYSeSienta(rndAccion, clienteParaDesdeYHasta);
 
         } else {
-            System.out.println("SOLO COMPRO Y SE TOMA EL PALO");
             clienteParaDesdeYHasta = cliente;
             comproYSeRetira(rndAccion, clienteParaDesdeYHasta);
         }
@@ -422,16 +416,13 @@ public class Calculator {
     public void siguienteAtenderEmpleado(Cliente cliente, float rndEspera) {
         tiempoEntrega = Formulas.tiempoEntregaPedido(tiempoEspera, rndEspera);
         finTiempoEntrega = tiempoEntrega + reloj;
-        System.out.println("los datos del cliente pero en el otro metodo son son" + cliente);
         cliente.setHoraPartida(finTiempoEntrega);
 
         if (empleado1.getEstado().equals("LIBRE")) {
-            System.out.println("Me atiende el empleado 1");
             empleado1.setOcupado();
             cliente.quienMeAtiende("EMPLEADO1");
 
         } else {
-            System.out.println("Me atiende el empleado 2");
             empleado2.setOcupado();
             cliente.quienMeAtiende("EMPLEADO2");
         }

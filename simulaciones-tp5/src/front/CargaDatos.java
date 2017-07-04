@@ -268,7 +268,7 @@ public class CargaDatos extends javax.swing.JFrame {
 
     private void aceptar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptar_btnActionPerformed
         // TODO add your handling code here:
-        if (Integer.parseInt(desde_txt.getText()) >= 0 && Integer.parseInt(hasta_txt.getText()) <= 60 && Integer.parseInt(hasta_txt.getText()) > Integer.parseInt(desde_txt.getText())) {
+        if (Integer.parseInt(desde_txt.getText()) >= 0 && Integer.parseInt(hasta_txt.getText()) > Integer.parseInt(desde_txt.getText())) {
 
             if (Integer.parseInt(media_txt.getText()) >= 0 && Integer.parseInt(desviacion_txt.getText()) >= 0 && Integer.parseInt(entranAComprar_txt.getText()) >= 0 && Integer.parseInt(entranAMesa_txt.getText()) >= 0 && Integer.parseInt(sientaEnMesa_txt.getText()) >= 0 && Integer.parseInt(seRetira_txt.getText()) >= 0) {
                 controller.valoresCargaTiempos(cargaTiempos.getTiempoTicket_txt(), cargaTiempos.getTiempoEspera_txt(), cargaTiempos.getTiempoConsumicion1_txt(), cargaTiempos.getTiempoConsumicion2_txt(), cargaTiempos.getTiempoUtilizacionMesa1_txt(), cargaTiempos.getTiempoUtilizacionMesa2_txt());

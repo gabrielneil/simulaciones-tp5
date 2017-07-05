@@ -125,7 +125,7 @@ public class Calculator {
             simularAvance();
         }
         grafico.tiempoPermanencia(((double) tiempoAcumulado / cantClientes));
-        grafico.buscarLosMayores();
+//        grafico.buscarLosMayores();
     }
 
     public void simularAvance() {
